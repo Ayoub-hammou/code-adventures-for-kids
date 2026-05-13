@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PalindromeRouteImport } from './routes/palindrome'
+import { Route as MastermindRouteImport } from './routes/mastermind'
 import { Route as GuessRouteImport } from './routes/guess'
 import { Route as Connect4RouteImport } from './routes/connect4'
 import { Route as AdventureRouteImport } from './routes/adventure'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const PalindromeRoute = PalindromeRouteImport.update({
   id: '/palindrome',
   path: '/palindrome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MastermindRoute = MastermindRouteImport.update({
+  id: '/mastermind',
+  path: '/mastermind',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuessRoute = GuessRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/adventure': typeof AdventureRoute
   '/connect4': typeof Connect4Route
   '/guess': typeof GuessRoute
+  '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/adventure': typeof AdventureRoute
   '/connect4': typeof Connect4Route
   '/guess': typeof GuessRoute
+  '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,34 @@ export interface FileRoutesById {
   '/adventure': typeof AdventureRoute
   '/connect4': typeof Connect4Route
   '/guess': typeof GuessRoute
+  '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/adventure' | '/connect4' | '/guess' | '/palindrome'
+  fullPaths:
+    | '/'
+    | '/adventure'
+    | '/connect4'
+    | '/guess'
+    | '/mastermind'
+    | '/palindrome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/adventure' | '/connect4' | '/guess' | '/palindrome'
-  id: '__root__' | '/' | '/adventure' | '/connect4' | '/guess' | '/palindrome'
+  to:
+    | '/'
+    | '/adventure'
+    | '/connect4'
+    | '/guess'
+    | '/mastermind'
+    | '/palindrome'
+  id:
+    | '__root__'
+    | '/'
+    | '/adventure'
+    | '/connect4'
+    | '/guess'
+    | '/mastermind'
+    | '/palindrome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +104,7 @@ export interface RootRouteChildren {
   AdventureRoute: typeof AdventureRoute
   Connect4Route: typeof Connect4Route
   GuessRoute: typeof GuessRoute
+  MastermindRoute: typeof MastermindRoute
   PalindromeRoute: typeof PalindromeRoute
 }
 
@@ -86,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/palindrome'
       fullPath: '/palindrome'
       preLoaderRoute: typeof PalindromeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mastermind': {
+      id: '/mastermind'
+      path: '/mastermind'
+      fullPath: '/mastermind'
+      preLoaderRoute: typeof MastermindRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guess': {
@@ -124,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdventureRoute: AdventureRoute,
   Connect4Route: Connect4Route,
   GuessRoute: GuessRoute,
+  MastermindRoute: MastermindRoute,
   PalindromeRoute: PalindromeRoute,
 }
 export const routeTree = rootRouteImport
