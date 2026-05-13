@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PalindromeRouteImport } from './routes/palindrome'
 import { Route as GuessRouteImport } from './routes/guess'
+import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PalindromeRoute = PalindromeRouteImport.update({
@@ -23,6 +24,11 @@ const GuessRoute = GuessRouteImport.update({
   path: '/guess',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdventureRoute = AdventureRouteImport.update({
+  id: '/adventure',
+  path: '/adventure',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,34 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/adventure': typeof AdventureRoute
   '/guess': typeof GuessRoute
   '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/adventure': typeof AdventureRoute
   '/guess': typeof GuessRoute
   '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/adventure': typeof AdventureRoute
   '/guess': typeof GuessRoute
   '/palindrome': typeof PalindromeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/guess' | '/palindrome'
+  fullPaths: '/' | '/adventure' | '/guess' | '/palindrome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/guess' | '/palindrome'
-  id: '__root__' | '/' | '/guess' | '/palindrome'
+  to: '/' | '/adventure' | '/guess' | '/palindrome'
+  id: '__root__' | '/' | '/adventure' | '/guess' | '/palindrome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdventureRoute: typeof AdventureRoute
   GuessRoute: typeof GuessRoute
   PalindromeRoute: typeof PalindromeRoute
 }
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/adventure': {
+      id: '/adventure'
+      path: '/adventure'
+      fullPath: '/adventure'
+      preLoaderRoute: typeof AdventureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdventureRoute: AdventureRoute,
   GuessRoute: GuessRoute,
   PalindromeRoute: PalindromeRoute,
 }
