@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PalindromeRouteImport } from './routes/palindrome'
 import { Route as GuessRouteImport } from './routes/guess'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PalindromeRoute = PalindromeRouteImport.update({
+  id: '/palindrome',
+  path: '/palindrome',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuessRoute = GuessRouteImport.update({
   id: '/guess',
   path: '/guess',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/guess': typeof GuessRoute
+  '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/guess': typeof GuessRoute
+  '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/guess': typeof GuessRoute
+  '/palindrome': typeof PalindromeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/guess'
+  fullPaths: '/' | '/guess' | '/palindrome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/guess'
-  id: '__root__' | '/' | '/guess'
+  to: '/' | '/guess' | '/palindrome'
+  id: '__root__' | '/' | '/guess' | '/palindrome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GuessRoute: typeof GuessRoute
+  PalindromeRoute: typeof PalindromeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/palindrome': {
+      id: '/palindrome'
+      path: '/palindrome'
+      fullPath: '/palindrome'
+      preLoaderRoute: typeof PalindromeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guess': {
       id: '/guess'
       path: '/guess'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GuessRoute: GuessRoute,
+  PalindromeRoute: PalindromeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
