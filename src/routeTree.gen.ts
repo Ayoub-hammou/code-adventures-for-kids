@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PalindromeRouteImport } from './routes/palindrome'
+import { Route as MastermindRouteImport } from './routes/mastermind'
+import { Route as GuessRouteImport } from './routes/guess'
+import { Route as Connect4RouteImport } from './routes/connect4'
+import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PalindromeRoute = PalindromeRouteImport.update({
+  id: '/palindrome',
+  path: '/palindrome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MastermindRoute = MastermindRouteImport.update({
+  id: '/mastermind',
+  path: '/mastermind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuessRoute = GuessRouteImport.update({
+  id: '/guess',
+  path: '/guess',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Connect4Route = Connect4RouteImport.update({
+  id: '/connect4',
+  path: '/connect4',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdventureRoute = AdventureRouteImport.update({
+  id: '/adventure',
+  path: '/adventure',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,102 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/adventure': typeof AdventureRoute
+  '/connect4': typeof Connect4Route
+  '/guess': typeof GuessRoute
+  '/mastermind': typeof MastermindRoute
+  '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/adventure': typeof AdventureRoute
+  '/connect4': typeof Connect4Route
+  '/guess': typeof GuessRoute
+  '/mastermind': typeof MastermindRoute
+  '/palindrome': typeof PalindromeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/adventure': typeof AdventureRoute
+  '/connect4': typeof Connect4Route
+  '/guess': typeof GuessRoute
+  '/mastermind': typeof MastermindRoute
+  '/palindrome': typeof PalindromeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/adventure'
+    | '/connect4'
+    | '/guess'
+    | '/mastermind'
+    | '/palindrome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/adventure'
+    | '/connect4'
+    | '/guess'
+    | '/mastermind'
+    | '/palindrome'
+  id:
+    | '__root__'
+    | '/'
+    | '/adventure'
+    | '/connect4'
+    | '/guess'
+    | '/mastermind'
+    | '/palindrome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdventureRoute: typeof AdventureRoute
+  Connect4Route: typeof Connect4Route
+  GuessRoute: typeof GuessRoute
+  MastermindRoute: typeof MastermindRoute
+  PalindromeRoute: typeof PalindromeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/palindrome': {
+      id: '/palindrome'
+      path: '/palindrome'
+      fullPath: '/palindrome'
+      preLoaderRoute: typeof PalindromeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mastermind': {
+      id: '/mastermind'
+      path: '/mastermind'
+      fullPath: '/mastermind'
+      preLoaderRoute: typeof MastermindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guess': {
+      id: '/guess'
+      path: '/guess'
+      fullPath: '/guess'
+      preLoaderRoute: typeof GuessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connect4': {
+      id: '/connect4'
+      path: '/connect4'
+      fullPath: '/connect4'
+      preLoaderRoute: typeof Connect4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adventure': {
+      id: '/adventure'
+      path: '/adventure'
+      fullPath: '/adventure'
+      preLoaderRoute: typeof AdventureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +157,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdventureRoute: AdventureRoute,
+  Connect4Route: Connect4Route,
+  GuessRoute: GuessRoute,
+  MastermindRoute: MastermindRoute,
+  PalindromeRoute: PalindromeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
