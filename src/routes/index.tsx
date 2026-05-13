@@ -22,7 +22,7 @@ function Home() {
     <div className="mx-auto max-w-6xl px-4 py-12">
       <section className="text-center mb-14">
         <div className="inline-block mb-4 px-4 py-1 rounded-full bg-accent text-accent-foreground text-sm font-bold">
-          For curious kids 10–14 ✨
+          For curious kids ✨
         </div>
         <h1 className="text-5xl md:text-7xl font-bold mb-4">
           Learn to <span className="text-primary">code</span> by{" "}
