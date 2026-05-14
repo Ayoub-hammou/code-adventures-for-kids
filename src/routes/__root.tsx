@@ -118,12 +118,30 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { LangProvider, useLang } from "@/lib/i18n";
+import { Onboarding } from "@/components/Onboarding";
+import { Header } from "@/components/Header";
+
+function Gate() {
+  const { name, ready } = useLang();
+  if (!ready) return null;
+  if (!name) return <Onboarding />;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <LangProvider>
+        <Gate />
+      </LangProvider>
     </QueryClientProvider>
   );
 }
