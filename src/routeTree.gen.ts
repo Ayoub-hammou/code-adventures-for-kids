@@ -9,13 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SimonRouteImport } from './routes/simon'
+import { Route as RpsRouteImport } from './routes/rps'
 import { Route as PalindromeRouteImport } from './routes/palindrome'
 import { Route as MastermindRouteImport } from './routes/mastermind'
 import { Route as GuessRouteImport } from './routes/guess'
+import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
 import { Route as Connect4RouteImport } from './routes/connect4'
+import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConceptsConceptRouteImport } from './routes/concepts.$concept'
 
+const SimonRoute = SimonRouteImport.update({
+  id: '/simon',
+  path: '/simon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RpsRoute = RpsRouteImport.update({
+  id: '/rps',
+  path: '/rps',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PalindromeRoute = PalindromeRouteImport.update({
   id: '/palindrome',
   path: '/palindrome',
@@ -31,9 +46,19 @@ const GuessRoute = GuessRouteImport.update({
   path: '/guess',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FizzbuzzRoute = FizzbuzzRouteImport.update({
+  id: '/fizzbuzz',
+  path: '/fizzbuzz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Connect4Route = Connect4RouteImport.update({
   id: '/connect4',
   path: '/connect4',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorRoute = CalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdventureRoute = AdventureRouteImport.update({
@@ -46,70 +71,124 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConceptsConceptRoute = ConceptsConceptRouteImport.update({
+  id: '/concepts/$concept',
+  path: '/concepts/$concept',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/rps': typeof RpsRoute
+  '/simon': typeof SimonRoute
+  '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/rps': typeof RpsRoute
+  '/simon': typeof SimonRoute
+  '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/rps': typeof RpsRoute
+  '/simon': typeof SimonRoute
+  '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/adventure'
+    | '/calculator'
     | '/connect4'
+    | '/fizzbuzz'
     | '/guess'
     | '/mastermind'
     | '/palindrome'
+    | '/rps'
+    | '/simon'
+    | '/concepts/$concept'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/adventure'
+    | '/calculator'
     | '/connect4'
+    | '/fizzbuzz'
     | '/guess'
     | '/mastermind'
     | '/palindrome'
+    | '/rps'
+    | '/simon'
+    | '/concepts/$concept'
   id:
     | '__root__'
     | '/'
     | '/adventure'
+    | '/calculator'
     | '/connect4'
+    | '/fizzbuzz'
     | '/guess'
     | '/mastermind'
     | '/palindrome'
+    | '/rps'
+    | '/simon'
+    | '/concepts/$concept'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdventureRoute: typeof AdventureRoute
+  CalculatorRoute: typeof CalculatorRoute
   Connect4Route: typeof Connect4Route
+  FizzbuzzRoute: typeof FizzbuzzRoute
   GuessRoute: typeof GuessRoute
   MastermindRoute: typeof MastermindRoute
   PalindromeRoute: typeof PalindromeRoute
+  RpsRoute: typeof RpsRoute
+  SimonRoute: typeof SimonRoute
+  ConceptsConceptRoute: typeof ConceptsConceptRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/simon': {
+      id: '/simon'
+      path: '/simon'
+      fullPath: '/simon'
+      preLoaderRoute: typeof SimonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rps': {
+      id: '/rps'
+      path: '/rps'
+      fullPath: '/rps'
+      preLoaderRoute: typeof RpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/palindrome': {
       id: '/palindrome'
       path: '/palindrome'
@@ -131,11 +210,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fizzbuzz': {
+      id: '/fizzbuzz'
+      path: '/fizzbuzz'
+      fullPath: '/fizzbuzz'
+      preLoaderRoute: typeof FizzbuzzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/connect4': {
       id: '/connect4'
       path: '/connect4'
       fullPath: '/connect4'
       preLoaderRoute: typeof Connect4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculator': {
+      id: '/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof CalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/adventure': {
@@ -152,16 +245,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/concepts/$concept': {
+      id: '/concepts/$concept'
+      path: '/concepts/$concept'
+      fullPath: '/concepts/$concept'
+      preLoaderRoute: typeof ConceptsConceptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdventureRoute: AdventureRoute,
+  CalculatorRoute: CalculatorRoute,
   Connect4Route: Connect4Route,
+  FizzbuzzRoute: FizzbuzzRoute,
   GuessRoute: GuessRoute,
   MastermindRoute: MastermindRoute,
   PalindromeRoute: PalindromeRoute,
+  RpsRoute: RpsRoute,
+  SimonRoute: SimonRoute,
+  ConceptsConceptRoute: ConceptsConceptRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
