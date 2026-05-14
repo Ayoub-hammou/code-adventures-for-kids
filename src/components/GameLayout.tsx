@@ -38,7 +38,9 @@ export function GameLayout({
           {children}
         </div>
         <aside className="rounded-2xl bg-foreground text-background p-5 text-xs font-mono overflow-x-auto h-fit sticky top-20">
-          <div className="text-[10px] uppercase tracking-widest opacity-60 mb-3">{t.howItWorks}</div>
+          <div className="text-[10px] uppercase tracking-widest opacity-60 mb-3">
+            {t.howItWorks}
+          </div>
           <pre className="whitespace-pre-wrap leading-relaxed">{code}</pre>
         </aside>
       </div>

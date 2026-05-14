@@ -23,6 +23,7 @@ You need **Node.js and npm** installed on your machine. npm comes bundled with N
 #### Installation by Operating System
 
 **🍎 macOS (using Homebrew):**
+
 ```bash
 # Install Homebrew if you don't have it
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -36,6 +37,7 @@ npm --version   # Should show 9 or higher
 ```
 
 **🪟 Windows:**
+
 1. Download the installer from [nodejs.org](https://nodejs.org/)
    - Choose the LTS (Long Term Support) version
    - Download the `.msi` file for Windows
@@ -49,6 +51,7 @@ npm --version   # Should show 9 or higher
    ```
 
 **🐧 Linux:**
+
 ```bash
 # For Ubuntu/Debian
 sudo apt-get update
@@ -96,6 +99,7 @@ Once you have the app running locally, you can share it with other machines on t
 ### Step 1: Find Your Machine's IP Address
 
 **On macOS/Linux:**
+
 ```bash
 # Find your local IP (usually looks like 192.168.X.X)
 ifconfig | grep "inet " | grep -v 127.0.0.1
@@ -106,6 +110,7 @@ ipconfig getifaddr en0  # macOS
 ```
 
 **On Windows:**
+
 ```bash
 ipconfig
 # Look for "IPv4 Address" under your active connection
@@ -123,11 +128,13 @@ npm run dev -- --host 0.0.0.0
 ### Step 3: Access from Other Machines
 
 On any other computer or device on the same network, open a browser and visit:
+
 ```
 http://YOUR_IP:5173
 ```
 
 **Example:**
+
 - Your machine's IP: `192.168.1.100`
 - Access URL from other machines: `http://192.168.1.100:5173`
 
@@ -136,10 +143,12 @@ http://YOUR_IP:5173
 If you can't connect from other machines, your firewall might be blocking the connection:
 
 **On macOS:**
+
 - System Preferences → Security & Privacy → Firewall Options
 - Allow incoming connections
 
 **On Windows:**
+
 - Windows Defender Firewall → Allow an app through firewall
 - Allow the Node.js or Bun process
 
@@ -224,6 +233,7 @@ npm run format
 ## 🌍 Languages
 
 The app is fully internationalized with support for:
+
 - 🇬🇧 English
 - 🇫🇷 French
 - 🇳🇱 Dutch
@@ -239,6 +249,7 @@ This project is created by Ayoub Hammou. © CodeKids Lab
 ## ❓ Troubleshooting
 
 ### "Port already in use"
+
 ```bash
 # Change the port when running
 bun run dev -- --port 3000
@@ -246,12 +257,14 @@ npm run dev -- --port 3000
 ```
 
 ### "Can't connect from other machines"
+
 1. Verify both machines are on the same WiFi network
 2. Check the firewall (see section above)
 3. Ensure you're using the correct IP (not `localhost`)
 4. Run server with `--host 0.0.0.0` flag
 
 ### "Module not found errors"
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules
@@ -265,9 +278,3 @@ bun install   # or: npm install
 If you find any bugs or have suggestions for new games, please create an issue in the project repository.
 
 Happy coding! 🚀
-
-
-
-
-
-

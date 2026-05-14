@@ -89,6 +89,7 @@ export const UI = {
     tryIt: "Try it",
     examples: "Examples",
     keyIdea: "Key idea",
+    copyright: "© 2025-2026 CodeKids Lab. All rights reserved.",
   },
   fr: {
     welcome: "Bienvenue !",
@@ -107,6 +108,7 @@ export const UI = {
     tryIt: "Essaie",
     examples: "Exemples",
     keyIdea: "Idée clé",
+    copyright: "© 2025-2026 CodeKids Lab. Tous droits réservés.",
   },
   nl: {
     welcome: "Welkom!",
@@ -125,6 +127,7 @@ export const UI = {
     tryIt: "Probeer",
     examples: "Voorbeelden",
     keyIdea: "Hoofdidee",
+    copyright: "© 2025-2026 CodeKids Lab. Alle rechten voorbehouden.",
   },
 } as const;
 
