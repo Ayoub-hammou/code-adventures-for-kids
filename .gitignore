@@ -1,32 +1,64 @@
+# Dependencies
+node_modules/
+bun.lockb
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+dist-client/
+dist-server/
+out/
+release/
+.electron/
+electron-builder.yaml
+builder-effective-config.yaml
+
+# Vite / TanStack
+.vite/
+.tanstack/
+routeTree.gen.ts
+.temp/
+
+# Development
+.env
+.env.local
+.env.*.local
+
 # Logs
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-.output
-.vinxi
-.tanstack/**
-.nitro
-*.local
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
-# Wrangler / Cloudflare
-.wrangler/
-.dev.vars
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# OS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# Electron specific
+electron/dist/
+*.app
+*.dmg
+*.exe
+*.msi
+
+# Temporary / Cache
+.cache/
+.tmp/
+coverage/
+*.tsbuildinfo
+
+# Lovable specific
+.lovable/
+
+# Optional - si tu ne veux pas versionner les builds Electron
+/release/
