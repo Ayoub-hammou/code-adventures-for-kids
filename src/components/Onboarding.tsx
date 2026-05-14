@@ -55,7 +55,7 @@ export function Onboarding() {
           autoFocus
           value={draftName}
           onChange={(e) => setDraftName(e.target.value)}
-          placeholder="Alex"
+          placeholder="Adam"
           maxLength={20}
           className="w-full rounded-xl border-2 border-border bg-input px-4 py-3 text-lg font-mono mb-6 focus:outline-none focus:border-primary"
         />
