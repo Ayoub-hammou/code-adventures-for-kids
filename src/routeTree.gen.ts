@@ -15,6 +15,7 @@ import { Route as GuessRouteImport } from './routes/guess'
 import { Route as Connect4RouteImport } from './routes/connect4'
 import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConceptsConceptRouteImport } from './routes/concepts.$concept'
 
 const PalindromeRoute = PalindromeRouteImport.update({
   id: '/palindrome',
@@ -46,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConceptsConceptRoute = ConceptsConceptRouteImport.update({
+  id: '/concepts/$concept',
+  path: '/concepts/$concept',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/guess': typeof GuessRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/guess': typeof GuessRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/guess': typeof GuessRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/guess'
     | '/mastermind'
     | '/palindrome'
+    | '/concepts/$concept'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/guess'
     | '/mastermind'
     | '/palindrome'
+    | '/concepts/$concept'
   id:
     | '__root__'
     | '/'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/guess'
     | '/mastermind'
     | '/palindrome'
+    | '/concepts/$concept'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   GuessRoute: typeof GuessRoute
   MastermindRoute: typeof MastermindRoute
   PalindromeRoute: typeof PalindromeRoute
+  ConceptsConceptRoute: typeof ConceptsConceptRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/concepts/$concept': {
+      id: '/concepts/$concept'
+      path: '/concepts/$concept'
+      fullPath: '/concepts/$concept'
+      preLoaderRoute: typeof ConceptsConceptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,7 +182,18 @@ const rootRouteChildren: RootRouteChildren = {
   GuessRoute: GuessRoute,
   MastermindRoute: MastermindRoute,
   PalindromeRoute: PalindromeRoute,
+  ConceptsConceptRoute: ConceptsConceptRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
