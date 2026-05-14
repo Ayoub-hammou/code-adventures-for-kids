@@ -51,7 +51,7 @@ const T = {
 
 function ConnectPage() {
   const { lang } = useLang();
-  const t = (k: keyof typeof T) => pick(lang, T[k] as any);
+  const t = (k: keyof typeof T): string => pick(lang, T[k] as any) as string;
   const [board, setBoard] = useState<Cell[][]>(emptyBoard);
   const [player, setPlayer] = useState<Cell>(1);
   const [winner, setWinner] = useState<Cell | null>(null);

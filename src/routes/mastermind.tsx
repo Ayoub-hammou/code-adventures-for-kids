@@ -52,7 +52,7 @@ const T = {
 
 function MastermindPage() {
   const { lang } = useLang();
-  const t = (k: keyof typeof T) => pick(lang, T[k] as any);
+  const t = (k: keyof typeof T): string => pick(lang, T[k] as any) as string;
   const [secret, setSecret] = useState<number[]>(makeSecret);
   const [current, setCurrent] = useState<(number | null)[]>(Array(CODE_LEN).fill(null));
   const [guesses, setGuesses] = useState<{ guess: number[]; exact: number; partial: number }[]>([]);

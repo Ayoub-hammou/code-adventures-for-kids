@@ -80,7 +80,7 @@ const T = {
 
 function PalindromePage() {
   const { lang } = useLang();
-  const t = (k: keyof typeof T) => pick(lang, T[k] as any);
+  const t = (k: keyof typeof T): string => pick(lang, T[k] as any) as string;
   const [text, setText] = useState("racecar");
   const result = text.trim() ? isPalindrome(text) : null;
 

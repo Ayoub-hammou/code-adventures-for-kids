@@ -86,7 +86,7 @@ zolang niet gevonden:
 
 function GuessPage() {
   const { lang } = useLang();
-  const t = (k: keyof typeof T) => pick(lang, T[k] as any);
+  const t = (k: keyof typeof T): string => pick(lang, T[k] as any) as string;
   const [secret, setSecret] = useState(() => Math.floor(Math.random() * 100) + 1);
   const [tries, setTries] = useState(0);
   const [history, setHistory] = useState<{ guess: number; hint: string }[]>([]);
