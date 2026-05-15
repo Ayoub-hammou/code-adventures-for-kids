@@ -10,13 +10,22 @@ const MOVES: Move[] = ["rock", "paper", "scissors"];
 
 function decide(p: Move, c: Move): "win" | "lose" | "draw" {
   if (p === c) return "draw";
-  if ((p === "rock" && c === "scissors") || (p === "paper" && c === "rock") || (p === "scissors" && c === "paper")) return "win";
+  if (
+    (p === "rock" && c === "scissors") ||
+    (p === "paper" && c === "rock") ||
+    (p === "scissors" && c === "paper")
+  )
+    return "win";
   return "lose";
 }
 
 const T = {
   title: { en: "Rock Paper Scissors", fr: "Pierre Feuille Ciseaux", nl: "Steen Papier Schaar" },
-  concept: { en: "Variables & Conditions", fr: "Variables & Conditions", nl: "Variabelen & Condities" },
+  concept: {
+    en: "Variables & Conditions",
+    fr: "Variables & Conditions",
+    nl: "Variabelen & Condities",
+  },
   intro: {
     en: "Choose your move. The computer picks one too. CONDITIONS decide who wins!",
     fr: "Choisis ton coup. L'ordi en choisit un aussi. Des CONDITIONS décident du vainqueur !",
@@ -45,7 +54,9 @@ const NAMES: Record<Move, { en: string; fr: string; nl: string }> = {
 function RPSPage() {
   const { lang } = useLang();
   const t = (k: keyof typeof T): string => pick(lang, T[k] as any) as string;
-  const [you, setYou] = useState(0), [cpu, setCpu] = useState(0), [draws, setDraws] = useState(0);
+  const [you, setYou] = useState(0),
+    [cpu, setCpu] = useState(0),
+    [draws, setDraws] = useState(0);
   const [last, setLast] = useState<{ p: Move; c: Move; r: "win" | "lose" | "draw" } | null>(null);
 
   function play(p: Move) {
@@ -57,42 +68,79 @@ function RPSPage() {
     else setDraws((v) => v + 1);
   }
 
-  function reset() { setYou(0); setCpu(0); setDraws(0); setLast(null); }
+  function reset() {
+    setYou(0);
+    setCpu(0);
+    setDraws(0);
+    setLast(null);
+  }
 
   return (
-    <GameLayout title={t("title")} emoji="✊" concept={t("concept")} intro={t("intro")} code={t("code")}>
+    <GameLayout
+      title={t("title")}
+      emoji="✊"
+      concept={t("concept")}
+      intro={t("intro")}
+      code={t("code")}
+    >
       <div className="grid grid-cols-3 text-center gap-2 mb-6">
-        <div className="rounded-xl bg-secondary p-3"><div className="text-xs text-muted-foreground">{t("you")}</div><div className="text-3xl font-bold">{you}</div></div>
-        <div className="rounded-xl bg-secondary p-3"><div className="text-xs text-muted-foreground">=</div><div className="text-3xl font-bold">{draws}</div></div>
-        <div className="rounded-xl bg-secondary p-3"><div className="text-xs text-muted-foreground">{t("cpu")}</div><div className="text-3xl font-bold">{cpu}</div></div>
+        <div className="rounded-xl bg-secondary p-3">
+          <div className="text-xs text-muted-foreground">{t("you")}</div>
+          <div className="text-3xl font-bold">{you}</div>
+        </div>
+        <div className="rounded-xl bg-secondary p-3">
+          <div className="text-xs text-muted-foreground">=</div>
+          <div className="text-3xl font-bold">{draws}</div>
+        </div>
+        <div className="rounded-xl bg-secondary p-3">
+          <div className="text-xs text-muted-foreground">{t("cpu")}</div>
+          <div className="text-3xl font-bold">{cpu}</div>
+        </div>
       </div>
 
       {last && (
-        <div className={`rounded-xl text-center p-5 mb-5 border-2 ${
-          last.r === "win" ? "border-[var(--fun-green)] bg-[color-mix(in_oklab,var(--fun-green)_15%,transparent)]"
-          : last.r === "lose" ? "border-[var(--fun-red)] bg-[color-mix(in_oklab,var(--fun-red)_15%,transparent)]"
-          : "border-border bg-secondary"
-        }`}>
+        <div
+          className={`rounded-xl text-center p-5 mb-5 border-2 ${
+            last.r === "win"
+              ? "border-[var(--fun-green)] bg-[color-mix(in_oklab,var(--fun-green)_15%,transparent)]"
+              : last.r === "lose"
+                ? "border-[var(--fun-red)] bg-[color-mix(in_oklab,var(--fun-red)_15%,transparent)]"
+                : "border-border bg-secondary"
+          }`}
+        >
           <div className="flex justify-center items-center gap-6 text-5xl mb-3">
-            <div><div className="text-xs text-muted-foreground mb-1">{t("you")}</div>{EMO[last.p]}</div>
+            <div>
+              <div className="text-xs text-muted-foreground mb-1">{t("you")}</div>
+              {EMO[last.p]}
+            </div>
             <div className="text-2xl">vs</div>
-            <div><div className="text-xs text-muted-foreground mb-1">{t("cpu")}</div>{EMO[last.c]}</div>
+            <div>
+              <div className="text-xs text-muted-foreground mb-1">{t("cpu")}</div>
+              {EMO[last.c]}
+            </div>
           </div>
-          <div className="text-xl font-bold">{last.r === "win" ? t("win") : last.r === "lose" ? t("lose") : t("draw")}</div>
+          <div className="text-xl font-bold">
+            {last.r === "win" ? t("win") : last.r === "lose" ? t("lose") : t("draw")}
+          </div>
         </div>
       )}
 
       <div className="grid grid-cols-3 gap-3">
         {MOVES.map((m) => (
-          <button key={m} onClick={() => play(m)}
-            className="rounded-2xl border-2 border-border bg-card p-5 hover:border-primary hover:-translate-y-1 transition shadow-[4px_4px_0_0_var(--color-border)]">
+          <button
+            key={m}
+            onClick={() => play(m)}
+            className="rounded-2xl border-2 border-border bg-card p-5 hover:border-primary hover:-translate-y-1 transition shadow-[4px_4px_0_0_var(--color-border)]"
+          >
             <div className="text-5xl mb-1">{EMO[m]}</div>
             <div className="font-bold">{pick(lang, NAMES[m])}</div>
           </button>
         ))}
       </div>
       <div className="text-center mt-5">
-        <button onClick={reset} className="text-sm font-semibold text-primary hover:underline">{t("reset")}</button>
+        <button onClick={reset} className="text-sm font-semibold text-primary hover:underline">
+          {t("reset")}
+        </button>
       </div>
     </GameLayout>
   );

@@ -25,7 +25,11 @@ const T = {
   best: { en: "Best", fr: "Record", nl: "Record" },
   watch: { en: "Watch…", fr: "Regarde…", nl: "Kijk…" },
   yourTurn: { en: "Your turn!", fr: "À toi !", nl: "Jouw beurt!" },
-  oops: { en: "💥 Oops! Wrong color.", fr: "💥 Oups ! Mauvaise couleur.", nl: "💥 Oeps! Foute kleur." },
+  oops: {
+    en: "💥 Oops! Wrong color.",
+    fr: "💥 Oups ! Mauvaise couleur.",
+    nl: "💥 Oeps! Foute kleur.",
+  },
   again: { en: "Try again", fr: "Réessayer", nl: "Opnieuw" },
   code: {
     en: `sequence = []\nlevel = 0\n\nwhile playing:\n  # add a random color (VARIABLE)\n  sequence.append(random_color())\n  level = level + 1\n\n  # 🔄 LOOP: show the sequence\n  for color in sequence:\n    flash(color)\n\n  # 🔄 LOOP: read player input\n  for i in 0..length(sequence):\n    input = wait_for_press()\n    if input != sequence[i]:\n      print("Game over!")\n      stop`,
@@ -44,23 +48,36 @@ function SimonPage() {
   const [best, setBest] = useState(0);
   const timer = useRef<number[]>([]);
 
-  function clearTimers() { timer.current.forEach((id) => window.clearTimeout(id)); timer.current = []; }
+  function clearTimers() {
+    timer.current.forEach((id) => window.clearTimeout(id));
+    timer.current = [];
+  }
   useEffect(() => () => clearTimers(), []);
 
   function start() {
     clearTimers();
     const first = [Math.floor(Math.random() * 4)];
-    setSeq(first); setUserIdx(0);
+    setSeq(first);
+    setUserIdx(0);
     showSequence(first);
   }
 
   function showSequence(s: number[]) {
-    setPhase("show"); setActive(null);
+    setPhase("show");
+    setActive(null);
     s.forEach((id, i) => {
       timer.current.push(window.setTimeout(() => setActive(id), 600 * (i + 1)));
       timer.current.push(window.setTimeout(() => setActive(null), 600 * (i + 1) + 350));
     });
-    timer.current.push(window.setTimeout(() => { setPhase("input"); setUserIdx(0); }, 600 * (s.length + 1)));
+    timer.current.push(
+      window.setTimeout(
+        () => {
+          setPhase("input");
+          setUserIdx(0);
+        },
+        600 * (s.length + 1),
+      ),
+    );
   }
 
   function press(id: number) {
@@ -81,7 +98,13 @@ function SimonPage() {
   }
 
   return (
-    <GameLayout title={t("title")} emoji="🧠" concept={t("concept")} intro={t("intro")} code={t("code")}>
+    <GameLayout
+      title={t("title")}
+      emoji="🧠"
+      concept={t("concept")}
+      intro={t("intro")}
+      code={t("code")}
+    >
       <div className="flex justify-between items-center mb-4">
         <div className="text-sm">
           <span className="font-bold">{t("level")}:</span> {Math.max(seq.length, 0)}
@@ -113,7 +136,10 @@ function SimonPage() {
       </div>
 
       <div className="text-center mt-6">
-        <button onClick={start} className="rounded-xl bg-primary text-primary-foreground px-6 py-2 font-bold hover:scale-105 transition">
+        <button
+          onClick={start}
+          className="rounded-xl bg-primary text-primary-foreground px-6 py-2 font-bold hover:scale-105 transition"
+        >
           {phase === "lost" ? t("again") : t("start")}
         </button>
       </div>

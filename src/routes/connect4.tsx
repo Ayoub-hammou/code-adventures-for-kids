@@ -5,26 +5,36 @@ import { useLang, pick } from "@/lib/i18n";
 
 export const Route = createFileRoute("/connect4")({ component: ConnectPage });
 
-const ROWS = 6, COLS = 7;
+const ROWS = 6,
+  COLS = 7;
 type Cell = 0 | 1 | 2;
 
-function emptyBoard(): Cell[][] { return Array.from({ length: ROWS }, () => Array(COLS).fill(0) as Cell[]); }
+function emptyBoard(): Cell[][] {
+  return Array.from({ length: ROWS }, () => Array(COLS).fill(0) as Cell[]);
+}
 
 function checkWin(board: Cell[][], player: Cell): boolean {
-  const dirs = [[0, 1], [1, 0], [1, 1], [1, -1]];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-    if (board[r][c] !== player) continue;
-    for (const [dr, dc] of dirs) {
-      let count = 0;
-      for (let k = 0; k < 4; k++) {
-        const rr = r + dr * k, cc = c + dc * k;
-        if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) break;
-        if (board[rr][cc] !== player) break;
-        count++;
+  const dirs = [
+    [0, 1],
+    [1, 0],
+    [1, 1],
+    [1, -1],
+  ];
+  for (let r = 0; r < ROWS; r++)
+    for (let c = 0; c < COLS; c++) {
+      if (board[r][c] !== player) continue;
+      for (const [dr, dc] of dirs) {
+        let count = 0;
+        for (let k = 0; k < 4; k++) {
+          const rr = r + dr * k,
+            cc = c + dc * k;
+          if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) break;
+          if (board[rr][cc] !== player) break;
+          count++;
+        }
+        if (count === 4) return true;
       }
-      if (count === 4) return true;
     }
-  }
   return false;
 }
 
@@ -72,34 +82,74 @@ function ConnectPage() {
     }
   }
 
-  function reset() { setBoard(emptyBoard()); setPlayer(1); setWinner(null); setDraw(false); }
+  function reset() {
+    setBoard(emptyBoard());
+    setPlayer(1);
+    setWinner(null);
+    setDraw(false);
+  }
 
-  const colorFor = (c: Cell) => c === 1 ? "var(--fun-red)" : c === 2 ? "var(--fun-yellow)" : "transparent";
-  const playerName = (c: Cell) => c === 1 ? t("red") : t("yellow");
+  const colorFor = (c: Cell) =>
+    c === 1 ? "var(--fun-red)" : c === 2 ? "var(--fun-yellow)" : "transparent";
+  const playerName = (c: Cell) => (c === 1 ? t("red") : t("yellow"));
 
   return (
-    <GameLayout title={t("title")} emoji="🔴" concept={t("concept")} intro={t("intro")} code={t("code")}>
+    <GameLayout
+      title={t("title")}
+      emoji="🔴"
+      concept={t("concept")}
+      intro={t("intro")}
+      code={t("code")}
+    >
       <div className="text-center mb-4">
         {winner ? (
-          <div className="text-2xl font-bold">🏆 <span style={{ color: colorFor(winner) }}>{playerName(winner)}</span> {t("wins")}</div>
-        ) : draw ? (<div className="text-2xl font-bold">{t("draw")}</div>) : (
+          <div className="text-2xl font-bold">
+            🏆 <span style={{ color: colorFor(winner) }}>{playerName(winner)}</span> {t("wins")}
+          </div>
+        ) : draw ? (
+          <div className="text-2xl font-bold">{t("draw")}</div>
+        ) : (
           <div className="text-lg font-semibold">
             {t("turn")}{" "}
-            <span className="inline-block w-6 h-6 rounded-full align-middle border-2 border-foreground" style={{ backgroundColor: colorFor(player) }} />{" "}
+            <span
+              className="inline-block w-6 h-6 rounded-full align-middle border-2 border-foreground"
+              style={{ backgroundColor: colorFor(player) }}
+            />{" "}
             {playerName(player)}
           </div>
         )}
       </div>
 
       <div className="rounded-2xl bg-[var(--fun-blue)] p-3 inline-block mx-auto">
-        <div className="grid gap-1.5" style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}>
+        <div
+          className="grid gap-1.5"
+          style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
+        >
           {Array.from({ length: COLS }).map((_, c) => (
-            <button key={`btn-${c}`} onClick={() => drop(c)} className="text-xl hover:bg-white/20 rounded-md py-1 transition">⬇</button>
+            <button
+              key={`btn-${c}`}
+              onClick={() => drop(c)}
+              className="text-xl hover:bg-white/20 rounded-md py-1 transition"
+            >
+              ⬇
+            </button>
           ))}
           {board.map((row, r) =>
             row.map((cell, c) => (
-              <div key={`${r}-${c}`} onClick={() => drop(c)} className="aspect-square rounded-full bg-background/90 cursor-pointer flex items-center justify-center">
-                {cell !== 0 && <div className="w-[85%] h-[85%] rounded-full" style={{ backgroundColor: colorFor(cell), boxShadow: "inset 0 -4px 0 rgba(0,0,0,0.2)" }} />}
+              <div
+                key={`${r}-${c}`}
+                onClick={() => drop(c)}
+                className="aspect-square rounded-full bg-background/90 cursor-pointer flex items-center justify-center"
+              >
+                {cell !== 0 && (
+                  <div
+                    className="w-[85%] h-[85%] rounded-full"
+                    style={{
+                      backgroundColor: colorFor(cell),
+                      boxShadow: "inset 0 -4px 0 rgba(0,0,0,0.2)",
+                    }}
+                  />
+                )}
               </div>
             )),
           )}
@@ -107,7 +157,12 @@ function ConnectPage() {
       </div>
 
       <div className="mt-5 text-center">
-        <button onClick={reset} className="rounded-xl bg-primary text-primary-foreground px-5 py-2 font-bold hover:scale-105 transition">{t("newGame")}</button>
+        <button
+          onClick={reset}
+          className="rounded-xl bg-primary text-primary-foreground px-5 py-2 font-bold hover:scale-105 transition"
+        >
+          {t("newGame")}
+        </button>
       </div>
     </GameLayout>
   );

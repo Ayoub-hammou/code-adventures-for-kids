@@ -132,6 +132,70 @@ const games = [
       nl: ["Variabele", "Foutafhandeling"],
     },
   },
+  {
+    to: "/inventory-master",
+    emoji: "📚",
+    color: "fun-blue",
+    title: { en: "Inventory Master", fr: "Maître de l'Inventaire", nl: "Inventarisgoeroe" },
+    desc: {
+      en: "Manage items using lists. Add and remove wisely!",
+      fr: "Gère les objets avec des listes. Ajoute et supprime avec sagesse !",
+      nl: "Beheer items met lijsten. Voeg toe en verwijder voorzichtig!",
+    },
+    tags: {
+      en: ["Arrays", "Lists"],
+      fr: ["Tableaux", "Listes"],
+      nl: ["Arrays", "Lijsten"],
+    },
+  },
+  {
+    to: "/luck-master",
+    emoji: "🎲",
+    color: "fun-red",
+    title: { en: "Luck Master", fr: "Maître de la Chance", nl: "Geluksmeester" },
+    desc: {
+      en: "Test your luck with random challenges and games!",
+      fr: "Teste ta chance avec des défis et jeux aléatoires !",
+      nl: "Test je geluk met willekeurige uitdagingen en spellen!",
+    },
+    tags: {
+      en: ["Randomness", "Probability"],
+      fr: ["Aléatoire", "Probabilités"],
+      nl: ["Willekeur", "Kansen"],
+    },
+  },
+  {
+    to: "/pattern-painter",
+    emoji: "🧩",
+    color: "fun-pink",
+    title: { en: "Pattern Painter", fr: "Peintre de Motifs", nl: "Patroon Schilder" },
+    desc: {
+      en: "Create beautiful patterns with loops and nesting!",
+      fr: "Crée de beaux motifs avec des boucles et l'imbrication !",
+      nl: "Maak mooie patronen met lussen en nesting!",
+    },
+    tags: {
+      en: ["Loops", "Patterns", "Nested Loops"],
+      fr: ["Boucles", "Motifs", "Boucles Imbriquées"],
+      nl: ["Lussen", "Patronen", "Geneste Lussen"],
+    },
+  },
+  {
+    to: "/race-against-time",
+    emoji: "⏱️",
+    color: "fun-blue",
+    title: { en: "Race Against Time", fr: "Course Contre la Montre", nl: "Race Tegen de Klok" },
+    desc: {
+      en: "Answer questions fast! Beat the clock in this speed challenge!",
+      fr: "Réponds vite ! Bats la montre dans ce défi de vitesse !",
+      nl: "Antwoord snel! Versla de klok in deze snelheidsuitdaging!",
+    },
+    tags: {
+      en: ["Timer", "Speed Challenge"],
+      fr: ["Minuteur", "Défi de Vitesse"],
+      nl: ["Timer", "Snelheidsuitdaging"],
+    },
+  },
 ];
 
 const concepts = [
@@ -190,6 +254,61 @@ const concepts = [
       nl: "Fouten vangen vóór de BOEM.",
     },
   },
+  {
+    slug: "functions",
+    emoji: "📞",
+    color: "concept-functions",
+    name: { en: "Functions", fr: "Les Fonctions", nl: "Functies" },
+    desc: {
+      en: "Reusable recipes for your code.",
+      fr: "Recettes réutilisables pour ton code.",
+      nl: "Herbruikbare recepten voor je code.",
+    },
+  },
+  {
+    slug: "arrays",
+    emoji: "📚",
+    color: "concept-arrays",
+    name: { en: "Arrays & Lists", fr: "Tableaux & Listes", nl: "Arrays & Lijsten" },
+    desc: {
+      en: "Store many things in one place.",
+      fr: "Range plein de choses au même endroit.",
+      nl: "Bewaar veel dingen op één plek.",
+    },
+  },
+  {
+    slug: "randomness",
+    emoji: "🎲",
+    color: "concept-randomness",
+    name: { en: "Randomness", fr: "L'aléatoire", nl: "Willekeur" },
+    desc: {
+      en: "Make games unpredictable and fun!",
+      fr: "Rends les jeux imprévisibles et amusants !",
+      nl: "Maak spellen onvoorspelbaar en leuk!",
+    },
+  },
+  {
+    slug: "patterns",
+    emoji: "🧩",
+    color: "concept-patterns",
+    name: { en: "Pattern Generation", fr: "Génération de Motifs", nl: "Patroon Generatie" },
+    desc: {
+      en: "Create beautiful ASCII art with loops!",
+      fr: "Crée du bel art ASCII avec des boucles !",
+      nl: "Maak mooie ASCII-art met lussen!",
+    },
+  },
+  {
+    slug: "timer",
+    emoji: "⏱️",
+    color: "concept-timer",
+    name: { en: "Timer & Countdown", fr: "Minuteur & Décompte", nl: "Timer & Aftelling" },
+    desc: {
+      en: "Add urgency and excitement to games!",
+      fr: "Ajoute de l'urgence et de l'excitation aux jeux !",
+      nl: "Voeg urgentie en spanning toe aan spellen!",
+    },
+  },
 ];
 
 function Home() {
@@ -216,9 +335,9 @@ function Home() {
     ),
   });
   const heroSub = pick(lang, {
-    en: "Nine mini-games. Five big programming ideas. Click an idea to learn the theory, or pick a game!",
-    fr: "Neuf mini-jeux. Cinq grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
-    nl: "Negen minigames. Vijf grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
+    en: "Thirteen mini-games. Ten big programming ideas. Click an idea to learn the theory, or pick a game!",
+    fr: "Treize mini-jeux. Dix grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
+    nl: "Dertien minigames. Tien grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
   });
 
   return (

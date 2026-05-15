@@ -1,6 +1,7 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { ReactNode } from "react";
 import { useUI } from "@/lib/i18n";
+import { getNextGameUrl } from "@/lib/games";
 
 export function GameLayout({
   children,
@@ -18,11 +19,23 @@ export function GameLayout({
   intro?: string;
 }) {
   const t = useUI();
+  const location = useLocation();
+  const nextGameUrl = getNextGameUrl(location.pathname);
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
-      <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-primary">
-        {t.back}
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-primary">
+          {t.back}
+        </Link>
+        {nextGameUrl && (
+          <Link
+            to={nextGameUrl}
+            className="text-sm font-semibold text-primary hover:text-primary/80"
+          >
+            {t.next} →
+          </Link>
+        )}
+      </div>
       <header className="mt-4 mb-6 flex flex-wrap items-end justify-between gap-3">
         <h1 className="text-4xl md:text-5xl font-bold">
           <span className="mr-2">{emoji}</span>

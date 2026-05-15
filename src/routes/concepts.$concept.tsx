@@ -292,6 +292,296 @@ const data: Record<string, Concept> = {
     ],
     games: ["/guess", "/calculator"],
   },
+  functions: {
+    emoji: "📞",
+    color: "concept-functions",
+    title: {
+      en: "Functions",
+      fr: "Les Fonctions",
+      nl: "Functies",
+    },
+    intro: {
+      en: "A function is like a reusable recipe. Instead of writing the same code over and over, you create a function once and use it many times. Functions take input (ingredients), do something with it, and give you output (the dish)!",
+      fr: "Une fonction, c'est comme une recette réutilisable. Au lieu d'écrire le même code plusieurs fois, tu crées une fonction une fois et tu l'utilises plein de fois. Les fonctions prennent une entrée (ingrédients), font quelque chose, et te donnent une sortie (le plat) !",
+      nl: "Een functie is als een herbruikbaar recept. In plaats van dezelfde code steeds opnieuw te schrijven, maak je een functie eenmaal en gebruik je deze vele keren. Functies nemen invoer (ingrediënten), doen iets ermee, en geven je uitvoer (het gerecht)!",
+    },
+    keyIdea: {
+      en: "Write once, use many times. Functions prevent repetition and make code cleaner.",
+      fr: "Écris une fois, utilise plein de fois. Les fonctions empêchent la répétition et rendent le code plus propre.",
+      nl: "Schrijf eenmaal, gebruik vele keren. Functies voorkomen herhaling en maken code schoner.",
+    },
+    examples: [
+      {
+        code: {
+          en: `function greet(name) {\n  return "Hello, " + name + "!"\n}\n\ngreet("Alice")  # Hello, Alice!\ngreet("Bob")    # Hello, Bob!`,
+          fr: `fonction saluer(nom) {\n  return "Bonjour, " + nom + " !"\n}\n\nsaluer("Alice")  # Bonjour, Alice !\nsaluer("Bob")    # Bonjour, Bob !`,
+          nl: `functie begroeten(naam) {\n  return "Hallo, " + naam + "!"\n}\n\nbegroeten("Alice")  # Hallo, Alice!\nbegroeten("Bob")    # Hallo, Bob!`,
+        },
+        explain: {
+          en: "Create a function once, use it multiple times with different inputs.",
+          fr: "Crée une fonction une fois, utilise-la plusieurs fois avec des entrées différentes.",
+          nl: "Maak een functie eenmaal, gebruik deze meerdere keren met verschillende invoer.",
+        },
+      },
+      {
+        code: {
+          en: `function average(num1, num2) {\n  return (num1 + num2) / 2\n}\n\naverage(10, 20)  # 15\naverage(50, 100) # 75`,
+          fr: `fonction moyenne(num1, num2) {\n  return (num1 + num2) / 2\n}\n\nmoyenne(10, 20)  # 15\nmoyenne(50, 100) # 75`,
+          nl: `functie gemiddelde(num1, num2) {\n  return (num1 + num2) / 2\n}\n\ngemiddelde(10, 20)  # 15\ngemiddelde(50, 100) # 75`,
+        },
+        explain: {
+          en: "Calculate the average of two numbers. Functions are perfect for mathematical operations!",
+          fr: "Calcule la moyenne de deux nombres. Les fonctions sont parfaites pour les opérations mathématiques !",
+          nl: "Bereken het gemiddelde van twee getallen. Functies zijn perfect voor wiskundige bewerkingen!",
+        },
+      },
+      {
+        code: {
+          en: `# BAD: Writing the same code twice\nprint("Score: " + str(100))\nprint("Score: " + str(250))\n\n# GOOD: Use a function\nfunction printScore(points) {\n  print("Score: " + str(points))\n}\nprintScore(100)\nprintScore(250)`,
+          fr: `# MAUVAIS : Écrire le même code deux fois\nafficher("Score : " + chaîne(100))\nafficher("Score : " + chaîne(250))\n\n# BON : Utiliser une fonction\nfonction afficherScore(points) {\n  afficher("Score : " + chaîne(points))\n}\nafficherScore(100)\nafficherScore(250)`,
+          nl: `# SLECHT: Dezelfde code twee keer schrijven\nafdrukken("Score: " + tekenreeks(100))\nafdrukken("Score: " + tekenreeks(250))\n\n# GOED: Gebruik een functie\nfunctie afdrukkenScore(punten) {\n  afdrukken("Score: " + tekenreeks(punten))\n}\nafdrukkenScore(100)\nafdrukkenScore(250)`,
+        },
+        explain: {
+          en: "Functions help you avoid writing the same code multiple times (DRY principle).",
+          fr: "Les fonctions t'aident à éviter d'écrire le même code plusieurs fois.",
+          nl: "Functies helpen je om dezelfde code niet twee keer te schrijven.",
+        },
+      },
+    ],
+    games: [],
+  },
+  arrays: {
+    emoji: "📚",
+    color: "concept-arrays",
+    title: {
+      en: "Arrays & Lists",
+      fr: "Les Tableaux & Listes",
+      nl: "Arrays & Lijsten",
+    },
+    intro: {
+      en: "An array (or list) is like a box with many compartments. Instead of creating separate boxes for each item, you store multiple items in one container and access them by position. Lists are perfect for storing collections like scores, names, or inventory items!",
+      fr: "Un tableau (ou liste), c'est comme une boîte avec plein de casiers. Au lieu de créer des boîtes séparées pour chaque objet, tu ranges plusieurs objets dans un seul conteneur et tu les accèdes par position. Les listes sont parfaites pour stocker des collections comme les scores, les noms ou l'inventaire !",
+      nl: "Een array (of lijst) is als een doos met veel vakjes. In plaats van aparte dozen voor elk item te maken, berg je meerdere items in één container op en access je ze via positie. Lijsten zijn perfect voor het opslaan van collecties zoals scores, namen of inventarisitems!",
+    },
+    keyIdea: {
+      en: "Store multiple items in one place. Access them by position (index starts at 0).",
+      fr: "Range plusieurs objets au même endroit. Accède-les par position (l'index commence à 0).",
+      nl: "Bewaar meerdere items op één plek. Access deze via positie (index begint bij 0).",
+    },
+    examples: [
+      {
+        code: {
+          en: `fruits = ["apple", "banana", "cherry"]\n\nprint(fruits[0])  # apple\nprint(fruits[1])  # banana\nprint(fruits[2])  # cherry`,
+          fr: `fruits = ["pomme", "banane", "cerise"]\n\nafficher(fruits[0])  # pomme\nafficher(fruits[1])  # banane\nafficher(fruits[2])  # cerise`,
+          nl: `vruchten = ["appel", "banaan", "kers"]\n\nafdrukken(vruchten[0])  # appel\nafdrukken(vruchten[1])  # banaan\nafdrukken(vruchten[2])  # kers`,
+        },
+        explain: {
+          en: "Create a list and access each item by its index (position). Index starts at 0!",
+          fr: "Crée une liste et accède à chaque élément par son index (position). L'index commence à 0 !",
+          nl: "Maak een lijst en access elk item via zijn index (positie). Index begint bij 0!",
+        },
+      },
+      {
+        code: {
+          en: `scores = [100, 250, 180, 320]\n\nfor score in scores:\n  print("Current score: " + str(score))`,
+          fr: `scores = [100, 250, 180, 320]\n\npour score dans scores:\n  afficher("Score actuel : " + chaîne(score))`,
+          nl: `scores = [100, 250, 180, 320]\n\nvoor score in scores:\n  afdrukken("Huidige score: " + tekenreeks(score))`,
+        },
+        explain: {
+          en: "Loop through all items in a list without knowing the exact number of items.",
+          fr: "Parcours tous les éléments d'une liste sans connaître le nombre exact d'éléments.",
+          nl: "Loop door alle items in een lijst zonder het exacte aantal items te kennen.",
+        },
+      },
+      {
+        code: {
+          en: `inventory = ["sword", "shield", "potion"]\n\n# Add new item\ninventory.append("ring")\n\n# Remove item\ninventory.remove("potion")\n\nprint(inventory)  # [sword, shield, ring]`,
+          fr: `inventaire = ["épée", "bouclier", "potion"]\n\n# Ajouter un nouvel objet\ninventaire.ajouter("anneau")\n\n# Supprimer un objet\ninventaire.supprimer("potion")\n\nafficher(inventaire)  # [épée, bouclier, anneau]`,
+          nl: `inventaris = ["zwaard", "schild", "trank"]\n\n# Voeg nieuw item toe\ninventaris.voegToe("ring")\n\n# Verwijder item\ninventaris.verwijder("trank")\n\nafdrukken(inventaris)  # [zwaard, schild, ring]`,
+        },
+        explain: {
+          en: "Add and remove items from a list dynamically as your program runs.",
+          fr: "Ajoute et supprime des éléments d'une liste dynamiquement pendant l'exécution.",
+          nl: "Voeg items toe aan een lijst toe en verwijder deze dynamisch terwijl je programma draait.",
+        },
+      },
+    ],
+    games: ["/inventory-master"],
+  },
+  randomness: {
+    emoji: "🎲",
+    color: "concept-randomness",
+    title: {
+      en: "Randomness & Probability",
+      fr: "L'Aléatoire & Probabilités",
+      nl: "Willekeur & Kansen",
+    },
+    intro: {
+      en: "Randomness is when the computer picks something unpredictably. Games use randomness to create surprise and excitement! You can pick random numbers, shuffle lists, or make random decisions. This makes every game different every time you play!",
+      fr: "L'aléatoire, c'est quand l'ordinateur choisit quelque chose de façon imprévisible. Les jeux utilisent l'aléatoire pour créer de la surprise et de l'excitation ! Tu peux choisir des nombres aléatoires, mélanger des listes ou faire des choix aléatoires. Ça rend chaque jeu différent à chaque fois que tu joues !",
+      nl: "Willekeur is wanneer de computer iets onvoorspelbaar kiest. Games gebruiken willekeur om verrassing en spanning te creëren! Je kunt willekeurige nummers kiezen, lijsten shuffelen of willekeurige keuzes maken. Dit maakt elk spel anders elke keer dat je speelt!",
+    },
+    keyIdea: {
+      en: "Use randomness to create variety and unpredictability in games. Every play is unique!",
+      fr: "Utilise l'aléatoire pour créer de la variété et de l'imprévisibilité dans les jeux. Chaque partie est unique !",
+      nl: "Gebruik willekeur om variatie en onvoorspelbaarheid in spellen te creëren. Elke partij is uniek!",
+    },
+    examples: [
+      {
+        code: {
+          en: `import random\n\n# Pick a random number between 1 and 10\nsecret = random.randint(1, 10)\nprint("Guess the number!")`,
+          fr: `importer aléatoire\n\n# Choisir un nombre aléatoire entre 1 et 10\nsecrèt = aléatoire.entierAleatoire(1, 10)\nafficher("Devine le nombre !")`,
+          nl: `importeer willekeur\n\n# Kies een willekeurig getal tussen 1 en 10\ngeheim = willekeur.willekeurigGetal(1, 10)\nafdrukken("Raad het getal!")`,
+        },
+        explain: {
+          en: "Generate a random number for games like guessing or rolling dice.",
+          fr: "Génère un nombre aléatoire pour des jeux comme deviner ou lancer les dés.",
+          nl: "Genereer een willekeurig getal voor spellen zoals raden of dobbelsteen gooien.",
+        },
+      },
+      {
+        code: {
+          en: `import random\n\nweapons = ["sword", "bow", "staff", "hammer"]\n\n# Pick a random weapon\nrandom_weapon = random.choice(weapons)\nprint("You got: " + random_weapon)`,
+          fr: `importer aléatoire\n\narmes = ["épée", "arc", "bâton", "marteau"]\n\n# Choisir une arme aléatoire\narme_aleatoire = aléatoire.choisir(armes)\nafficher("Tu as reçu : " + arme_aleatoire)`,
+          nl: `importeer willekeur\n\nwapens = ["zwaard", "boog", "staf", "hamer"]\n\n# Kies een willekeurig wapen\nwillekeurig_wapen = willekeur.kies(wapens)\nafdrukken("Je hebt gekregen: " + willekeurig_wapen)`,
+        },
+        explain: {
+          en: "Pick a random item from a list for loot drops, random events, or random choices.",
+          fr: "Choisis un élément aléatoire d'une liste pour les butin, les événements aléatoires ou les choix aléatoires.",
+          nl: "Kies een willekeurig item uit een lijst voor lootdrops, willekeurige events of willekeurige keuzes.",
+        },
+      },
+      {
+        code: {
+          en: `import random\n\nopponents = ["Goblin", "Wizard", "Knight", "Dragon"]\n\n# Shuffle and pick\nrandom.shuffle(opponents)\nenemy = opponents[0]\n\nprint("You face: " + enemy)`,
+          fr: `importer aléatoire\n\nadvversaires = ["Gobelin", "Magicien", "Chevalier", "Dragon"]\n\n# Mélanger et choisir\naléatoire.melanger(adversaires)\nenemi = adversaires[0]\n\nafficher("Tu affrontes : " + enemi)`,
+          nl: `importeer willekeur\n\ntegenstanders = ["Goblin", "Tovenaar", "Ridder", "Draak"]\n\n# Shuffel en kies\nwillekeur.shuffel(tegenstanders)\ntegenstander = tegenstanders[0]\n\nafdrukken("Je staat tegenover: " + tegenstander)`,
+        },
+        explain: {
+          en: "Shuffle a list to randomize order, perfect for random encounters or level selection.",
+          fr: "Mélange une liste pour randomiser l'ordre, parfait pour les rencontres aléatoires ou la sélection de niveau.",
+          nl: "Shuffel een lijst om volgorde te randomiseren, perfect voor willekeurige encountersof levelkeuze.",
+        },
+      },
+    ],
+    games: ["/guess", "/luck-master"],
+  },
+  patterns: {
+    emoji: "🧩",
+    color: "concept-patterns",
+    title: {
+      en: "Pattern Generation",
+      fr: "Génération de Motifs",
+      nl: "Patroon Generatie",
+    },
+    intro: {
+      en: "Pattern generation uses loops to create beautiful and repetitive designs. From simple stars to complex fractals, you can build amazing ASCII art with just a few lines of code. Loops make creating patterns easy and fun!",
+      fr: "La génération de motifs utilise les boucles pour créer des designs beaux et répétitifs. Des étoiles simples aux fractales complexes, tu peux créer de l'art ASCII incroyable avec juste quelques lignes de code. Les boucles rendent la création de motifs facile et amusante !",
+      nl: "Patroonafvoer gebruikt lussen om prachtige en repetitieve ontwerpen te maken. Van eenvoudige sterren tot complexe fractals, je kunt geweldig ASCII-art maken met slechts enkele regels code. Lussen maken het maken van patronen gemakkelijk en leuk!",
+    },
+    keyIdea: {
+      en: "Loops create repetition. With a little math, repetition becomes beautiful patterns!",
+      fr: "Les boucles créent la répétition. Avec un peu de mathématiques, la répétition devient de beaux motifs !",
+      nl: "Lussen creëren herhaling. Met een beetje wiskunde wordt herhaling prachtige patronen!",
+    },
+    examples: [
+      {
+        code: {
+          en: `# Simple star pyramid\nfor i in 1..5:\n  print("*" * i)`,
+          fr: `# Pyramide d'étoiles simple\npour i de 1 à 5:\n  afficher("*" * i)`,
+          nl: `# Eenvoudige sterpyramide\nvoor i van 1 tot 5:\n  afdrukken("*" * i)`,
+        },
+        explain: {
+          en: "Each loop iteration prints one more star. The result is a pyramid!",
+          fr: "Chaque itération de la boucle affiche une étoile de plus. Le résultat est une pyramide !",
+          nl: "Elke lusherhaling drukt één ster meer af. Het resultaat is een piramide!",
+        },
+      },
+      {
+        code: {
+          en: `# Diamond pattern\nfor i in 1..3:\n  print(" " * (3-i) + "*" * (2*i-1))\nfor i in 2..1:\n  print(" " * (3-i) + "*" * (2*i-1))`,
+          fr: `# Motif en diamant\npour i de 1 à 3:\n  afficher(" " * (3-i) + "*" * (2*i-1))\npour i de 2 à 1:\n  afficher(" " * (3-i) + "*" * (2*i-1))`,
+          nl: `# Diamantpatroon\nvoor i van 1 tot 3:\n  afdrukken(" " * (3-i) + "*" * (2*i-1))\nvoor i van 2 tot 1:\n  afdrukken(" " * (3-i) + "*" * (2*i-1))`,
+        },
+        explain: {
+          en: "Combine loops and math to create complex shapes. Spaces for alignment, stars for the pattern!",
+          fr: "Combine les boucles et les mathématiques pour créer des formes complexes. Des espaces pour l'alignement, des étoiles pour le motif !",
+          nl: "Combineer lussen en wiskunde om complexe vormen te maken. Spaties voor uitlijning, sterren voor het patroon!",
+        },
+      },
+      {
+        code: {
+          en: `# Multiplication table pattern\nfor i in 1..5:\n  for j in 1..5:\n    print(i * j, end=" ")\n  print()`,
+          fr: `# Motif de table de multiplication\npour i de 1 à 5:\n  pour j de 1 à 5:\n    afficher(i * j, fin=" ")\n  afficher()`,
+          nl: `# Vermenigvuldigingstabelpatroon\nvoor i van 1 tot 5:\n  voor j van 1 tot 5:\n    afdrukken(i * j, einde=" ")\n  afdrukken()`,
+        },
+        explain: {
+          en: "Nested loops create 2D patterns! Each inner loop creates a row, outer loop creates rows.",
+          fr: "Les boucles imbriquées créent des motifs 2D ! Chaque boucle interne crée une ligne, la boucle externe crée les lignes.",
+          nl: "Geneste lussen creëren 2D-patronen! Elke binnenste lus creëert een rij, buitenlus creëert rijen.",
+        },
+      },
+    ],
+    games: ["/pattern-painter"],
+  },
+  timer: {
+    emoji: "⏱️",
+    color: "concept-timer",
+    title: {
+      en: "Timer & Countdown",
+      fr: "Minuteur & Décompte",
+      nl: "Timer & Aftelling",
+    },
+    intro: {
+      en: "Timers and countdowns bring urgency and challenge to games! By tracking time, you can create race-against-the-clock games, time limits, and speed challenges. Time management makes games more exciting!",
+      fr: "Les minuteurs et les décomptes apportent de l'urgence et du défi aux jeux ! En suivant le temps, tu peux créer des jeux contre la montre, des limites de temps et des défis de vitesse. La gestion du temps rend les jeux plus excitants !",
+      nl: "Timers en aftellingen brengen urgentie en uitdaging in spellen! Door tijd bij te houden, kunt u race-against-the-clock-spellen, tijdlimieten en snelheidsuitdagingen maken. Tijdsbeheer maakt spellen spannender!",
+    },
+    keyIdea: {
+      en: "Time creates urgency. Urgency makes games exciting. Challenge the player to beat the clock!",
+      fr: "Le temps crée l'urgence. L'urgence rend les jeux excitants. Défiez le joueur de battre la montre !",
+      nl: "Tijd creëert urgentie. Urgentie maakt spellen spannend. Daag de speler uit om de klok te verslaan!",
+    },
+    examples: [
+      {
+        code: {
+          en: `import time\n\n# Countdown timer\nfor seconds in range(10, 0, -1):\n  print(f"Time: {seconds}s")\n  time.sleep(1)\nprint("Time's up!")`,
+          fr: `importer temps\n\n# Minuteur de décompte\npour secondes dans intervalle(10, 0, -1):\n  afficher(f"Temps : {secondes}s")\n  temps.dormir(1)\nafficher("Temps écoulé !")`,
+          nl: `importeer tijd\n\n# Aftellingstimer\nvoor seconden in bereik(10, 0, -1):\n  afdrukken(f"Tijd: {seconden}s")\n  tijd.slaap(1)\nafdrukken("Tijd is om!")`,
+        },
+        explain: {
+          en: "Count down from 10 seconds. The loop runs from 10 down to 1, creating a countdown!",
+          fr: "Décompte à partir de 10 secondes. La boucle commence à 10 et descend à 1, créant un décompte !",
+          nl: "Aftellen vanaf 10 seconden. De lus loopt van 10 tot 1, wat een aftelling creëert!",
+        },
+      },
+      {
+        code: {
+          en: `import time\n\nstart_time = time.time()\nwhile time.time() - start_time < 60:\n  print("Still going...")\n  time.sleep(10)\nprint("1 minute passed!")`,
+          fr: `importer temps\n\ntemps_debut = temps.maintenant()\ntandis_que temps.maintenant() - temps_debut < 60:\n  afficher("Toujours en cours...")\n  temps.dormir(10)\nafficher("1 minute écoulée !")`,
+          nl: `importeer tijd\n\nstarttijd = tijd.nu()\nzolang tijd.nu() - starttijd < 60:\n  afdrukken("Nog steeds bezig...")\n  tijd.slaap(10)\nafdrukken("1 minuut voorbij!")`,
+        },
+        explain: {
+          en: "Run code for exactly 60 seconds. Measure time with `time.time()` to track elapsed time!",
+          fr: "Exécute le code pendant exactement 60 secondes. Mesure le temps avec `temps.temps()` pour suivre le temps écoulé !",
+          nl: "Voer code uit voor precies 60 seconden. Meet tijd met `tijd.nu()` om verstreken tijd bij te houden!",
+        },
+      },
+      {
+        code: {
+          en: `import time\n\nprint("Speed challenge: Answer in 5 seconds!")\nstart = time.time()\nuser_input = input("What is 5 + 3? ")\nelapsed = time.time() - start\n\nif elapsed < 5 and user_input == "8":\n  print(f"✓ Correct in {elapsed:.1f}s!")\nelse:\n  print("✗ Too slow or wrong answer!")`,
+          fr: `importer temps\n\nafficher("Défi de vitesse : Réponds en 5 secondes !")\ndebut = temps.maintenant()\nentree_utilisateur = lire("Combien font 5 + 3 ? ")\ntemps_ecoule = temps.maintenant() - debut\n\nsi temps_ecoule < 5 et entree_utilisateur == "8":\n  afficher(f"✓ Correct en {temps_ecoule:.1f}s !")\nsinon:\n  afficher("✗ Trop lent ou mauvaise réponse !")`,
+          nl: `importeer tijd\n\nafdrukken("Snelheidsuitdaging: Antwoord in 5 seconden!")\nbegin = tijd.nu()\ngebruiker_invoer = lees("Hoeveel is 5 + 3? ")\nverstreken = tijd.nu() - begin\n\nals verstreken < 5 en gebruiker_invoer == "8":\n  afdrukken(f"✓ Correct in {verstreken:.1f}s!")\nanders:\n  afdrukken("✗ Te langzaam of fout antwoord!")`,
+        },
+        explain: {
+          en: "Combine time tracking with game logic! Track how fast the player responds and reward speed!",
+          fr: "Combine le suivi du temps avec la logique du jeu ! Suivez la rapidité de réponse du joueur et récompensez la vitesse !",
+          nl: "Combineer tijdbijhouding met spellogica! Volg hoe snel de speler reageert en beloon snelheid!",
+        },
+      },
+    ],
+    games: ["/race-against-time"],
+  },
 };
 
 const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
@@ -304,6 +594,22 @@ const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
   "/fizzbuzz": { en: "Fizz Buzz", fr: "Fizz Buzz", nl: "Fizz Buzz" },
   "/simon": { en: "Simon Says", fr: "Jacques a dit", nl: "Simon Zegt" },
   "/calculator": { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
+  "/inventory-master": {
+    en: "Inventory Master",
+    fr: "Maître de l'Inventaire",
+    nl: "Inventarisgoeroe",
+  },
+  "/luck-master": { en: "Luck Master", fr: "Maître de la Chance", nl: "Geluksmeester" },
+  "/pattern-painter": {
+    en: "Pattern Painter",
+    fr: "Peintre de Motifs",
+    nl: "Patroon Schilder",
+  },
+  "/race-against-time": {
+    en: "Race Against Time",
+    fr: "Course Contre la Montre",
+    nl: "Race Tegen de Klok",
+  },
 };
 
 const labels = {
@@ -360,18 +666,22 @@ function ConceptPage() {
         ))}
       </div>
 
-      <h2 className="text-2xl font-bold mb-4">🎮 {L.explore}</h2>
-      <div className="flex flex-wrap gap-2">
-        {c.games.map((g) => (
-          <Link
-            key={g}
-            to={g}
-            className="rounded-full bg-primary text-primary-foreground px-4 py-2 font-bold hover:scale-105 transition"
-          >
-            {pick(lang, gameNames[g])} →
-          </Link>
-        ))}
-      </div>
+      {c.games.length > 0 && (
+        <>
+          <h2 className="text-2xl font-bold mb-4">🎮 {L.explore}</h2>
+          <div className="flex flex-wrap gap-2">
+            {c.games.map((g) => (
+              <Link
+                key={g}
+                to={g}
+                className="rounded-full bg-primary text-primary-foreground px-4 py-2 font-bold hover:scale-105 transition"
+              >
+                {pick(lang, gameNames[g])} →
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

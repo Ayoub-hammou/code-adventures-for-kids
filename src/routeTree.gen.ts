@@ -11,8 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SimonRouteImport } from './routes/simon'
 import { Route as RpsRouteImport } from './routes/rps'
+import { Route as RaceAgainstTimeRouteImport } from './routes/race-against-time'
+import { Route as PatternPainterRouteImport } from './routes/pattern-painter'
 import { Route as PalindromeRouteImport } from './routes/palindrome'
 import { Route as MastermindRouteImport } from './routes/mastermind'
+import { Route as LuckMasterRouteImport } from './routes/luck-master'
+import { Route as InventoryMasterRouteImport } from './routes/inventory-master'
 import { Route as GuessRouteImport } from './routes/guess'
 import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
 import { Route as Connect4RouteImport } from './routes/connect4'
@@ -31,6 +35,16 @@ const RpsRoute = RpsRouteImport.update({
   path: '/rps',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RaceAgainstTimeRoute = RaceAgainstTimeRouteImport.update({
+  id: '/race-against-time',
+  path: '/race-against-time',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatternPainterRoute = PatternPainterRouteImport.update({
+  id: '/pattern-painter',
+  path: '/pattern-painter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PalindromeRoute = PalindromeRouteImport.update({
   id: '/palindrome',
   path: '/palindrome',
@@ -39,6 +53,16 @@ const PalindromeRoute = PalindromeRouteImport.update({
 const MastermindRoute = MastermindRouteImport.update({
   id: '/mastermind',
   path: '/mastermind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LuckMasterRoute = LuckMasterRouteImport.update({
+  id: '/luck-master',
+  path: '/luck-master',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryMasterRoute = InventoryMasterRouteImport.update({
+  id: '/inventory-master',
+  path: '/inventory-master',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuessRoute = GuessRouteImport.update({
@@ -84,8 +108,12 @@ export interface FileRoutesByFullPath {
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/inventory-master': typeof InventoryMasterRoute
+  '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/pattern-painter': typeof PatternPainterRoute
+  '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
@@ -97,8 +125,12 @@ export interface FileRoutesByTo {
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/inventory-master': typeof InventoryMasterRoute
+  '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/pattern-painter': typeof PatternPainterRoute
+  '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
@@ -111,8 +143,12 @@ export interface FileRoutesById {
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/inventory-master': typeof InventoryMasterRoute
+  '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
   '/palindrome': typeof PalindromeRoute
+  '/pattern-painter': typeof PatternPainterRoute
+  '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
@@ -126,8 +162,12 @@ export interface FileRouteTypes {
     | '/connect4'
     | '/fizzbuzz'
     | '/guess'
+    | '/inventory-master'
+    | '/luck-master'
     | '/mastermind'
     | '/palindrome'
+    | '/pattern-painter'
+    | '/race-against-time'
     | '/rps'
     | '/simon'
     | '/concepts/$concept'
@@ -139,8 +179,12 @@ export interface FileRouteTypes {
     | '/connect4'
     | '/fizzbuzz'
     | '/guess'
+    | '/inventory-master'
+    | '/luck-master'
     | '/mastermind'
     | '/palindrome'
+    | '/pattern-painter'
+    | '/race-against-time'
     | '/rps'
     | '/simon'
     | '/concepts/$concept'
@@ -152,8 +196,12 @@ export interface FileRouteTypes {
     | '/connect4'
     | '/fizzbuzz'
     | '/guess'
+    | '/inventory-master'
+    | '/luck-master'
     | '/mastermind'
     | '/palindrome'
+    | '/pattern-painter'
+    | '/race-against-time'
     | '/rps'
     | '/simon'
     | '/concepts/$concept'
@@ -166,8 +214,12 @@ export interface RootRouteChildren {
   Connect4Route: typeof Connect4Route
   FizzbuzzRoute: typeof FizzbuzzRoute
   GuessRoute: typeof GuessRoute
+  InventoryMasterRoute: typeof InventoryMasterRoute
+  LuckMasterRoute: typeof LuckMasterRoute
   MastermindRoute: typeof MastermindRoute
   PalindromeRoute: typeof PalindromeRoute
+  PatternPainterRoute: typeof PatternPainterRoute
+  RaceAgainstTimeRoute: typeof RaceAgainstTimeRoute
   RpsRoute: typeof RpsRoute
   SimonRoute: typeof SimonRoute
   ConceptsConceptRoute: typeof ConceptsConceptRoute
@@ -189,6 +241,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RpsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/race-against-time': {
+      id: '/race-against-time'
+      path: '/race-against-time'
+      fullPath: '/race-against-time'
+      preLoaderRoute: typeof RaceAgainstTimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pattern-painter': {
+      id: '/pattern-painter'
+      path: '/pattern-painter'
+      fullPath: '/pattern-painter'
+      preLoaderRoute: typeof PatternPainterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/palindrome': {
       id: '/palindrome'
       path: '/palindrome'
@@ -201,6 +267,20 @@ declare module '@tanstack/react-router' {
       path: '/mastermind'
       fullPath: '/mastermind'
       preLoaderRoute: typeof MastermindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/luck-master': {
+      id: '/luck-master'
+      path: '/luck-master'
+      fullPath: '/luck-master'
+      preLoaderRoute: typeof LuckMasterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory-master': {
+      id: '/inventory-master'
+      path: '/inventory-master'
+      fullPath: '/inventory-master'
+      preLoaderRoute: typeof InventoryMasterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guess': {
@@ -262,8 +342,12 @@ const rootRouteChildren: RootRouteChildren = {
   Connect4Route: Connect4Route,
   FizzbuzzRoute: FizzbuzzRoute,
   GuessRoute: GuessRoute,
+  InventoryMasterRoute: InventoryMasterRoute,
+  LuckMasterRoute: LuckMasterRoute,
   MastermindRoute: MastermindRoute,
   PalindromeRoute: PalindromeRoute,
+  PatternPainterRoute: PatternPainterRoute,
+  RaceAgainstTimeRoute: RaceAgainstTimeRoute,
   RpsRoute: RpsRoute,
   SimonRoute: SimonRoute,
   ConceptsConceptRoute: ConceptsConceptRoute,
