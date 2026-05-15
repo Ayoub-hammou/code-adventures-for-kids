@@ -180,7 +180,7 @@ const games = [
       nl: ["Lussen", "Patronen", "Geneste Lussen"],
     },
   },
-  {
+   {
     to: "/race-against-time",
     emoji: "⏱️",
     color: "fun-blue",
@@ -194,6 +194,22 @@ const games = [
       en: ["Timer", "Speed Challenge"],
       fr: ["Minuteur", "Défi de Vitesse"],
       nl: ["Timer", "Snelheidsuitdaging"],
+    },
+  },
+  {
+    to: "/ice-skater",
+    emoji: "⛸️",
+    color: "fun-blue",
+    title: { en: "Ice Skater", fr: "Patineur sur Glace", nl: "IJsschaatser" },
+    desc: {
+      en: "Help the skater escape by navigating the ice rink with loops!",
+      fr: "Aide le patineur à s'échapper en naviguant la patinoire avec des boucles !",
+      nl: "Help de schaatser ontsnappen door de ijsbaan te navigeren met lussen!",
+    },
+    tags: {
+      en: ["Loops", "Logic", "Navigation"],
+      fr: ["Boucles", "Logique", "Navigation"],
+      nl: ["Lussen", "Logica", "Navigatie"],
     },
   },
 ];

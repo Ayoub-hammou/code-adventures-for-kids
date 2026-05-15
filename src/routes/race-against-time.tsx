@@ -25,6 +25,8 @@ function RaceAgainstTime() {
       intro: "Answer math questions as fast as you can! The clock is ticking!",
       code: `# 🏃 RACE AGAINST TIME\n\nfunction startGame(difficulty):\n  timeLimit = getDifficultyTime(difficulty)  # 10s, 7s, or 5s\n  score = 0\n  questionIndex = 0\n  \n  while questionIndex < totalQuestions:\n    currentQuestion = getRandomQuestion()\n    timeLeft = timeLimit\n    \n    # 🔄 TIMER LOOP\n    while timeLeft > 0:\n      displayQuestion(currentQuestion)\n      displayTime(timeLeft)\n      \n      if userSubmitsAnswer():\n        if isAnswerCorrect(userAnswer, currentQuestion):\n          # ✓ Award points based on remaining time\n          score += timeLeft * 10\n          feedback = "Correct!"\n        else:\n          feedback = "Incorrect!"\n        break  # Move to next question\n      \n      timeLeft -= 1\n      sleep(1 second)\n    \n    # ⏰ Handle timeout\n    if timeLeft == 0:\n      feedback = "Time's Up!"\n    \n    questionIndex += 1\n  \n  return displayFinalScore(score)`,
       start: "Start Racing",
+      chooseDifficulty: "Choose Difficulty",
+      answerPlaceholder: "Your answer...",
       easy: "Easy (10s)",
       medium: "Medium (7s)",
       hard: "Hard (5s)",
@@ -126,6 +128,8 @@ function RaceAgainstTime() {
       intro: "Réponds aux questions mathématiques aussi vite que tu peux ! La montre tourne !",
       code: `# 🏃 COURSE CONTRE LA MONTRE\n\nfonction lancerJeu(difficulte):\n  tempsLimite = getTempsParDifficulte(difficulte)  # 10s, 7s, ou 5s\n  score = 0\n  indexQuestion = 0\n  \n  tant que indexQuestion < totalQuestions:\n    questionActuelle = getRandomQuestion()\n    tempsRestant = tempsLimite\n    \n    # 🔄 BOUCLE DE MINUTEUR\n    tant que tempsRestant > 0:\n      afficherQuestion(questionActuelle)\n      afficherTemps(tempsRestant)\n      \n      si utilisateurSoumetRéponse():\n        si laRéponseEstCorrecte(réponseUtilisateur, questionActuelle):\n          # ✓ Points basés sur le temps restant\n          score += tempsRestant * 10\n          retour = "Correct!"\n        sinon:\n          retour = "Incorrect!"\n        break  # Passer à la question suivante\n      \n      tempsRestant -= 1\n      attendre(1 seconde)\n    \n    # ⏰ Gérer le dépassement de temps\n    si tempsRestant == 0:\n      retour = "Temps Écoulé!"\n    \n    indexQuestion += 1\n  \n  retour afficherScoreFinal(score)`,
       start: "Commencer la Course",
+      chooseDifficulty: "Choisir la Difficulté",
+      answerPlaceholder: "Ton réponse...",
       easy: "Facile (10s)",
       medium: "Moyen (7s)",
       hard: "Difficile (5s)",
@@ -231,6 +235,8 @@ function RaceAgainstTime() {
       intro: "Beantwoord wiskundige vragen zo snel als je kunt! De klok tikt!",
       code: `# 🏃 RACE TEGEN DE KLOK\n\nfunctie startGame(moeilijkheid):\n  tijdslimiet = getTijdByMoeilijkheid(moeilijkheid)  # 10s, 7s, of 5s\n  score = 0\n  vraagIndex = 0\n  \n  terwijl vraagIndex < totaalVragen:\n    huidigeVraag = getRandomVraag()\n    tijdOver = tijdslimiet\n    \n    # 🔄 TIMER LUSSEN\n    terwijl tijdOver > 0:\n      toonVraag(huidigeVraag)\n      toonTijd(tijdOver)\n      \n      als gebruikerStudieertAntwoord():\n        als antwoordIsCorrect(gebruikerAntwoord, huidigeVraag):\n          # ✓ Punten gebaseerd op resterende tijd\n          score += tijdOver * 10\n          feedback = "Correct!"\n        anders:\n          feedback = "Incorrect!"\n        break  # Ga naar volgende vraag\n      \n      tijdOver -= 1\n      sleep(1 seconde)\n    \n    # ⏰ Timeout afhandelen\n    als tijdOver == 0:\n      feedback = "Tijd om!"\n    \n    vraagIndex += 1\n  \n  return toonEindScore(score)`,
       start: "Start Race",
+      chooseDifficulty: "Selecteer Moeilijkheid",
+      answerPlaceholder: "Jouw antwoord...",
       easy: "Gemakkelijk (10s)",
       medium: "Gemiddeld (7s)",
       hard: "Moeilijk (5s)",
@@ -399,19 +405,12 @@ function RaceAgainstTime() {
   };
 
   return (
-    <GameLayout
-      title={t.title}
-      emoji="⏱️"
-      concept={t.concept}
-      intro={t.intro}
-      code={t.code}
-    >
+    <GameLayout title={t.title} emoji="⏱️" concept={t.concept} intro={t.intro} code={t.code}>
       <div className="max-w-2xl mx-auto">
-
         {gameState === "start" && (
           <div className="text-center space-y-6">
             <div className="text-6xl">⏱️</div>
-            <p className="text-lg font-semibold">Choose Difficulty:</p>
+            <p className="text-lg font-semibold">{t.chooseDifficulty}:</p>
             <div className="flex flex-col gap-3">
               <Button onClick={() => handleSelectDifficulty("easy")} size="lg" variant="outline">
                 {t.easy}
@@ -463,7 +462,7 @@ function RaceAgainstTime() {
                   if (e.key === "Enter") handleSubmit();
                 }}
                 className="w-full p-4 rounded-lg border-2 border-border bg-card text-center text-lg font-bold"
-                placeholder="Your answer..."
+                placeholder={t.answerPlaceholder}
                 autoFocus
               />
             </div>

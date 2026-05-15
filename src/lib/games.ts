@@ -12,6 +12,7 @@ export const GAMES_ORDER = [
   "/luck-master",
   "/pattern-painter",
   "/race-against-time",
+  "/ice-skater",
 ];
 
 export function getNextGameUrl(currentPath: string): string | null {

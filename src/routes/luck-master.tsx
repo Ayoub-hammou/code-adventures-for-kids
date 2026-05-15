@@ -10,19 +10,39 @@ export const Route = createFileRoute("/luck-master")({
 
 function LuckMaster() {
   const { lang } = useLang();
-  const [gameState, setGameState] = useState<"start" | "playing" | "result">("playing");
+  const [gameState, setGameState] = useState<"start" | "playing" | "mystery-choice" | "result" | "summary">("start");
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(0);
   const [result, setResult] = useState("");
   const [lastReward, setLastReward] = useState(0);
   const [mysteryNumber, setMysteryNumber] = useState<number | null>(null);
-  const [mysteryChoice, setMysteryChoice] = useState<"ODD" | "EVEN" | null>(null);
+  const [_mysteryChoice, setMysteryChoice] = useState<"ODD" | "EVEN" | null>(null);
+
+  const roundCodes = {
+    en: [
+      `# 🎲 ROUND 1: LUCKY DICE\n\nimport random\n\n# Roll two random dice\ndice1 = random.randint(1, 6)\ndice2 = random.randint(1, 6)\nprint(f"Dice: {dice1}, {dice2}")\n\n# Check if they match\nif dice1 == dice2:\n  print("✓ Match! +20 points")\nelse:\n  print("✗ No match")`,
+      `# 🎡 ROUND 2: SPIN THE WHEEL\n\nimport random\n\n# 50% chance game\nif random.random() < 0.5:\n  print("🌟 Gold! +30 points")\nelse:\n  print("Silver! Try again")`,
+      `# 🎁 ROUND 3: PICK THE PRIZE\n\nimport random\n\n# Pick a random prize\nif random.random() < 0.5:\n  print("🎉 Big Prize! +50 points")\nelse:\n  print("Small Prize +10 points")`,
+      `# 🔮 ROUND 4: MYSTERY NUMBER\n\nimport random\n\n# Player chooses ODD or EVEN\nguess = input("ODD or EVEN? ")\n\n# Random number appears\nmystery = random.randint(1, 100)\nprint(f"Number: {mystery}")\n\n# Check if correct\nif (guess == "EVEN" and mystery % 2 == 0) or (guess == "ODD" and mystery % 2 == 1):\n  print("✓ Correct! +25 bonus")\nelse:\n  print("✗ Wrong!")`,
+    ],
+    fr: [
+      `# 🎲 MANCHE 1: DÉS DE CHANCE\n\nimporter aléatoire\n\n# Lancer deux dés aléatoires\ndé1 = aléatoire.randint(1, 6)\ndé2 = aléatoire.randint(1, 6)\nafficher(f"Dés: {dé1}, {dé2}")\n\n# Vérifier s'ils correspondent\nsi dé1 == dé2:\n  afficher("✓ Jackpot! +20 points")\nsinon:\n  afficher("✗ Pas de chance")`,
+      `# 🎡 MANCHE 2: TOURNER LA ROUE\n\nimporter aléatoire\n\n# Jeu 50% chance\nsi aléatoire.random() < 0.5:\n  afficher("🌟 Or! +30 points")\nsinon:\n  afficher("Argent! Réessaie")`,
+      `# 🎁 MANCHE 3: CHOISIR LE PRIX\n\nimporter aléatoire\n\n# Choisir un prix aléatoire\nsi aléatoire.random() < 0.5:\n  afficher("🎉 Grand Prix! +50 points")\nsinon:\n  afficher("Petit Prix +10 points")`,
+      `# 🔮 MANCHE 4: NOMBRE MYSTÈRE\n\nimporter aléatoire\n\n# Joueur choisit PAIR ou IMPAIR\ndeviner = input("PAIR ou IMPAIR? ")\n\n# Nombre aléatoire apparaît\nmystere = aléatoire.randint(1, 100)\nafficher(f"Nombre: {mystere}")\n\n# Vérifier si correct\nsi (deviner == "PAIR" et mystere % 2 == 0) ou (deviner == "IMPAIR" et mystere % 2 == 1):\n  afficher("✓ Correct! +25 bonus")\nsinon:\n  afficher("✗ Faux!")`,
+    ],
+    nl: [
+      `# 🎲 RONDE 1: GELUKSDOBBELSTENEN\n\nimporteer willekeur\n\n# Gooi twee willekeurige dobbelstenen\ndob1 = willekeur.randint(1, 6)\ndob2 = willekeur.randint(1, 6)\nafdrukken(f"Dobbelstenen: {dob1}, {dob2}")\n\n# Controleer of ze hetzelfde zijn\nals dob1 == dob2:\n  afdrukken("✓ Jackpot! +20 punten")\nanders:\n  afdrukken("✗ Geen geluk")`,
+      `# 🎡 RONDE 2: DRAAI HET WIEL\n\nimporteer willekeur\n\n# 50% kansspel\nals willekeur.random() < 0.5:\n  afdrukken("🌟 Goud! +30 punten")\nanders:\n  afdrukken("Zilver! Probeer opnieuw")`,
+      `# 🎁 RONDE 3: KIES DE PRIJS\n\nimporteer willekeur\n\n# Kies een willekeurige prijs\nals willekeur.random() < 0.5:\n  afdrukken("🎉 Grote Prijs! +50 punten")\nanders:\n  afdrukken("Kleine Prijs +10 punten")`,
+      `# 🔮 RONDE 4: MYSTIEK GETAL\n\nimporteer willekeur\n\n# Speler kiest ONEVEN of EVEN\nraden = input("ONEVEN of EVEN? ")\n\n# Willekeurig getal verschijnt\nmystiek = willekeur.randint(1, 100)\nafdrukken(f"Getal: {mystiek}")\n\n# Controleer of juist\nals (raden == "EVEN" en mystiek % 2 == 0) of (raden == "ONEVEN" en mystiek % 2 == 1):\n  afdrukken("✓ Correct! +25 bonus")\nanders:\n  afdrukken("✗ Fout!")`,
+    ],
+  };
   const texts = {
     en: {
       title: "Luck Master",
       concept: "Randomness & Probability",
       intro: "Test your luck with randomness! Spin, guess, and win points!",
-      code: `# 🎲 RANDOMNESS IN GAMES\n\nimport random\n\n# Random integer\ndice1 = random.randint(1, 6)\ndice2 = random.randint(1, 6)\nif dice1 == dice2:\n  print("Jackpot! +20 points")\n\n# Random float for probability\nif random.random() < 0.5:\n  print("50% chance - You won! +30")\nelse:\n  print("Better luck next time!")\n\n# Mystery Number Game - 3 Steps\n# Step 1: Player chooses ODD or EVEN\nguess = input("ODD or EVEN? ")\n\n# Step 2: Reveal the random number\nmystery_num = random.randint(1, 100)\nprint(f"Mystery Number: {mystery_num}")\n\n# Step 3: Check if guess was correct\nif (guess == "EVEN" and mystery_num % 2 == 0) or (guess == "ODD" and mystery_num % 2 == 1):\n  print(f"✓ CORRECT! +25 bonus points")\nelse:\n  print(f"✗ Wrong! No points")`,
       start: "Roll the Dice",
       spinWheel: "Let's Go",
       pickOption: "Pick an Option",
@@ -37,10 +57,11 @@ function LuckMaster() {
       evenChoice: "EVEN",
       mysteryNumber: "Mystery Number",
       correct: "CORRECT",
-      wrong: "WRONG",
-      showNumber: "Reveal Number",
-      nextGame: "Next Game →",
-      restartAll: "Restart All →",
+       wrong: "WRONG",
+       showNumber: "Reveal Number",
+       result: "Result",
+       nextGame: "Next Game →",
+       restartAll: "Restart →",
       challenges: [
         {
           name: "Lucky Dice Roll 🎲",
@@ -105,7 +126,6 @@ function LuckMaster() {
       title: "Maître de la Chance",
       concept: "Aléatoire & Probabilités",
       intro: "Teste ta chance avec l'aléatoire ! Tourne, devine et gagne des points !",
-      code: `# 🎲 ALÉATOIRE DANS LES JEUX\n\nimporter aléatoire\n\n# Entier aléatoire\ndé1 = aléatoire.randint(1, 6)\ndé2 = aléatoire.randint(1, 6)\nsi dé1 == dé2:\n  afficher("Jackpot ! +20 points")\n\n# Float aléatoire pour probabilité\nsi aléatoire.random() < 0.5:\n  afficher("50% chance - Tu as gagné ! +30")\nsinon:\n  afficher("Meilleure chance la prochaine fois !")\n\n# Jeu du Nombre Mystère - 3 Étapes\n# Étape 1: Joueur choisit PAIR ou IMPAIR\ndeviner = input("PAIR ou IMPAIR? ")\n\n# Étape 2: Révéler le nombre aléatoire\nnombre_mystere = aléatoire.randint(1, 100)\nafficher(f"Nombre Mystère: {nombre_mystere}")\n\n# Étape 3: Vérifier si la réponse était correcte\nsi (deviner == "PAIR" et nombre_mystere % 2 == 0) ou (deviner == "IMPAIR" et nombre_mystere % 2 == 1):\n  afficher(f"✓ CORRECT! +25 points bonus")\nsinon:\n  afficher(f"✗ Faux! Aucun point")`,
       start: "Lancer les Dés",
       spinWheel: "Allons-y",
       pickOption: "Choisir une Option",
@@ -120,10 +140,11 @@ function LuckMaster() {
       evenChoice: "PAIR",
       mysteryNumber: "Nombre Mystère",
       correct: "CORRECT",
-      wrong: "FAUX",
-      showNumber: "Révéler le Nombre",
-      nextGame: "Jeu Suivant →",
-      restartAll: "Recommencer Tout →",
+       wrong: "FAUX",
+       showNumber: "Révéler le Nombre",
+       result: "Résultat",
+       nextGame: "Jeu Suivant →",
+       restartAll: "Recommencer →",
       challenges: [
         {
           name: "Lancer les Dés 🎲",
@@ -200,10 +221,10 @@ function LuckMaster() {
       title: "Geluksmeester",
       concept: "Willekeur & Kansen",
       intro: "Test je geluk met willekeur! Draai, gok en win punten!",
-       code: `# 🎲 WILLEKEUR IN SPELLEN\n\nimporteer willekeur\n\n# Willekeurig geheel getal\ndob1 = willekeur.randint(1, 6)\ndob2 = willekeur.randint(1, 6)\nals dob1 == dob2:\n  afdrukken("Jackpot! +20 punten")\n\n# Willekeurig float voor waarschijnlijkheid\nals willekeur.random() < 0.5:\n  afdrukken("50% kans - Je wint! +30")\nanders:\n  afdrukken("Beter geluk volgende keer!")\n\n# Mystiek Getalspel - 3 Stappen\n# Stap 1: Speler kiest ONEVEN of EVEN\nraden = input("ONEVEN of EVEN? ")\n\n# Stap 2: Toon het willekeurige getal\nmystiek_getal = willekeur.randint(1, 100)\nafdrukken(f"Mystiek Getal: {mystiek_getal}")\n\n# Stap 3: Controleer of gok juist was\nals (raden == "EVEN" en mystiek_getal % 2 == 0) of (raden == "ONEVEN" en mystiek_getal % 2 == 1):\n  afdrukken(f"✓ CORRECT! +25 bonuspunten")\nanders:\n  afdrukken(f"✗ Fout! Geen punten")`,
-       start: "Gooi de Dobbelstenen",
-       spinWheel: "Laten we gaan",
-       tryAgain: "Opnieuw Proberen",
+      start: "Gooi de Dobbelstenen",
+      spinWheel: "Laten we gaan",
+      pickOption: "Kies een Optie",
+      tryAgain: "Opnieuw Proberen",
       gameOver: "Ronde Voltooid!",
       score: "Score",
       round: "Ronde",
@@ -214,10 +235,11 @@ function LuckMaster() {
       evenChoice: "EVEN",
       mysteryNumber: "Mystiek Getal",
       correct: "CORRECT",
-      wrong: "FOUT",
-      showNumber: "Getal Tonen",
-      nextGame: "Volgende Spel →",
-      restartAll: "Alles Opnieuw →",
+       wrong: "FOUT",
+       showNumber: "Getal Tonen",
+       result: "Resultaat",
+       nextGame: "Volgende Spel →",
+       restartAll: "Opnieuw →",
       challenges: [
         {
           name: "Dobbelstenen Gooien 🎲",
@@ -294,14 +316,17 @@ function LuckMaster() {
 
   const t = texts[lang as keyof typeof texts];
   const challenge = t.challenges[round % t.challenges.length];
+  const roundCodesList = roundCodes[lang as keyof typeof roundCodes];
+  const currentRoundCode = gameState === "start" || gameState === "summary" ? "" : roundCodesList[round % roundCodesList.length];
+  const currentCodeKey = gameState === "start" || gameState === "summary" ? "start" : round;
 
   const handleStart = () => {
-     setGameState("playing");
-     setRound(0);
-     setScore(0);
-     setMysteryNumber(null);
-     setMysteryChoice(null);
-   };
+    setGameState("playing");
+    setRound(0);
+    setScore(0);
+    setMysteryNumber(null);
+    setMysteryChoice(null);
+  };
 
   const handleChallenge = () => {
     const isMysteryChallengeIndex = round % t.challenges.length === 3;
@@ -310,11 +335,13 @@ function LuckMaster() {
       setGameState("mystery-choice");
     } else {
       const outcome = challenge.play();
-      setResult(outcome.message);
-      setLastReward(outcome.points);
-      const newScore = score + outcome.points;
-      setScore(newScore);
-      setGameState("result");
+      if (outcome) {
+        setResult(outcome.message);
+        setLastReward(outcome.points);
+        const newScore = score + outcome.points;
+        setScore(newScore);
+        setGameState("result");
+      }
     }
   };
 
@@ -339,12 +366,16 @@ function LuckMaster() {
   };
 
   const handleNextRound = () => {
-    setRound(round + 1);
-    setGameState("playing");
+    if (round >= 3) {
+      setGameState("summary");
+    } else {
+      setRound(round + 1);
+      setGameState("playing");
+    }
   };
 
   return (
-    <GameLayout title={t.title} emoji="🎲" concept={t.concept} intro={t.intro} code={t.code}>
+    <GameLayout title={t.title} emoji="🎲" concept={t.concept} intro={gameState === "start" ? t.intro : ""} code={currentRoundCode} codeKey={currentCodeKey}>
       <div className="space-y-6">
         {gameState === "start" && (
           <div className="text-center space-y-4">
@@ -440,19 +471,34 @@ function LuckMaster() {
               )}
             </div>
 
-            <div className="flex gap-4">
-              {round < 3 ? (
-                <Button onClick={handleNextRound} size="lg" className="w-full">
-                  {t.nextGame}
-                </Button>
-              ) : (
-                <Button onClick={handleStart} size="lg" className="w-full">
-                  {t.restartAll}
-                </Button>
-              )}
-            </div>
-          </div>
-        )}
+             <div className="flex gap-4">
+               <Button onClick={handleNextRound} size="lg" className="w-full">
+                 {round < 3 ? t.nextGame : t.result}
+               </Button>
+             </div>
+           </div>
+         )}
+
+         {gameState === "summary" && (
+           <div className="space-y-6">
+             <div className="bg-card border-2 border-border rounded-2xl p-8 text-center space-y-6">
+               <p className="text-5xl font-bold">🎉</p>
+               <p className="text-4xl font-bold">Game Complete!</p>
+               <div className="space-y-2">
+                 <p className="text-lg text-muted-foreground">Final Score</p>
+                 <p className="text-6xl font-bold text-primary">{score}</p>
+               </div>
+               <div className="py-4 border-t border-b text-lg">
+                 <p className="text-muted-foreground mb-2">You completed 4 rounds:</p>
+                 <p className="font-semibold">🎲 Lucky Dice • 🎡 Spin Wheel • 🎁 Pick Prize • 🔮 Mystery Number</p>
+               </div>
+             </div>
+
+              <Button onClick={handleStart} size="lg" className="w-full">
+                {t.restartAll}
+              </Button>
+           </div>
+         )}
       </div>
     </GameLayout>
   );

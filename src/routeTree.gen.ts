@@ -17,6 +17,7 @@ import { Route as PalindromeRouteImport } from './routes/palindrome'
 import { Route as MastermindRouteImport } from './routes/mastermind'
 import { Route as LuckMasterRouteImport } from './routes/luck-master'
 import { Route as InventoryMasterRouteImport } from './routes/inventory-master'
+import { Route as IceSkaterRouteImport } from './routes/ice-skater'
 import { Route as GuessRouteImport } from './routes/guess'
 import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
 import { Route as Connect4RouteImport } from './routes/connect4'
@@ -65,6 +66,11 @@ const InventoryMasterRoute = InventoryMasterRouteImport.update({
   path: '/inventory-master',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IceSkaterRoute = IceSkaterRouteImport.update({
+  id: '/ice-skater',
+  path: '/ice-skater',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuessRoute = GuessRouteImport.update({
   id: '/guess',
   path: '/guess',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/ice-skater': typeof IceSkaterRoute
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/ice-skater': typeof IceSkaterRoute
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/ice-skater': typeof IceSkaterRoute
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/connect4'
     | '/fizzbuzz'
     | '/guess'
+    | '/ice-skater'
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
     | '/connect4'
     | '/fizzbuzz'
     | '/guess'
+    | '/ice-skater'
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
@@ -196,6 +207,7 @@ export interface FileRouteTypes {
     | '/connect4'
     | '/fizzbuzz'
     | '/guess'
+    | '/ice-skater'
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
@@ -214,6 +226,7 @@ export interface RootRouteChildren {
   Connect4Route: typeof Connect4Route
   FizzbuzzRoute: typeof FizzbuzzRoute
   GuessRoute: typeof GuessRoute
+  IceSkaterRoute: typeof IceSkaterRoute
   InventoryMasterRoute: typeof InventoryMasterRoute
   LuckMasterRoute: typeof LuckMasterRoute
   MastermindRoute: typeof MastermindRoute
@@ -283,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InventoryMasterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ice-skater': {
+      id: '/ice-skater'
+      path: '/ice-skater'
+      fullPath: '/ice-skater'
+      preLoaderRoute: typeof IceSkaterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guess': {
       id: '/guess'
       path: '/guess'
@@ -342,6 +362,7 @@ const rootRouteChildren: RootRouteChildren = {
   Connect4Route: Connect4Route,
   FizzbuzzRoute: FizzbuzzRoute,
   GuessRoute: GuessRoute,
+  IceSkaterRoute: IceSkaterRoute,
   InventoryMasterRoute: InventoryMasterRoute,
   LuckMasterRoute: LuckMasterRoute,
   MastermindRoute: MastermindRoute,

@@ -1,7 +1,8 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { ReactNode } from "react";
-import { useUI } from "@/lib/i18n";
+import { ReactNode, useState, useEffect } from "react";
+import { useUI, useLang } from "@/lib/i18n";
 import { getNextGameUrl } from "@/lib/games";
+import { Button } from "@/components/ui/button";
 
 export function GameLayout({
   children,
@@ -10,6 +11,7 @@ export function GameLayout({
   concept,
   code,
   intro,
+  codeKey,
 }: {
   children: ReactNode;
   title: string;
@@ -17,10 +19,20 @@ export function GameLayout({
   concept: string;
   code: string;
   intro?: string;
+  codeKey?: string | number;
 }) {
+  const { showCodeByDefault } = useLang();
+  const [showCode, setShowCode] = useState(showCodeByDefault);
   const t = useUI();
   const location = useLocation();
   const nextGameUrl = getNextGameUrl(location.pathname);
+
+  // Reset showCode when codeKey changes (e.g., when level changes)
+  // Also update based on the global setting
+  useEffect(() => {
+    setShowCode(showCodeByDefault);
+  }, [codeKey, showCodeByDefault]);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <div className="flex items-center justify-between">
@@ -50,12 +62,22 @@ export function GameLayout({
         <div className="rounded-2xl bg-card border-2 border-border p-6 shadow-[6px_6px_0_0_var(--color-border)]">
           {children}
         </div>
-        <aside className="rounded-2xl bg-foreground text-background p-5 text-xs font-mono overflow-x-auto h-fit sticky top-20">
-          <div className="text-[10px] uppercase tracking-widest opacity-60 mb-3">
-            {t.howItWorks}
-          </div>
-          <pre className="whitespace-pre-wrap leading-relaxed">{code}</pre>
-        </aside>
+        {code && (
+          <aside className="rounded-2xl bg-foreground text-background p-5 text-xs font-mono overflow-x-auto h-fit sticky top-20">
+             <div className="flex items-center justify-between mb-3">
+               <div className="text-[10px] uppercase tracking-widest opacity-60">{t.howItWorks}</div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowCode(!showCode)}
+                className="h-6 px-2 text-xs text-background hover:bg-background/20"
+              >
+                {showCode ? t.hide : t.show}
+              </Button>
+            </div>
+            {showCode && <pre className="whitespace-pre-wrap leading-relaxed">{code}</pre>}
+          </aside>
+        )}
       </div>
     </div>
   );
