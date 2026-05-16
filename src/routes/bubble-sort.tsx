@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { GameLayout } from "@/components/GameLayout";
 import { useLang, pick } from "@/lib/i18n";
 
@@ -97,8 +97,18 @@ function BubbleSortPage() {
   const [speed, setSpeed] = useState(50);
   const [swappingIndices, setSwappingIndices] = useState<[number, number] | null>(null);
   const sortingRef = useRef(false);
+  const speedRef = useRef(speed);
+
+  // Keep speed ref in sync with the state
+  useEffect(() => {
+    speedRef.current = speed;
+  }, [speed]);
 
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const getDynamicDelay = () => {
+    return 1000 - speedRef.current * 9.9;
+  };
 
   async function bubbleSort() {
     setSorting(true);
@@ -130,7 +140,7 @@ function BubbleSortPage() {
         setComparisons(compCount);
 
         // Wait for user to see the comparison
-        await delay(1000 - speed * 9.9);
+        await delay(getDynamicDelay());
 
         // PHASE 2: Check if swap is needed
         if (arr[j] > arr[j + 1]) {
@@ -156,7 +166,7 @@ function BubbleSortPage() {
           setBars(swappedBars);
 
           // Wait for swap animation to complete
-          await delay(1000 - speed * 9.9);
+          await delay(getDynamicDelay());
           setSwappingIndices(null);
         } else {
           // No swap needed - show bars as normal
@@ -324,7 +334,6 @@ function BubbleSortPage() {
             max={100}
             value={speed}
             onChange={(e) => setSpeed(parseInt(e.target.value))}
-            disabled={sorting}
             className="w-full"
           />
         </div>
@@ -362,13 +371,3 @@ function BubbleSortPage() {
     </GameLayout>
   );
 }
-
-
-
-
-
-
-
-
-
-
