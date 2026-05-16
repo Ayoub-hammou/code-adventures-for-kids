@@ -15,125 +15,82 @@ interface GameState {
   won: boolean;
   gameStarted: boolean;
   moves: string[];
+  hasKey: boolean;
 }
 
-const GRID_SIZE = 10;
 const CELL_SIZE = 40;
+
+const GRID_SIZE_CONFIG: Record<Level, { width: number; height: number }> = {
+  easy: { width: 9, height: 4 },
+  normal: { width: 7, height: 7 },
+  hard: { width: 14, height: 12 },
+};
 
 const generateLevel = (
   level: Level,
-): { obstacles: Set<string>; exit: { x: number; y: number } } => {
+): {
+  obstacles: Set<string>;
+  exit: { x: number; y: number };
+  start: { x: number; y: number };
+  width: number;
+  height: number;
+  key?: { x: number; y: number };
+} => {
   const obstacles = new Set<string>();
   let exit: { x: number; y: number };
+  let start: { x: number; y: number };
+  let key: { x: number; y: number } | undefined;
+  const config = GRID_SIZE_CONFIG[level];
 
   if (level === "easy") {
-    // Easy: 10x10 grid with custom designed maze
-    // Start at (0,0), End at (9,9)
+    // Easy: 9x4 grid with custom designed maze
+    // Start at (0,2), Escape at (8,1)
     obstacles.add("2,0");
-    obstacles.add("3,0");
-    obstacles.add("4,0");
-    obstacles.add("5,0");
-    obstacles.add("6,0");
-    obstacles.add("7,0");
     obstacles.add("8,0");
-    obstacles.add("9,0");
-    obstacles.add("0,1");
-    obstacles.add("2,1");
-    obstacles.add("9,1");
-    obstacles.add("0,2");
-    obstacles.add("2,2");
-    obstacles.add("4,2");
-    obstacles.add("5,2");
     obstacles.add("6,2");
-    obstacles.add("7,2");
-    obstacles.add("9,2");
-    obstacles.add("0,3");
-    obstacles.add("2,3");
-    obstacles.add("4,3");
-    obstacles.add("7,3");
-    obstacles.add("9,3");
-    obstacles.add("0,4");
-    obstacles.add("2,4");
-    obstacles.add("4,4");
-    obstacles.add("6,4");
-    obstacles.add("7,4");
-    obstacles.add("9,4");
-    obstacles.add("0,5");
-    obstacles.add("4,5");
-    obstacles.add("6,5");
-    obstacles.add("9,5");
-    obstacles.add("0,6");
-    obstacles.add("1,6");
-    obstacles.add("2,6");
-    obstacles.add("4,6");
-    obstacles.add("6,6");
-    obstacles.add("8,6");
-    obstacles.add("9,6");
-    obstacles.add("0,7");
-    obstacles.add("4,7");
-    obstacles.add("8,7");
-    obstacles.add("9,7");
-    obstacles.add("0,8");
-    obstacles.add("2,8");
-    obstacles.add("3,8");
-    obstacles.add("4,8");
-    obstacles.add("5,8");
-    obstacles.add("6,8");
-    obstacles.add("9,8");
-    obstacles.add("0,9");
-    obstacles.add("6,9");
-    obstacles.add("7,9");
-    exit = { x: 9, y: 9 };
-  } else if (level === "normal") {
-    // Normal: 10x10 grid, 8-10 moves with alternating obstacles
-    // Start at (0,0), End at (9,9)
-    obstacles.add("2,0");
-    obstacles.add("4,0");
-    obstacles.add("0,1");
-    obstacles.add("2,2");
-    obstacles.add("4,2");
+    obstacles.add("8,2");
     obstacles.add("1,3");
-    obstacles.add("3,3");
-    obstacles.add("5,3");
-    obstacles.add("0,4");
-    obstacles.add("2,4");
-    obstacles.add("4,4");
-    obstacles.add("1,5");
-    obstacles.add("3,5");
-    obstacles.add("5,5");
-    obstacles.add("2,6");
-    obstacles.add("4,6");
-    obstacles.add("3,7");
-    obstacles.add("5,7");
-    obstacles.add("4,8");
-    obstacles.add("6,8");
-    exit = { x: 9, y: 9 };
-  } else {
-    // Hard: 10x10 grid with custom designed maze
-    // Start at (0,0), End at (9,9)
-    // 16 obstacles strategically placed
+    obstacles.add("4,3");
+    obstacles.add("8,3");
+    exit = { x: 8, y: 1 };
+    start = { x: 0, y: 2 };
+  } else if (level === "normal") {
+    // Normal: 7x7 grid with key mechanic
+    // Start at (0,0), Key at (6,1), Escape at (0,3)
     obstacles.add("3,0");
+    obstacles.add("4,0");
+    obstacles.add("6,0");
+    obstacles.add("0,1");
+    obstacles.add("0,2");
+    obstacles.add("6,2");
+    obstacles.add("2,3");
+    obstacles.add("0,5");
+    obstacles.add("5,5");
+    obstacles.add("0,6");
+    exit = { x: 0, y: 3 };
+    start = { x: 0, y: 0 };
+    key = { x: 6, y: 1 };
+  } else {
+    // Hard: 14x12 grid with custom designed maze
+    // Start at (13,11), Escape at (13,7)
     obstacles.add("8,0");
-    obstacles.add("2,1");
-    obstacles.add("6,1");
-    obstacles.add("4,2");
+    obstacles.add("3,1");
     obstacles.add("9,2");
-    obstacles.add("0,3");
-    obstacles.add("7,3");
-    obstacles.add("2,4");
-    obstacles.add("5,4");
-    obstacles.add("8,5");
-    obstacles.add("1,6");
-    obstacles.add("4,6");
-    obstacles.add("6,7");
-    obstacles.add("0,8");
-    obstacles.add("3,8");
-    obstacles.add("8,8");
-    obstacles.add("5,9");
-    exit = { x: 9, y: 9 };
+    obstacles.add("1,3");
+    obstacles.add("0,4");
+    obstacles.add("8,4");
+    obstacles.add("13,5");
+    obstacles.add("6,6");
+    obstacles.add("2,7");
+    obstacles.add("13,8");
+    obstacles.add("7,9");
+    obstacles.add("5,10");
+    obstacles.add("9,10");
+    exit = { x: 13, y: 7 };
+    start = { x: 13, y: 11 };
   }
 
-  return { obstacles, exit };
+  return { obstacles, exit, start, width: config.width, height: config.height, key };
 };
 
 const T = {
@@ -170,6 +127,10 @@ function slide(direction):
 while NOT at_exit(x, y):
   direction = ask_player("Up/Down/Left/Right?")
   slide(direction)
+  
+  # On medium level, check if we picked up the key
+  if at_key(x, y):
+    hasKey = true
 
 print("Escaped!")`,
     fr: `# Définir la position initiale
@@ -185,6 +146,10 @@ fonction glisser(direction):
 tant que PAS sortie(x, y):
   direction = demander("Haut/Bas/Gauche/Droite?")
   glisser(direction)
+  
+  # Au niveau moyen, vérifier si nous avons récupéré la clé
+  si at_clé(x, y):
+    avonsClé = vrai
 
 afficher("Échappé !")`,
     nl: `# Initiële positie instellen
@@ -200,6 +165,10 @@ functie glijden(richting):
 zolang GEEN uitgang(x, y):
   richting = vraag("Omhoog/Omlaag/Links/Rechts?")
   glijden(richting)
+  
+  # Op middelmatig niveau, controleer of we de sleutel hebben opgepakt
+  als at_sleutel(x, y):
+    heeftSleutel = waar
 
 druk_af("Ontsnapt!")`,
   },
@@ -218,12 +187,19 @@ function IceSkaterPage() {
     won: false,
     gameStarted: false,
     moves: [],
+    hasKey: false,
   });
 
   const levelData = level
     ? generateLevel(level)
-    : { obstacles: new Set<string>(), exit: { x: 6, y: 6 } };
-  const { obstacles, exit } = levelData;
+    : {
+        obstacles: new Set<string>(),
+        exit: { x: 6, y: 6 },
+        start: { x: 0, y: 0 },
+        width: 10,
+        height: 10,
+      };
+  const { obstacles, exit, width, height, key } = levelData;
 
   const touchStartRef = useRef({ x: 0, y: 0 });
 
@@ -246,7 +222,7 @@ function IceSkaterPage() {
       else if (slideDir === "left") nextX--;
       else if (slideDir === "right") nextX++;
 
-      if (nextX < 0 || nextX >= GRID_SIZE || nextY < 0 || nextY >= GRID_SIZE) {
+      if (nextX < 0 || nextX >= width || nextY < 0 || nextY >= height) {
         break;
       }
 
@@ -258,7 +234,14 @@ function IceSkaterPage() {
       newY = nextY;
     }
 
-    const won = newX === exit.x && newY === exit.y;
+    // Check if player picked up the key
+    let newHasKey = gameState.hasKey;
+    if (key && newX === key.x && newY === key.y) {
+      newHasKey = true;
+    }
+
+    // Check if player reached exit (only if key is picked up, or no key exists)
+    const won = newX === exit.x && newY === exit.y && (!key || newHasKey);
 
     setGameState({
       playerX: newX,
@@ -267,30 +250,35 @@ function IceSkaterPage() {
       won,
       gameStarted: true,
       moves: newMoves,
+      hasKey: newHasKey,
     });
   };
 
   const startGame = (selectedLevel: Level) => {
     setLevel(selectedLevel);
+    const levelData = generateLevel(selectedLevel);
     setGameState({
-      playerX: 0,
-      playerY: 0,
+      playerX: levelData.start.x,
+      playerY: levelData.start.y,
       direction: null,
       won: false,
       gameStarted: true,
       moves: [],
+      hasKey: false,
     });
   };
 
   const resetGame = () => {
     if (level) {
+      const levelData = generateLevel(level);
       setGameState({
-        playerX: 0,
-        playerY: 0,
+        playerX: levelData.start.x,
+        playerY: levelData.start.y,
         direction: null,
         won: false,
         gameStarted: true,
         moves: [],
+        hasKey: false,
       });
     }
   };
@@ -304,6 +292,7 @@ function IceSkaterPage() {
       won: false,
       gameStarted: false,
       moves: [],
+      hasKey: false,
     });
   };
 
@@ -312,16 +301,16 @@ function IceSkaterPage() {
     if (!gameState.gameStarted || gameState.won) return;
 
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") {
+      if (e.key === "ArrowUp") {
         e.preventDefault();
         movePlayer("up");
-      } else if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") {
+      } else if (e.key === "ArrowDown") {
         e.preventDefault();
         movePlayer("down");
-      } else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+      } else if (e.key === "ArrowLeft") {
         e.preventDefault();
         movePlayer("left");
-      } else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+      } else if (e.key === "ArrowRight") {
         e.preventDefault();
         movePlayer("right");
       }
@@ -329,6 +318,7 @@ function IceSkaterPage() {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState]);
 
   // Touch/swipe controls
@@ -374,7 +364,7 @@ function IceSkaterPage() {
       emoji="⛸️"
       concept={t("concept")}
       intro={t("intro")}
-      code={t("code")}
+      code={level ? t("code") : ""}
       codeKey={level ?? "select"}
     >
       {!level ? (
@@ -406,39 +396,49 @@ function IceSkaterPage() {
           <div className="mb-6 flex justify-between items-center">
             <div className="flex gap-4">
               <div className="rounded-xl bg-secondary p-3 text-center">
-                <div className="text-xs text-muted-foreground">
-                  {t("position")}
-                </div>
+                <div className="text-xs text-muted-foreground">{t("position")}</div>
                 <div className="font-mono font-bold">
                   ({gameState.playerX}, {gameState.playerY})
                 </div>
               </div>
               <div className="rounded-xl bg-secondary p-3 text-center">
                 <div className="text-xs text-muted-foreground">{t("moves")}</div>
-                <div className="font-mono font-bold">
-                  {gameState.moves.length}
-                </div>
+                <div className="font-mono font-bold">{gameState.moves.length}</div>
               </div>
+              {key && (
+                <div className="rounded-xl bg-secondary p-3 text-center">
+                  <div className="text-xs text-muted-foreground">Key</div>
+                  <div className="font-bold text-lg">{gameState.hasKey ? "🔑" : "⭕"}</div>
+                </div>
+              )}
             </div>
-            <button
-              onClick={backToLevelSelect}
-              className="text-sm font-semibold text-primary hover:underline"
-            >
-              {t("selectLevel")}
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={backToLevelSelect}
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                {t("selectLevel")}
+              </button>
+              <button
+                onClick={resetGame}
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                {t("reset")}
+              </button>
+            </div>
           </div>
 
           <div className="mb-6 flex justify-center">
             <div
               className="relative bg-blue-100 dark:bg-blue-950 border-4 border-blue-400 rounded-lg touch-none"
               style={{
-                width: GRID_SIZE * CELL_SIZE,
-                height: GRID_SIZE * CELL_SIZE,
+                width: width * CELL_SIZE,
+                height: height * CELL_SIZE,
               }}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              {Array.from({ length: GRID_SIZE - 1 }).map((_, i) => (
+              {Array.from({ length: width - 1 }).map((_, i) => (
                 <div
                   key={`v${i}`}
                   className="absolute bg-blue-200 dark:bg-blue-900"
@@ -450,7 +450,7 @@ function IceSkaterPage() {
                   }}
                 />
               ))}
-              {Array.from({ length: GRID_SIZE - 1 }).map((_, i) => (
+              {Array.from({ length: height - 1 }).map((_, i) => (
                 <div
                   key={`h${i}`}
                   className="absolute bg-blue-200 dark:bg-blue-900"
@@ -468,19 +468,35 @@ function IceSkaterPage() {
                 return (
                   <div
                     key={`obs-${obs}`}
-                    className="absolute bg-gray-400 dark:bg-gray-600 rounded"
+                    className="absolute flex items-center justify-center text-4xl"
                     style={{
                       left: x * CELL_SIZE + 2,
                       top: y * CELL_SIZE + 2,
                       width: CELL_SIZE - 4,
                       height: CELL_SIZE - 4,
                     }}
-                  />
+                  >
+                    🪨
+                  </div>
                 );
               })}
 
+              {key && !gameState.hasKey && (
+                <div
+                  className="absolute flex items-center justify-center font-bold text-2xl"
+                  style={{
+                    left: key.x * CELL_SIZE + 2,
+                    top: key.y * CELL_SIZE + 2,
+                    width: CELL_SIZE - 4,
+                    height: CELL_SIZE - 4,
+                  }}
+                >
+                  🔑
+                </div>
+              )}
+
               <div
-                className="absolute bg-green-400 dark:bg-green-600 rounded flex items-center justify-center font-bold text-lg"
+                className="absolute flex items-center justify-center text-4xl"
                 style={{
                   left: exit.x * CELL_SIZE + 2,
                   top: exit.y * CELL_SIZE + 2,
@@ -488,11 +504,11 @@ function IceSkaterPage() {
                   height: CELL_SIZE - 4,
                 }}
               >
-                ✓
+                {key && !gameState.hasKey ? "🔒" : "🚪"}
               </div>
 
               <div
-                className="absolute bg-red-500 dark:bg-red-600 rounded-full flex items-center justify-center font-bold text-white transition-all"
+                className="absolute flex items-center justify-center text-3xl transition-all"
                 style={{
                   left: gameState.playerX * CELL_SIZE + 4,
                   top: gameState.playerY * CELL_SIZE + 4,
@@ -500,13 +516,13 @@ function IceSkaterPage() {
                   height: CELL_SIZE - 8,
                 }}
               >
-                ⛸️
+                🏂
               </div>
             </div>
           </div>
 
           <div className="text-center text-sm text-muted-foreground mb-4">
-            💡 Use arrow keys, WASD, or swipe to move
+            💡 Use arrow keys or swipe to move
           </div>
 
           {gameState.won && (
@@ -516,63 +532,8 @@ function IceSkaterPage() {
               </div>
             </div>
           )}
-
-          <div className="grid grid-cols-3 gap-3 w-fit mx-auto mb-6">
-            <div />
-            <button
-              onClick={() => movePlayer("up")}
-              disabled={gameState.won}
-              className="rounded-xl border-2 border-border bg-card p-4 hover:border-primary disabled:opacity-50 transition font-bold text-lg"
-            >
-              {t("up")}
-            </button>
-            <div />
-            <button
-              onClick={() => movePlayer("left")}
-              disabled={gameState.won}
-              className="rounded-xl border-2 border-border bg-card p-4 hover:border-primary disabled:opacity-50 transition font-bold text-lg"
-            >
-              {t("left")}
-            </button>
-            <button
-              onClick={() => movePlayer("down")}
-              disabled={gameState.won}
-              className="rounded-xl border-2 border-border bg-card p-4 hover:border-primary disabled:opacity-50 transition font-bold text-lg"
-            >
-              {t("down")}
-            </button>
-            <button
-              onClick={() => movePlayer("right")}
-              disabled={gameState.won}
-              className="rounded-xl border-2 border-border bg-card p-4 hover:border-primary disabled:opacity-50 transition font-bold text-lg"
-            >
-              {t("right")}
-            </button>
-          </div>
-
-          <div className="text-center">
-            <button
-              onClick={resetGame}
-              className="text-sm font-semibold text-primary hover:underline"
-            >
-              {t("reset")}
-            </button>
-          </div>
         </div>
       )}
     </GameLayout>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
