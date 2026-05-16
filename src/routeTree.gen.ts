@@ -17,6 +17,7 @@ import { Route as PalindromeRouteImport } from './routes/palindrome'
 import { Route as MastermindRouteImport } from './routes/mastermind'
 import { Route as LuckMasterRouteImport } from './routes/luck-master'
 import { Route as InventoryMasterRouteImport } from './routes/inventory-master'
+import { Route as InsertionSortRouteImport } from './routes/insertion-sort'
 import { Route as IceSkaterRouteImport } from './routes/ice-skater'
 import { Route as GuessRouteImport } from './routes/guess'
 import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
@@ -24,6 +25,7 @@ import { Route as Connect4RouteImport } from './routes/connect4'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as CaesarCipherRouteImport } from './routes/caesar-cipher'
 import { Route as BubbleSortRouteImport } from './routes/bubble-sort'
+import { Route as AiTrainerRouteImport } from './routes/ai-trainer'
 import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConceptsConceptRouteImport } from './routes/concepts.$concept'
@@ -68,6 +70,11 @@ const InventoryMasterRoute = InventoryMasterRouteImport.update({
   path: '/inventory-master',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InsertionSortRoute = InsertionSortRouteImport.update({
+  id: '/insertion-sort',
+  path: '/insertion-sort',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IceSkaterRoute = IceSkaterRouteImport.update({
   id: '/ice-skater',
   path: '/ice-skater',
@@ -103,6 +110,11 @@ const BubbleSortRoute = BubbleSortRouteImport.update({
   path: '/bubble-sort',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiTrainerRoute = AiTrainerRouteImport.update({
+  id: '/ai-trainer',
+  path: '/ai-trainer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdventureRoute = AdventureRouteImport.update({
   id: '/adventure',
   path: '/adventure',
@@ -122,6 +134,7 @@ const ConceptsConceptRoute = ConceptsConceptRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/ai-trainer': typeof AiTrainerRoute
   '/bubble-sort': typeof BubbleSortRoute
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
@@ -129,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/ice-skater': typeof IceSkaterRoute
+  '/insertion-sort': typeof InsertionSortRoute
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
@@ -142,6 +156,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/ai-trainer': typeof AiTrainerRoute
   '/bubble-sort': typeof BubbleSortRoute
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
@@ -149,6 +164,7 @@ export interface FileRoutesByTo {
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/ice-skater': typeof IceSkaterRoute
+  '/insertion-sort': typeof InsertionSortRoute
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
@@ -163,6 +179,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/ai-trainer': typeof AiTrainerRoute
   '/bubble-sort': typeof BubbleSortRoute
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
@@ -170,6 +187,7 @@ export interface FileRoutesById {
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/ice-skater': typeof IceSkaterRoute
+  '/insertion-sort': typeof InsertionSortRoute
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
@@ -185,6 +203,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/adventure'
+    | '/ai-trainer'
     | '/bubble-sort'
     | '/caesar-cipher'
     | '/calculator'
@@ -192,6 +211,7 @@ export interface FileRouteTypes {
     | '/fizzbuzz'
     | '/guess'
     | '/ice-skater'
+    | '/insertion-sort'
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
@@ -205,6 +225,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/adventure'
+    | '/ai-trainer'
     | '/bubble-sort'
     | '/caesar-cipher'
     | '/calculator'
@@ -212,6 +233,7 @@ export interface FileRouteTypes {
     | '/fizzbuzz'
     | '/guess'
     | '/ice-skater'
+    | '/insertion-sort'
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
@@ -225,6 +247,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/adventure'
+    | '/ai-trainer'
     | '/bubble-sort'
     | '/caesar-cipher'
     | '/calculator'
@@ -232,6 +255,7 @@ export interface FileRouteTypes {
     | '/fizzbuzz'
     | '/guess'
     | '/ice-skater'
+    | '/insertion-sort'
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
@@ -246,6 +270,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdventureRoute: typeof AdventureRoute
+  AiTrainerRoute: typeof AiTrainerRoute
   BubbleSortRoute: typeof BubbleSortRoute
   CaesarCipherRoute: typeof CaesarCipherRoute
   CalculatorRoute: typeof CalculatorRoute
@@ -253,6 +278,7 @@ export interface RootRouteChildren {
   FizzbuzzRoute: typeof FizzbuzzRoute
   GuessRoute: typeof GuessRoute
   IceSkaterRoute: typeof IceSkaterRoute
+  InsertionSortRoute: typeof InsertionSortRoute
   InventoryMasterRoute: typeof InventoryMasterRoute
   LuckMasterRoute: typeof LuckMasterRoute
   MastermindRoute: typeof MastermindRoute
@@ -322,6 +348,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InventoryMasterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/insertion-sort': {
+      id: '/insertion-sort'
+      path: '/insertion-sort'
+      fullPath: '/insertion-sort'
+      preLoaderRoute: typeof InsertionSortRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ice-skater': {
       id: '/ice-skater'
       path: '/ice-skater'
@@ -371,6 +404,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BubbleSortRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-trainer': {
+      id: '/ai-trainer'
+      path: '/ai-trainer'
+      fullPath: '/ai-trainer'
+      preLoaderRoute: typeof AiTrainerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/adventure': {
       id: '/adventure'
       path: '/adventure'
@@ -398,6 +438,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdventureRoute: AdventureRoute,
+  AiTrainerRoute: AiTrainerRoute,
   BubbleSortRoute: BubbleSortRoute,
   CaesarCipherRoute: CaesarCipherRoute,
   CalculatorRoute: CalculatorRoute,
@@ -405,6 +446,7 @@ const rootRouteChildren: RootRouteChildren = {
   FizzbuzzRoute: FizzbuzzRoute,
   GuessRoute: GuessRoute,
   IceSkaterRoute: IceSkaterRoute,
+  InsertionSortRoute: InsertionSortRoute,
   InventoryMasterRoute: InventoryMasterRoute,
   LuckMasterRoute: LuckMasterRoute,
   MastermindRoute: MastermindRoute,

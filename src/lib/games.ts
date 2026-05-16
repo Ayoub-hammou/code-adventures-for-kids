@@ -10,6 +10,7 @@ export const GAMES_ORDER = [
   "/calculator",
   "/caesar-cipher",
   "/bubble-sort",
+  "/insertion-sort",
   "/inventory-master",
   "/luck-master",
   "/pattern-painter",

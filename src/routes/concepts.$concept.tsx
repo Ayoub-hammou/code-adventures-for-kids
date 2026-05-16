@@ -640,7 +640,135 @@ const data: Record<string, Concept> = {
     ],
     games: ["/caesar-cipher"],
   },
-};
+  sorting: {
+    emoji: "🔢",
+    color: "concept-algorithms",
+    title: {
+      en: "Sorting & Algorithms",
+      fr: "Tri & Algorithmes",
+      nl: "Sorteren & Algoritmen",
+    },
+    intro: {
+      en: "Sorting is organizing data in a specific order - like arranging cards from smallest to largest, or alphabetizing names! An algorithm is a step-by-step recipe for solving a problem. Different sorting algorithms work in different ways. Some are super fast, some are simple, and some are just for fun to learn!",
+      fr: "Le tri, c'est organiser les données dans un ordre spécifique - comme arranger les cartes du plus petit au plus grand, ou mettre les noms par ordre alphabétique ! Un algorithme est une recette étape par étape pour résoudre un problème. Les différents algorithmes de tri fonctionnent de manières différentes. Certains sont super rapides, certains sont simples, et d'autres sont juste pour apprendre !",
+      nl: "Sorteren is gegevens in een specifieke volgorde organiseren - zoals kaarten van klein naar groot ordenen, of namen alfabetisch rangschikken! Een algoritme is een stap-voor-stap recept om een probleem op te lossen. Verschillende sorteeralgoritmen werken op verschillende manieren. Sommige zijn supersnellennen, sommige zijn eenvoudig, en sommige zijn gewoon om te leren!",
+    },
+    keyIdea: {
+      en: "Algorithms are recipes for computers. The same problem can have many solutions - some clever, some simple, some fast!",
+      fr: "Les algorithmes sont des recettes pour les ordinateurs. Le même problème peut avoir plusieurs solutions - certaines intelligentes, certaines simples, certaines rapides !",
+      nl: "Algoritmen zijn recepten voor computers. Hetzelfde probleem kan veel oplossingen hebben - sommige slim, sommige eenvoudig, sommige snel!",
+    },
+    examples: [
+      {
+        code: {
+          en: `# Bubble Sort: Compare neighbors and swap\narray = [5, 2, 8, 1, 9]\n\nfor i in 0..length(array)-1:\n  for j in 0..length(array)-i-2:\n    if array[j] > array[j+1]:\n      # Swap neighbors\n      temp = array[j]\n      array[j] = array[j+1]\n      array[j+1] = temp\n\nprint(array)  # [1, 2, 5, 8, 9]`,
+          fr: `# Tri à Bulles : Compare les voisins et échange\ntableau = [5, 2, 8, 1, 9]\n\npour i de 0 à longueur(tableau)-1:\n  pour j de 0 à longueur(tableau)-i-2:\n    si tableau[j] > tableau[j+1]:\n      # Échange les voisins\n      temp = tableau[j]\n      tableau[j] = tableau[j+1]\n      tableau[j+1] = temp\n\nafficher(tableau)  # [1, 2, 5, 8, 9]`,
+          nl: `# Bellensort: Vergelijk buren en ruil ze\narray = [5, 2, 8, 1, 9]\n\nvoor i in 0..lengte(array)-1:\n  voor j in 0..lengte(array)-i-2:\n    als array[j] > array[j+1]:\n      # Ruil buren\n      temp = array[j]\n      array[j] = array[j+1]\n      array[j+1] = temp\n\nafdrukken(array)  # [1, 2, 5, 8, 9]`,
+        },
+        explain: {
+          en: "Bubble Sort compares neighbors and swaps them if they're in the wrong order. Like bubbles, bigger numbers 'float' to the end!",
+          fr: "Le Tri à Bulles compare les voisins et les échange s'ils sont mal ordonnés. Comme des bulles, les plus grands nombres 'flottent' vers la fin !",
+          nl: "Bellensort vergelijkt buren en verwisselt ze als ze in de verkeerde volgorde staan. Zoals bellen 'drijven' grotere getallen naar het einde!",
+        },
+      },
+      {
+        code: {
+          en: `# Insertion Sort: Build sorted hand like playing cards\narray = [5, 2, 8, 1, 9]\n\nfor i in 1..length(array)-1:\n  key = array[i]     # Pick a card\n  j = i - 1\n  \n  # Find where it fits\n  while j >= 0 and array[j] > key:\n    array[j+1] = array[j]  # Shift right\n    j = j - 1\n  \n  array[j+1] = key   # Insert the card\n\nprint(array)  # [1, 2, 5, 8, 9]`,
+          fr: `# Tri par Insertion : Construis une main triée comme des cartes\ntableau = [5, 2, 8, 1, 9]\n\npour i de 1 à longueur(tableau)-1:\n  cle = tableau[i]      # Prends une carte\n  j = i - 1\n  \n  # Trouve où elle va\n  tant que j >= 0 et tableau[j] > cle:\n    tableau[j+1] = tableau[j]  # Décale à droite\n    j = j - 1\n  \n  tableau[j+1] = cle   # Insère la carte\n\nafficher(tableau)  # [1, 2, 5, 8, 9]`,
+          nl: `# Invoegsortering: Bouw gesorteerde hand als kaarten\narray = [5, 2, 8, 1, 9]\n\nvoor i van 1 tot lengte(array)-1:\n  sleutel = array[i]   # Pak een kaart\n  j = i - 1\n  \n  # Vind waar het past\n  terwijl j >= 0 en array[j] > sleutel:\n    array[j+1] = array[j]  # Verschuif rechts\n    j = j - 1\n  \n  array[j+1] = sleutel   # Voeg de kaart in\n\nafdrukken(array)  # [1, 2, 5, 8, 9]`,
+        },
+        explain: {
+          en: "Insertion Sort picks one item at a time and places it in the right spot, like organizing a hand of cards. It's intuitive and often faster on small data!",
+          fr: "Le Tri par Insertion prend un élément à la fois et le place à la bonne place, comme organiser une main de cartes. C'est intuitif et souvent plus rapide sur de petites données !",
+          nl: "Invoegsortering pakt één item tegelijk en plaatst het op de juiste plek, zoals kaarten in je hand organiseren. Het is intuïtief en vaak sneller op kleine gegevens!",
+        },
+      },
+      {
+        code: {
+          en: `# Real World: Sorting a list of students by name\nstudents = ["Zoe", "Alex", "Maya", "Ben"]\n\n# Using Insertion Sort logic\nfor i in 1..length(students)-1:\n  key = students[i]\n  j = i - 1\n  \n  while j >= 0 and students[j] > key:\n    students[j+1] = students[j]\n    j = j - 1\n  \n  students[j+1] = key\n\nprint(students)  # ["Alex", "Ben", "Maya", "Zoe"]`,
+          fr: `# Monde réel : Trier une liste d'étudiants par nom\netudiants = ["Zoé", "Alex", "Maya", "Benjamin"]\n\n# Utiliser la logique du Tri par Insertion\npour i de 1 à longueur(etudiants)-1:\n  cle = etudiants[i]\n  j = i - 1\n  \n  tant que j >= 0 et etudiants[j] > cle:\n    etudiants[j+1] = etudiants[j]\n    j = j - 1\n  \n  etudiants[j+1] = cle\n\nafficher(etudiants)  # ["Alex", "Benjamin", "Maya", "Zoé"]`,
+          nl: `# Real World: Studenten op naam sorteren\nstudenten = ["Zoe", "Alex", "Maya", "Ben"]\n\n# Invoegsortering logica gebruiken\nvoor i van 1 tot lengte(studenten)-1:\n  sleutel = studenten[i]\n  j = i - 1\n  \n  terwijl j >= 0 en studenten[j] > sleutel:\n    studenten[j+1] = studenten[j]\n    j = j - 1\n  \n  studenten[j+1] = sleutel\n\nafdrukken(studenten)  # ["Alex", "Ben", "Maya", "Zoe"]`,
+        },
+        explain: {
+          en: "Sorting is everywhere! Schools sort students, stores sort products, games sort high scores. Learning sorting algorithms teaches you how computers organize information!",
+          fr: "Le tri est partout ! Les écoles trient les étudiants, les magasins trient les produits, les jeux trient les meilleurs scores. Apprendre les algorithmes de tri t'apprend comment les ordinateurs organisent les informations !",
+          nl: "Sorteren is overal! Scholen sorteren studenten, winkels sorteren producten, spellen sorteren hoge scores. Het leren van sorteeralgoritmen leert je hoe computers informatie organiseren!",
+        },
+      },
+    ],
+    games: ["/bubble-sort", "/insertion-sort"],
+  },
+  ai: {
+    emoji: "🤖",
+    color: "concept-ai",
+    title: {
+      en: "AI & Machine Learning",
+      fr: "IA & Apprentissage Automatique",
+      nl: "AI & Machine Learning",
+    },
+    intro: {
+      en: "AI (Artificial Intelligence) is when computers learn from examples instead of following programmers' rules. Like how YOU learn to recognize dogs by seeing many dogs, AI learns patterns from data. Machine Learning is the technique that makes this possible! But AI isn't magic—it has strengths AND weaknesses.",
+      fr: "L'IA (Intelligence Artificielle) c'est quand les ordinateurs apprennent d'exemples au lieu de suivre les règles des programmeurs. Comme quand TU apprends à reconnaître les chiens en en voyant beaucoup, l'IA apprend les motifs des données. L'Apprentissage Automatique est la technique qui rend cela possible ! Mais l'IA n'est pas de la magie — elle a des forces ET des faiblesses.",
+      nl: "AI (Kunstmatige Intelligentie) is wanneer computers leren van voorbeelden in plaats van programmeurregels te volgen. Net zoals JIJ leert honden te herkennen door veel honden te zien, leert AI patronen uit gegevens. Machine Learning is de techniek die dit mogelijk maakt! Maar AI is geen magie — het heeft sterke kanten EN zwakke kanten.",
+    },
+     keyIdea: {
+       en: "AI learns from examples (data) rather than from rules. Strong at finding patterns, but can make mistakes, needs lots of examples, and can be biased. Developer knowledge is CRUCIAL to make AI work correctly!",
+       fr: "L'IA apprend d'exemples (données) plutôt que de règles. Forte pour trouver des motifs, mais peut faire des erreurs, nécessite beaucoup d'exemples, et peut être biaisée. La connaissance des développeurs est CRUCIALE pour faire fonctionner l'IA correctement !",
+       nl: "AI leert van voorbeelden (gegevens) in plaats van regels. Sterk in het vinden van patronen, maar kan fouten maken, heeft veel voorbeelden nodig en kan voorgekomen zijn. Programmeurkennis is CRUCIAAL om AI goed te laten werken!",
+     },
+     examples: [
+       {
+         code: {
+           en: `# PROGRAMMER'S RESPONSIBILITY: Edge Cases\n# The programmer MUST think about edge cases!\n\ndef find_max(a, b):\n  # Simple case: different numbers\n  if a > b:\n    return a\n  return b\n\n# BUT WAIT! What about edge cases?\nprint(find_max(5, 10))    # ✓ Returns 10 (correct)\nprint(find_max(5, 5))     # Edge case: equal numbers!\nprint(find_max(-5, -10))  # Edge case: negative numbers!\n\n# Good programming needs to handle these!`,
+           fr: `# RESPONSABILITÉ DU PROGRAMMEUR : Cas Limites\n# Le programmeur DOIT penser aux cas limites !\n\ndef trouver_max(a, b):\n  # Cas simple : nombres différents\n  si a > b:\n    retourner a\n  retourner b\n\n# MAIS ATTENDS ! Et les cas limites ?\nafficher(trouver_max(5, 10))    # ✓ Retourne 10 (correct)\nafficher(trouver_max(5, 5))     # Cas limite : nombres égaux !\nafficher(trouver_max(-5, -10))  # Cas limite : nombres négatifs !\n\n# Une bonne programmation doit gérer ceux-ci !`,
+           nl: `# PROGRAMMEUR VERANTWOORDELIJKHEID: Edge Cases\n# De programmeur MOET aan edge cases denken!\n\ndef vind_max(a, b):\n  # Eenvoudig geval: verschillende getallen\n  als a > b:\n    retourneer a\n  retourneer b\n\n# MAAR WACHT! Wat dacht je van edge cases?\nafdrukken(vind_max(5, 10))    # ✓ Retourneert 10 (correct)\nafdrukken(vind_max(5, 5))     # Edge case: gelijke getallen!\nafdrukken(vind_max(-5, -10))  # Edge case: negatieve getallen!\n\n# Goed programmeren moet dit aanpakken!`,
+         },
+         explain: {
+           en: "Developers MUST anticipate edge cases! AI won't think about equal numbers or negative values—YOU must!",
+           fr: "Les développeurs DOIVENT anticiper les cas limites ! L'IA ne pensera pas aux nombres égaux ou aux valeurs négatives — C'EST TOI !",
+           nl: "Programmeurs MOETEN edge cases voorzien! AI zal niet aan gelijke getallen of negatieve waarden denken — JIJ MOET!",
+         },
+       },
+       {
+         code: {
+           en: `# AI: Find max (trained on examples)\nai_model = train_with_examples([\n  ([5, 10], 10),\n  ([3, 8], 8),\n  ([1, 2], 2),\n  # But what if we forget edge cases?\n])\n\n# AI learned the pattern... sort of\nprint(ai_model.predict([5, 10]))    # Works: 10\nprint(ai_model.predict([5, 5]))     # Edge case: could say 5... or 0!\nprint(ai_model.predict([-5, -10]))  # Edge case: could fail!\nprint(ai_model.predict([1000, 2]))  # Large numbers: might fail!\n\n# PROBLEM: AI learned INCOMPLETELY! Developer responsibility!`,
+           fr: `# IA : Trouver max (entraîné sur des exemples)\nmodele_ia = entrainer_avec_exemples([\n  ([5, 10], 10),\n  ([3, 8], 8),\n  ([1, 2], 2),\n  # Mais et si on oublie les cas limites ?\n])\n\n# L'IA a appris le motif... plus ou moins\nafficher(modele_ia.predire([5, 10]))    # Marche : 10\nafficher(modele_ia.predire([5, 5]))     # Cas limite : pourrait dire 5... ou 0 !\nafficher(modele_ia.predire([-5, -10]))  # Cas limite : pourrait échouer !\nafficher(modele_ia.predire([1000, 2]))  # Grands nombres : pourrait échouer !\n\n# PROBLÈME : L'IA a appris INCOMPLÈTEMENT ! Responsabilité du développeur !`,
+           nl: `# AI: Vind max (getraind op voorbeelden)\nai_model = train_met_voorbeelden([\n  ([5, 10], 10),\n  ([3, 8], 8),\n  ([1, 2], 2),\n  # Maar wat als we edge cases vergeten?\n])\n\n# AI leerde het patroon... min of meer\nafdrukken(ai_model.voorspel([5, 10]))    # Werkt: 10\nafdrukken(ai_model.voorspel([5, 5]))     # Edge case: zou kunnen zeggen 5... of 0!\nafdrukken(ai_model.voorspel([-5, -10]))  # Edge case: kan falen!\nafdrukken(ai_model.voorspel([1000, 2]))  # Grote getallen: kan falen!\n\n# PROBLEEM: AI leerde ONVOLLEDIG! Programmeurverantwoordelijkheid!`,
+         },
+         explain: {
+           en: "AI trained on incomplete data will have incomplete results! The programmer must ensure training data covers ALL edge cases!",
+           fr: "L'IA entraînée sur des données incomplètes donnera des résultats incomplets ! Le programmeur doit s'assurer que les données d'entraînement couvrent TOUS les cas limites !",
+           nl: "AI getraind op onvolledige gegevens geeft onvolledige resultaten! De programmeur moet ervoor zorgen dat trainingsgegevens ALLE edge cases dekken!",
+         },
+       },
+       {
+         code: {
+           en: `# DEVELOPER KNOWLEDGE: Proper Implementation\n# A GOOD developer catches what AI misses!\n\ndef find_max_properly(a, b):\n  # ✓ Handle equal numbers\n  if a == b:\n    return (\"equal\", a)\n  \n  # ✓ Handle negative numbers\n  if a > b:\n    return (\"a_is_bigger\", a)\n  else:\n    return (\"b_is_bigger\", b)\n\n# NOW with proper testing:\nprint(find_max_properly(5, 10))    # ✓ (\"b_is_bigger\", 10)\nprint(find_max_properly(5, 5))     # ✓ (\"equal\", 5) - HANDLED!\nprint(find_max_properly(-5, -10))  # ✓ (\"a_is_bigger\", -5)\n\n# Good programming = thinking ahead!`,
+           fr: `# CONNAISSANCE EN DÉVELOPPEMENT : Implémentation Appropriée\n# Un BON développeur attrape ce que l'IA manque !\n\ndef trouver_max_correctement(a, b):\n  # ✓ Gérer les nombres égaux\n  si a == b:\n    retourner (\"égal\", a)\n  \n  # ✓ Gérer les nombres négatifs\n  si a > b:\n    retourner (\"a_plus_grand\", a)\n  sinon:\n    retourner (\"b_plus_grand\", b)\n\n# MAINTENANT avec test approprié :\nafficher(trouver_max_correctement(5, 10))    # ✓ (\"b_plus_grand\", 10)\nafficher(trouver_max_correctement(5, 5))     # ✓ (\"égal\", 5) - GÉRÉ !\nafficher(trouver_max_correctement(-5, -10))  # ✓ (\"a_plus_grand\", -5)\n\n# Bonne programmation = penser à l'avance !`,
+           nl: `# PROGRAMMEURKENNIS: Juiste Implementatie\n# Een GOEDE programmeur vangt wat AI mist!\n\ndef vind_max_goed(a, b):\n  # ✓ Gelijke getallen afhandelen\n  als a == b:\n    retourneer (\"gelijk\", a)\n  \n  # ✓ Negatieve getallen afhandelen\n  als a > b:\n    retourneer (\"a_groter\", a)\n  anders:\n    retourneer (\"b_groter\", b)\n\n# NU met juiste testing:\nafdrukken(vind_max_goed(5, 10))    # ✓ (\"b_groter\", 10)\nafdrukken(vind_max_goed(5, 5))     # ✓ (\"gelijk\", 5) - AFGEHANDELD!\nafdrukken(vind_max_goed(-5, -10))  # ✓ (\"a_groter\", -5)\n\n# Goed programmeren = vooruit denken!`,
+         },
+         explain: {
+           en: "Good developers think about edge cases BEFORE they become problems. AI can help, but developers must validate and handle edge cases!",
+           fr: "Les bons développeurs pensent aux cas limites AVANT qu'ils ne deviennent des problèmes. L'IA peut aider, mais les développeurs doivent valider et gérer les cas limites !",
+           nl: "Goede programmeurs denken aan edge cases VOORDAT ze problemen worden. AI kan helpen, maar programmeurs moeten edge cases valideren en afhandelen!",
+         },
+       },
+       {
+         code: {
+           en: `# REAL WORLD: AI + Developer Knowledge = Success\n\n# Step 1: Developer creates proper specifications\nrequirements = {\n  "handle_equal\": True,\n  \"handle_negative\": True,\n  \"handle_large_numbers\": True,\n  \"return_reason\": True,\n}\n\n# Step 2: Developer prepares COMPLETE training data\ntraining_data = [\n  ([5, 10], \"10\"),\n  ([5, 5], \"equal\"),           # Edge case!\n  ([-5, -10], \"-5\"),            # Edge case!\n  ([1000, 2], \"1000\"),          # Edge case!\n  ([0, 0], \"equal\"),            # Edge case!\n]\n\n# Step 3: Developer trains AI with COMPLETE data\nmodel = train_ai(training_data)\n\n# Step 4: Developer TESTS thoroughly\nassert model.predict([5, 10]) == \"10\"\nassert model.predict([5, 5]) == \"equal\"\nassert model.predict([-5, -10]) == \"-5\"\n\n# NOW AI works! Thanks to developer knowledge!`,
+           fr: `# MONDE RÉEL : IA + Connaissance du Développeur = Succès\n\n# Étape 1 : Le développeur crée des spécifications appropriées\nexigences = {\n  \"gerer_egal\": Vrai,\n  \"gerer_negatif\": Vrai,\n  \"gerer_grands_nombres\": Vrai,\n  \"retourner_raison\": Vrai,\n}\n\n# Étape 2 : Le développeur prépare des données d'entraînement COMPLÈTES\ndonnees_entrainement = [\n  ([5, 10], \"10\"),\n  ([5, 5], \"égal\"),              # Cas limite !\n  ([-5, -10], \"-5\"),             # Cas limite !\n  ([1000, 2], \"1000\"),           # Cas limite !\n  ([0, 0], \"égal\"),              # Cas limite !\n]\n\n# Étape 3 : Le développeur entraîne l'IA avec des données COMPLÈTES\nmodele = entrainer_ia(donnees_entrainement)\n\n# Étape 4 : Le développeur TESTE complètement\naffirmer modele.predire([5, 10]) == \"10\"\naffirmer modele.predire([5, 5]) == \"égal\"\naffirmer modele.predire([-5, -10]) == \"-5\"\n\n# MAINTENANT l'IA fonctionne ! Grâce à la connaissance du développeur !`,
+           nl: `# REAL WORLD: AI + Programmeurkennis = Succes\n\n# Stap 1: Programmeur maakt juiste specificaties\nvereisten = {\n  \"afhandel_gelijk\": Waar,\n  \"afhandel_negatief\": Waar,\n  \"afhandel_grote_getallen\": Waar,\n  \"retourneer_reden\": Waar,\n}\n\n# Stap 2: Programmeur bereidt VOLLEDIGE trainingsgegevens voor\ntrainingsgegevens = [\n  ([5, 10], \"10\"),\n  ([5, 5], \"gelijk\"),            # Edge case!\n  ([-5, -10], \"-5\"),             # Edge case!\n  ([1000, 2], \"1000\"),           # Edge case!\n  ([0, 0], \"gelijk\"),            # Edge case!\n]\n\n# Stap 3: Programmeur traint AI met VOLLEDIGE gegevens\nmodel = train_ai(trainingsgegevens)\n\n# Stap 4: Programmeur TEST uitgebreid\nasserteer model.voorspel([5, 10]) == \"10\"\nasserteer model.voorspel([5, 5]) == \"gelijk\"\nasserteer model.voorspel([-5, -10]) == \"-5\"\n\n# NU werkt AI! Dankzij programmeurkennis!`,
+         },
+         explain: {
+           en: "The REAL power: Developer Knowledge + AI. Developers provide specifications, complete training data, and thorough testing. AI does the pattern matching. Together = Success!",
+           fr: "Le VRAI pouvoir : Connaissance du Développeur + IA. Les développeurs fournissent les spécifications, les données d'entraînement complètes et les tests approdondis. L'IA fait la correspondance de motifs. Ensemble = Succès !",
+           nl: "De ECHT kracht: Programmeurkennis + AI. Programmeurs leveren specificaties, volledige trainingsgegevens en grondige tests. AI doet patroonherkenning. Samen = Succes!",
+         },
+        },
+      ],
+     games: ["/ai-trainer"],
+   },
+ };
 
 const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
   "/guess": { en: "Guess the Number", fr: "Devine le Nombre", nl: "Raad het Getal" },
@@ -654,6 +782,7 @@ const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
    "/calculator": { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
    "/caesar-cipher": { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
    "/bubble-sort": { en: "Bubble Sort", fr: "Tri à Bulles", nl: "Bellensort" },
+   "/insertion-sort": { en: "Insertion Sort", fr: "Tri par Insertion", nl: "Invoegsortering" },
    "/inventory-master": {
     en: "Inventory Master",
     fr: "Maître de l'Inventaire",
@@ -665,12 +794,13 @@ const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
     fr: "Peintre de Motifs",
     nl: "Patroon Schilder",
   },
-  "/race-against-time": {
-    en: "Race Against Time",
-    fr: "Course Contre la Montre",
-    nl: "Race Tegen de Klok",
-  },
-};
+   "/race-against-time": {
+     en: "Race Against Time",
+     fr: "Course Contre la Montre",
+     nl: "Race Tegen de Klok",
+   },
+   "/ai-trainer": { en: "AI Trainer", fr: "Entraîneur IA", nl: "AI Trainer" },
+ };
 
 const labels = {
   en: { play: "Play games using this", explore: "Explore in these games" },

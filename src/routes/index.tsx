@@ -163,9 +163,25 @@ const games = [
        fr: ["Algoritme", "Boucles", "Tri"],
        nl: ["Algoritme", "Lussen", "Sorteren"],
      },
-   },
-   {
-     to: "/inventory-master",
+    },
+    {
+      to: "/insertion-sort",
+      emoji: "🎴",
+      color: "fun-blue",
+      title: { en: "Insertion Sort", fr: "Tri par Insertion", nl: "Invoegsortering" },
+      desc: {
+        en: "Sort like playing cards! Insert each card into its correct position.",
+        fr: "Trie comme des cartes à jouer ! Insère chaque carte à sa bonne place.",
+        nl: "Sorteer als speelkaarten! Voeg elke kaart op de juiste plaats in.",
+      },
+      tags: {
+        en: ["Algorithm", "Loops", "Sorting"],
+        fr: ["Algoritme", "Boucles", "Tri"],
+        nl: ["Algoritme", "Lussen", "Sorteren"],
+      },
+    },
+    {
+      to: "/inventory-master",
      emoji: "📚",
      color: "fun-blue",
      title: { en: "Inventory Master", fr: "Maître de l'Inventaire", nl: "Inventarisgoeroe" },
@@ -228,22 +244,38 @@ const games = [
       nl: ["Timer", "Snelheidsuitdaging"],
     },
   },
-  {
-    to: "/ice-skater",
-    emoji: "⛸️",
-    color: "fun-blue",
-    title: { en: "Ice Skater", fr: "Patineur sur Glace", nl: "IJsschaatser" },
-    desc: {
-      en: "Help the skater escape by navigating the ice rink with loops!",
-      fr: "Aide le patineur à s'échapper en naviguant la patinoire avec des boucles !",
-      nl: "Help de schaatser ontsnappen door de ijsbaan te navigeren met lussen!",
-    },
-    tags: {
-      en: ["Loops", "Logic", "Navigation"],
-      fr: ["Boucles", "Logique", "Navigation"],
-      nl: ["Lussen", "Logica", "Navigatie"],
-    },
-  },
+   {
+     to: "/ice-skater",
+     emoji: "⛸️",
+     color: "fun-blue",
+     title: { en: "Ice Skater", fr: "Patineur sur Glace", nl: "IJsschaatser" },
+     desc: {
+       en: "Help the skater escape by navigating the ice rink with loops!",
+       fr: "Aide le patineur à s'échapper en naviguant la patinoire avec des boucles !",
+       nl: "Help de schaatser ontsnappen door de ijsbaan te navigeren met lussen!",
+     },
+     tags: {
+       en: ["Loops", "Logic", "Navigation"],
+       fr: ["Boucles", "Logique", "Navigation"],
+       nl: ["Lussen", "Logica", "Navigatie"],
+     },
+   },
+   {
+     to: "/ai-trainer",
+     emoji: "🤖",
+     color: "fun-indigo",
+     title: { en: "AI Trainer", fr: "Entraîneur IA", nl: "AI Trainer" },
+     desc: {
+       en: "Teach an AI to learn patterns by giving it examples!",
+       fr: "Enseigne à une IA à apprendre des motifs en lui donnant des exemples !",
+       nl: "Leer een AI patronen door voorbeelden te geven!",
+     },
+     tags: {
+       en: ["AI", "Machine Learning", "Pattern Recognition"],
+       fr: ["IA", "Apprentissage Automatique", "Reconnaissance de Motifs"],
+       nl: ["AI", "Machine Learning", "Patroonherkenning"],
+     },
+   },
 ];
 
 const concepts = [
@@ -357,22 +389,44 @@ const concepts = [
       nl: "Voeg urgentie en spanning toe aan spellen!",
     },
   },
-  {
-    slug: "encryption",
-    emoji: "🔐",
-    color: "concept-encryption",
-    name: {
-      en: "Encryption & Secret Codes",
-      fr: "Chiffrement & Codes Secrets",
-      nl: "Versleuteling & Geheime Codes",
+   {
+     slug: "encryption",
+     emoji: "🔐",
+     color: "concept-encryption",
+     name: {
+       en: "Encryption & Secret Codes",
+       fr: "Chiffrement & Codes Secrets",
+       nl: "Versleuteling & Geheime Codes",
+     },
+     desc: {
+       en: "Hide messages with secret formulas so only the right person can read them!",
+       fr: "Cache des messages avec des formules secrètes pour que seul le bon personne puisse les lire !",
+       nl: "Verberg berichten met geheime formules zodat alleen de juiste persoon ze kan lezen!",
+     },
+   },
+    {
+      slug: "sorting",
+      emoji: "🔢",
+      color: "concept-algorithms",
+      name: { en: "Sorting & Algorithms", fr: "Tri & Algorithmes", nl: "Sorteren & Algoritmen" },
+      desc: {
+        en: "Organize data efficiently using smart sorting techniques!",
+        fr: "Organise les données efficacement avec des techniques de tri malines !",
+        nl: "Organiseer gegevens efficiënt met slimme sorteerttechnieken!",
+      },
     },
-    desc: {
-      en: "Hide messages with secret formulas so only the right person can read them!",
-      fr: "Cache des messages avec des formules secrètes pour que seul le bon personne puisse les lire !",
-      nl: "Verberg berichten met geheime formules zodat alleen de juiste persoon ze kan lezen!",
+    {
+      slug: "ai",
+      emoji: "🤖",
+      color: "concept-ai",
+      name: { en: "AI & Machine Learning", fr: "IA & Apprentissage Automatique", nl: "AI & Machine Learning" },
+      desc: {
+        en: "Create smart programs that learn from examples instead of following strict rules!",
+        fr: "Crée des programmes intelligents qui apprennent d'exemples plutôt que de suivre des règles strictes !",
+        nl: "Maak slimme programma's die leren van voorbeelden in plaats van strikte regels te volgen!",
+      },
     },
-  },
-];
+  ];
 
 function Home() {
   const { lang, name } = useLang();
@@ -398,9 +452,9 @@ function Home() {
     ),
   });
     const heroSub = pick(lang, {
-      en: "Fifteen mini-games. Eleven big programming ideas. Click an idea to learn the theory, or pick a game!",
-      fr: "Quinze mini-jeux. Onze grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
-      nl: "Vijftien minigames. Elf grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
+      en: "Sixteen mini-games. Eleven big programming ideas. Click an idea to learn the theory, or pick a game!",
+      fr: "Seize mini-jeux. Onze grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
+      nl: "Zestien minigames. Elf grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
     });
 
   return (
