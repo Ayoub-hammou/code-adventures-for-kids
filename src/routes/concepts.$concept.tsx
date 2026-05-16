@@ -653,6 +653,7 @@ const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
   "/simon": { en: "Simon Says", fr: "Jacques a dit", nl: "Simon Zegt" },
    "/calculator": { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
    "/caesar-cipher": { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
+   "/bubble-sort": { en: "Bubble Sort", fr: "Tri à Bulles", nl: "Bellensort" },
    "/inventory-master": {
     en: "Inventory Master",
     fr: "Maître de l'Inventaire",

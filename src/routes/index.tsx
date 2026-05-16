@@ -149,17 +149,33 @@ const games = [
      },
    },
    {
+     to: "/bubble-sort",
+     emoji: "🔢",
+     color: "fun-green",
+     title: { en: "Bubble Sort", fr: "Tri à Bulles", nl: "Bellensort" },
+     desc: {
+       en: "Watch numbers bubble to their correct positions. Learn sorting algorithms!",
+       fr: "Regarde les nombres monter à leur bonne place. Apprends les algoritmes de tri !",
+       nl: "Bekijk getallen naar hun juiste positie bubbelen. Leer sorteeralgoritmen!",
+     },
+     tags: {
+       en: ["Algorithm", "Loops", "Sorting"],
+       fr: ["Algoritme", "Boucles", "Tri"],
+       nl: ["Algoritme", "Lussen", "Sorteren"],
+     },
+   },
+   {
      to: "/inventory-master",
-    emoji: "📚",
-    color: "fun-blue",
-    title: { en: "Inventory Master", fr: "Maître de l'Inventaire", nl: "Inventarisgoeroe" },
-    desc: {
-      en: "Manage items using lists. Add and remove wisely!",
-      fr: "Gère les objets avec des listes. Ajoute et supprime avec sagesse !",
-      nl: "Beheer items met lijsten. Voeg toe en verwijder voorzichtig!",
-    },
-    tags: {
-      en: ["Arrays", "Lists"],
+     emoji: "📚",
+     color: "fun-blue",
+     title: { en: "Inventory Master", fr: "Maître de l'Inventaire", nl: "Inventarisgoeroe" },
+     desc: {
+       en: "Manage items using lists. Add and remove wisely!",
+       fr: "Gère les objets avec des listes. Ajoute et supprime avec sagesse !",
+       nl: "Beheer items met lijsten. Voeg toe en verwijder voorzichtig!",
+     },
+     tags: {
+       en: ["Arrays", "Lists"],
       fr: ["Tableaux", "Listes"],
       nl: ["Arrays", "Lijsten"],
     },
@@ -382,9 +398,9 @@ function Home() {
     ),
   });
     const heroSub = pick(lang, {
-      en: "Fourteen mini-games. Eleven big programming ideas. Click an idea to learn the theory, or pick a game!",
-      fr: "Quatorze mini-jeux. Onze grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
-      nl: "Veertien minigames. Elf grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
+      en: "Fifteen mini-games. Eleven big programming ideas. Click an idea to learn the theory, or pick a game!",
+      fr: "Quinze mini-jeux. Onze grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
+      nl: "Vijftien minigames. Elf grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
     });
 
   return (

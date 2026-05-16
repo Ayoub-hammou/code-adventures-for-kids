@@ -9,6 +9,7 @@ export const GAMES_ORDER = [
   "/simon",
   "/calculator",
   "/caesar-cipher",
+  "/bubble-sort",
   "/inventory-master",
   "/luck-master",
   "/pattern-painter",

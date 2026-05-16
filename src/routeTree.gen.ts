@@ -23,6 +23,7 @@ import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
 import { Route as Connect4RouteImport } from './routes/connect4'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as CaesarCipherRouteImport } from './routes/caesar-cipher'
+import { Route as BubbleSortRouteImport } from './routes/bubble-sort'
 import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConceptsConceptRouteImport } from './routes/concepts.$concept'
@@ -97,6 +98,11 @@ const CaesarCipherRoute = CaesarCipherRouteImport.update({
   path: '/caesar-cipher',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BubbleSortRoute = BubbleSortRouteImport.update({
+  id: '/bubble-sort',
+  path: '/bubble-sort',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdventureRoute = AdventureRouteImport.update({
   id: '/adventure',
   path: '/adventure',
@@ -116,6 +122,7 @@ const ConceptsConceptRoute = ConceptsConceptRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/bubble-sort': typeof BubbleSortRoute
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
@@ -135,6 +142,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/bubble-sort': typeof BubbleSortRoute
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/bubble-sort': typeof BubbleSortRoute
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/adventure'
+    | '/bubble-sort'
     | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/adventure'
+    | '/bubble-sort'
     | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/adventure'
+    | '/bubble-sort'
     | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
@@ -234,6 +246,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdventureRoute: typeof AdventureRoute
+  BubbleSortRoute: typeof BubbleSortRoute
   CaesarCipherRoute: typeof CaesarCipherRoute
   CalculatorRoute: typeof CalculatorRoute
   Connect4Route: typeof Connect4Route
@@ -351,6 +364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaesarCipherRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bubble-sort': {
+      id: '/bubble-sort'
+      path: '/bubble-sort'
+      fullPath: '/bubble-sort'
+      preLoaderRoute: typeof BubbleSortRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/adventure': {
       id: '/adventure'
       path: '/adventure'
@@ -378,6 +398,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdventureRoute: AdventureRoute,
+  BubbleSortRoute: BubbleSortRoute,
   CaesarCipherRoute: CaesarCipherRoute,
   CalculatorRoute: CalculatorRoute,
   Connect4Route: Connect4Route,
