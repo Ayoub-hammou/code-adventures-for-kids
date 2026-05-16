@@ -367,18 +367,7 @@ const concepts = [
       nl: "Maak spellen onvoorspelbaar en leuk!",
     },
   },
-  {
-    slug: "patterns",
-    emoji: "🧩",
-    color: "concept-patterns",
-    name: { en: "Pattern Generation", fr: "Génération de Motifs", nl: "Patroon Generatie" },
-    desc: {
-      en: "Create beautiful ASCII art with loops!",
-      fr: "Crée du bel art ASCII avec des boucles !",
-      nl: "Maak mooie ASCII-art met lussen!",
-    },
-  },
-  {
+   {
     slug: "timer",
     emoji: "⏱️",
     color: "concept-timer",
@@ -452,10 +441,10 @@ function Home() {
     ),
   });
     const heroSub = pick(lang, {
-      en: "Sixteen mini-games. Eleven big programming ideas. Click an idea to learn the theory, or pick a game!",
-      fr: "Seize mini-jeux. Onze grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
-      nl: "Zestien minigames. Elf grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
-    });
+       en: "Sixteen mini-games. Ten big programming ideas. Click an idea to learn the theory, or pick a game!",
+       fr: "Seize mini-jeux. Dix grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
+       nl: "Zestien minigames. Tien grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
+     });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">

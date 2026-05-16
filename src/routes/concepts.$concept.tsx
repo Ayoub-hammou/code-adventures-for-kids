@@ -466,64 +466,6 @@ const data: Record<string, Concept> = {
     ],
     games: ["/guess", "/luck-master"],
   },
-  patterns: {
-    emoji: "🧩",
-    color: "concept-patterns",
-    title: {
-      en: "Pattern Generation",
-      fr: "Génération de Motifs",
-      nl: "Patroon Generatie",
-    },
-    intro: {
-      en: "Pattern generation uses loops to create beautiful and repetitive designs. From simple stars to complex fractals, you can build amazing ASCII art with just a few lines of code. Loops make creating patterns easy and fun!",
-      fr: "La génération de motifs utilise les boucles pour créer des designs beaux et répétitifs. Des étoiles simples aux fractales complexes, tu peux créer de l'art ASCII incroyable avec juste quelques lignes de code. Les boucles rendent la création de motifs facile et amusante !",
-      nl: "Patroonafvoer gebruikt lussen om prachtige en repetitieve ontwerpen te maken. Van eenvoudige sterren tot complexe fractals, je kunt geweldig ASCII-art maken met slechts enkele regels code. Lussen maken het maken van patronen gemakkelijk en leuk!",
-    },
-    keyIdea: {
-      en: "Loops create repetition. With a little math, repetition becomes beautiful patterns!",
-      fr: "Les boucles créent la répétition. Avec un peu de mathématiques, la répétition devient de beaux motifs !",
-      nl: "Lussen creëren herhaling. Met een beetje wiskunde wordt herhaling prachtige patronen!",
-    },
-    examples: [
-      {
-        code: {
-          en: `# Simple star pyramid\nfor i in 1..5:\n  print("*" * i)`,
-          fr: `# Pyramide d'étoiles simple\npour i de 1 à 5:\n  afficher("*" * i)`,
-          nl: `# Eenvoudige sterpyramide\nvoor i van 1 tot 5:\n  afdrukken("*" * i)`,
-        },
-        explain: {
-          en: "Each loop iteration prints one more star. The result is a pyramid!",
-          fr: "Chaque itération de la boucle affiche une étoile de plus. Le résultat est une pyramide !",
-          nl: "Elke lusherhaling drukt één ster meer af. Het resultaat is een piramide!",
-        },
-      },
-      {
-        code: {
-          en: `# Diamond pattern\nfor i in 1..3:\n  print(" " * (3-i) + "*" * (2*i-1))\nfor i in 2..1:\n  print(" " * (3-i) + "*" * (2*i-1))`,
-          fr: `# Motif en diamant\npour i de 1 à 3:\n  afficher(" " * (3-i) + "*" * (2*i-1))\npour i de 2 à 1:\n  afficher(" " * (3-i) + "*" * (2*i-1))`,
-          nl: `# Diamantpatroon\nvoor i van 1 tot 3:\n  afdrukken(" " * (3-i) + "*" * (2*i-1))\nvoor i van 2 tot 1:\n  afdrukken(" " * (3-i) + "*" * (2*i-1))`,
-        },
-        explain: {
-          en: "Combine loops and math to create complex shapes. Spaces for alignment, stars for the pattern!",
-          fr: "Combine les boucles et les mathématiques pour créer des formes complexes. Des espaces pour l'alignement, des étoiles pour le motif !",
-          nl: "Combineer lussen en wiskunde om complexe vormen te maken. Spaties voor uitlijning, sterren voor het patroon!",
-        },
-      },
-      {
-        code: {
-          en: `# Multiplication table pattern\nfor i in 1..5:\n  for j in 1..5:\n    print(i * j, end=" ")\n  print()`,
-          fr: `# Motif de table de multiplication\npour i de 1 à 5:\n  pour j de 1 à 5:\n    afficher(i * j, fin=" ")\n  afficher()`,
-          nl: `# Vermenigvuldigingstabelpatroon\nvoor i van 1 tot 5:\n  voor j van 1 tot 5:\n    afdrukken(i * j, einde=" ")\n  afdrukken()`,
-        },
-        explain: {
-          en: "Nested loops create 2D patterns! Each inner loop creates a row, outer loop creates rows.",
-          fr: "Les boucles imbriquées créent des motifs 2D ! Chaque boucle interne crée une ligne, la boucle externe crée les lignes.",
-          nl: "Geneste lussen creëren 2D-patronen! Elke binnenste lus creëert een rij, buitenlus creëert rijen.",
-        },
-      },
-    ],
-    games: ["/pattern-painter"],
-  },
   timer: {
     emoji: "⏱️",
     color: "concept-timer",
