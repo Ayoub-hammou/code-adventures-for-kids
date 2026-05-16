@@ -120,7 +120,7 @@ function ConnectPage() {
         )}
       </div>
 
-      <div className="rounded-2xl bg-[var(--fun-blue)] p-3 inline-block mx-auto">
+      <div className="rounded-2xl bg-[var(--fun-blue)] p-3 mx-auto w-fit">
         <div
           className="grid gap-1.5"
           style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}

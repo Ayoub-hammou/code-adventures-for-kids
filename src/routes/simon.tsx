@@ -111,11 +111,29 @@ function SimonPage() {
           <span className="mx-3">•</span>
           <span className="font-bold">{t("best")}:</span> {best}
         </div>
-        <div className="text-sm font-semibold text-primary">
-          {phase === "show" && t("watch")}
-          {phase === "input" && t("yourTurn")}
-          {phase === "lost" && t("oops")}
-        </div>
+        {phase !== "idle" && (
+          <div
+            className="rounded-xl px-4 py-3 font-bold text-lg min-w-fit text-center"
+            style={{
+              backgroundColor:
+                phase === "input"
+                  ? "var(--fun-green)"
+                  : phase === "show"
+                    ? "var(--fun-blue)"
+                    : phase === "lost"
+                      ? "var(--fun-red)"
+                      : "var(--muted)",
+              color:
+                phase === "input" || phase === "show" || phase === "lost"
+                  ? "white"
+                  : "var(--foreground)",
+            }}
+          >
+            {phase === "show" && t("watch")}
+            {phase === "input" && t("yourTurn")}
+            {phase === "lost" && t("oops")}
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
@@ -138,7 +156,8 @@ function SimonPage() {
       <div className="text-center mt-6">
         <button
           onClick={start}
-          className="rounded-xl bg-primary text-primary-foreground px-6 py-2 font-bold hover:scale-105 transition"
+          disabled={phase !== "idle" && phase !== "lost"}
+          className="rounded-xl bg-primary text-primary-foreground px-6 py-2 font-bold hover:scale-105 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {phase === "lost" ? t("again") : t("start")}
         </button>
