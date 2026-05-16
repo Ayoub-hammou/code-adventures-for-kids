@@ -14,6 +14,7 @@ import { Route as RpsRouteImport } from './routes/rps'
 import { Route as RaceAgainstTimeRouteImport } from './routes/race-against-time'
 import { Route as PatternPainterRouteImport } from './routes/pattern-painter'
 import { Route as PalindromeRouteImport } from './routes/palindrome'
+import { Route as MemoryGameRouteImport } from './routes/memory-game'
 import { Route as MastermindRouteImport } from './routes/mastermind'
 import { Route as LuckMasterRouteImport } from './routes/luck-master'
 import { Route as InventoryMasterRouteImport } from './routes/inventory-master'
@@ -21,6 +22,7 @@ import { Route as InsertionSortRouteImport } from './routes/insertion-sort'
 import { Route as IceSkaterRouteImport } from './routes/ice-skater'
 import { Route as GuessRouteImport } from './routes/guess'
 import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
+import { Route as ErrorHandlerRouteImport } from './routes/error-handler'
 import { Route as Connect4RouteImport } from './routes/connect4'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as CaesarCipherRouteImport } from './routes/caesar-cipher'
@@ -53,6 +55,11 @@ const PatternPainterRoute = PatternPainterRouteImport.update({
 const PalindromeRoute = PalindromeRouteImport.update({
   id: '/palindrome',
   path: '/palindrome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemoryGameRoute = MemoryGameRouteImport.update({
+  id: '/memory-game',
+  path: '/memory-game',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MastermindRoute = MastermindRouteImport.update({
@@ -88,6 +95,11 @@ const GuessRoute = GuessRouteImport.update({
 const FizzbuzzRoute = FizzbuzzRouteImport.update({
   id: '/fizzbuzz',
   path: '/fizzbuzz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ErrorHandlerRoute = ErrorHandlerRouteImport.update({
+  id: '/error-handler',
+  path: '/error-handler',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Connect4Route = Connect4RouteImport.update({
@@ -139,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/error-handler': typeof ErrorHandlerRoute
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/ice-skater': typeof IceSkaterRoute
@@ -146,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
+  '/memory-game': typeof MemoryGameRoute
   '/palindrome': typeof PalindromeRoute
   '/pattern-painter': typeof PatternPainterRoute
   '/race-against-time': typeof RaceAgainstTimeRoute
@@ -161,6 +175,7 @@ export interface FileRoutesByTo {
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/error-handler': typeof ErrorHandlerRoute
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/ice-skater': typeof IceSkaterRoute
@@ -168,6 +183,7 @@ export interface FileRoutesByTo {
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
+  '/memory-game': typeof MemoryGameRoute
   '/palindrome': typeof PalindromeRoute
   '/pattern-painter': typeof PatternPainterRoute
   '/race-against-time': typeof RaceAgainstTimeRoute
@@ -184,6 +200,7 @@ export interface FileRoutesById {
   '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/error-handler': typeof ErrorHandlerRoute
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
   '/ice-skater': typeof IceSkaterRoute
@@ -191,6 +208,7 @@ export interface FileRoutesById {
   '/inventory-master': typeof InventoryMasterRoute
   '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
+  '/memory-game': typeof MemoryGameRoute
   '/palindrome': typeof PalindromeRoute
   '/pattern-painter': typeof PatternPainterRoute
   '/race-against-time': typeof RaceAgainstTimeRoute
@@ -208,6 +226,7 @@ export interface FileRouteTypes {
     | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
+    | '/error-handler'
     | '/fizzbuzz'
     | '/guess'
     | '/ice-skater'
@@ -215,6 +234,7 @@ export interface FileRouteTypes {
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
+    | '/memory-game'
     | '/palindrome'
     | '/pattern-painter'
     | '/race-against-time'
@@ -230,6 +250,7 @@ export interface FileRouteTypes {
     | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
+    | '/error-handler'
     | '/fizzbuzz'
     | '/guess'
     | '/ice-skater'
@@ -237,6 +258,7 @@ export interface FileRouteTypes {
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
+    | '/memory-game'
     | '/palindrome'
     | '/pattern-painter'
     | '/race-against-time'
@@ -252,6 +274,7 @@ export interface FileRouteTypes {
     | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
+    | '/error-handler'
     | '/fizzbuzz'
     | '/guess'
     | '/ice-skater'
@@ -259,6 +282,7 @@ export interface FileRouteTypes {
     | '/inventory-master'
     | '/luck-master'
     | '/mastermind'
+    | '/memory-game'
     | '/palindrome'
     | '/pattern-painter'
     | '/race-against-time'
@@ -275,6 +299,7 @@ export interface RootRouteChildren {
   CaesarCipherRoute: typeof CaesarCipherRoute
   CalculatorRoute: typeof CalculatorRoute
   Connect4Route: typeof Connect4Route
+  ErrorHandlerRoute: typeof ErrorHandlerRoute
   FizzbuzzRoute: typeof FizzbuzzRoute
   GuessRoute: typeof GuessRoute
   IceSkaterRoute: typeof IceSkaterRoute
@@ -282,6 +307,7 @@ export interface RootRouteChildren {
   InventoryMasterRoute: typeof InventoryMasterRoute
   LuckMasterRoute: typeof LuckMasterRoute
   MastermindRoute: typeof MastermindRoute
+  MemoryGameRoute: typeof MemoryGameRoute
   PalindromeRoute: typeof PalindromeRoute
   PatternPainterRoute: typeof PatternPainterRoute
   RaceAgainstTimeRoute: typeof RaceAgainstTimeRoute
@@ -325,6 +351,13 @@ declare module '@tanstack/react-router' {
       path: '/palindrome'
       fullPath: '/palindrome'
       preLoaderRoute: typeof PalindromeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/memory-game': {
+      id: '/memory-game'
+      path: '/memory-game'
+      fullPath: '/memory-game'
+      preLoaderRoute: typeof MemoryGameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mastermind': {
@@ -374,6 +407,13 @@ declare module '@tanstack/react-router' {
       path: '/fizzbuzz'
       fullPath: '/fizzbuzz'
       preLoaderRoute: typeof FizzbuzzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/error-handler': {
+      id: '/error-handler'
+      path: '/error-handler'
+      fullPath: '/error-handler'
+      preLoaderRoute: typeof ErrorHandlerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/connect4': {
@@ -443,6 +483,7 @@ const rootRouteChildren: RootRouteChildren = {
   CaesarCipherRoute: CaesarCipherRoute,
   CalculatorRoute: CalculatorRoute,
   Connect4Route: Connect4Route,
+  ErrorHandlerRoute: ErrorHandlerRoute,
   FizzbuzzRoute: FizzbuzzRoute,
   GuessRoute: GuessRoute,
   IceSkaterRoute: IceSkaterRoute,
@@ -450,6 +491,7 @@ const rootRouteChildren: RootRouteChildren = {
   InventoryMasterRoute: InventoryMasterRoute,
   LuckMasterRoute: LuckMasterRoute,
   MastermindRoute: MastermindRoute,
+  MemoryGameRoute: MemoryGameRoute,
   PalindromeRoute: PalindromeRoute,
   PatternPainterRoute: PatternPainterRoute,
   RaceAgainstTimeRoute: RaceAgainstTimeRoute,

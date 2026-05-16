@@ -116,82 +116,102 @@ const games = [
     },
     tags: { en: ["Variable", "Loop"], fr: ["Variable", "Boucle"], nl: ["Variabele", "Lus"] },
   },
+  {
+    to: "/calculator",
+    emoji: "🧮",
+    color: "fun-green",
+    title: { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
+    desc: {
+      en: "Catches mistakes before they crash!",
+      fr: "Attrape les erreurs avant qu'elles plantent !",
+      nl: "Vangt fouten voor ze crashen!",
+    },
+    tags: {
+      en: ["Variable", "Error Handling"],
+      fr: ["Variable", "Gestion d'erreurs"],
+      nl: ["Variabele", "Foutafhandeling"],
+    },
+   },
    {
-     to: "/calculator",
-     emoji: "🧮",
-     color: "fun-green",
-     title: { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
+     to: "/error-handler",
+     emoji: "🛡️",
+     color: "fun-red",
+     title: {
+       en: "Error Handler Workshop",
+       fr: "Atelier Gestion des Erreurs",
+       nl: "Foutafhandelings Workshop",
+     },
      desc: {
-       en: "Catches mistakes before they crash!",
-       fr: "Attrape les erreurs avant qu'elles plantent !",
-       nl: "Vangt fouten voor ze crashen!",
+       en: "Build a robot or validate forms. Learn error handling with two interactive workshops!",
+       fr: "Construis un robot ou valide des formulaires. Apprends la gestion des erreurs avec deux ateliers interactifs !",
+       nl: "Bouw een robot of valideer formulieren. Leer foutafhandeling met twee interactieve workshops!",
      },
      tags: {
-       en: ["Variable", "Error Handling"],
-       fr: ["Variable", "Gestion d'erreurs"],
-       nl: ["Variabele", "Foutafhandeling"],
+       en: ["Error Handling", "Validation", "Try/Catch"],
+       fr: ["Gestion d'erreurs", "Validation", "Try/Catch"],
+       nl: ["Foutafhandeling", "Validatie", "Try/Catch"],
      },
    },
    {
      to: "/caesar-cipher",
-     emoji: "🔐",
-     color: "fun-red",
-     title: { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
-     desc: {
-       en: "Encrypt messages by shifting letters.",
-       fr: "Chiffre les messages en décalant les lettres.",
-       nl: "Versleutel berichten door letters te verschuiven.",
-     },
-     tags: {
-       en: ["String", "Loop", "Character"],
-       fr: ["Chaîne", "Boucle", "Caractère"],
-       nl: ["String", "Lus", "Karakter"],
-     },
-   },
-   {
-     to: "/bubble-sort",
-     emoji: "🔢",
-     color: "fun-green",
-     title: { en: "Bubble Sort", fr: "Tri à Bulles", nl: "Bellensort" },
-     desc: {
-       en: "Watch numbers bubble to their correct positions. Learn sorting algorithms!",
-       fr: "Regarde les nombres monter à leur bonne place. Apprends les algoritmes de tri !",
-       nl: "Bekijk getallen naar hun juiste positie bubbelen. Leer sorteeralgoritmen!",
-     },
-     tags: {
-       en: ["Algorithm", "Loops", "Sorting"],
-       fr: ["Algoritme", "Boucles", "Tri"],
-       nl: ["Algoritme", "Lussen", "Sorteren"],
-     },
+    emoji: "🔐",
+    color: "fun-red",
+    title: { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
+    desc: {
+      en: "Encrypt messages by shifting letters.",
+      fr: "Chiffre les messages en décalant les lettres.",
+      nl: "Versleutel berichten door letters te verschuiven.",
     },
-    {
-      to: "/insertion-sort",
-      emoji: "🎴",
-      color: "fun-blue",
-      title: { en: "Insertion Sort", fr: "Tri par Insertion", nl: "Invoegsortering" },
-      desc: {
-        en: "Sort like playing cards! Insert each card into its correct position.",
-        fr: "Trie comme des cartes à jouer ! Insère chaque carte à sa bonne place.",
-        nl: "Sorteer als speelkaarten! Voeg elke kaart op de juiste plaats in.",
-      },
-      tags: {
-        en: ["Algorithm", "Loops", "Sorting"],
-        fr: ["Algoritme", "Boucles", "Tri"],
-        nl: ["Algoritme", "Lussen", "Sorteren"],
-      },
+    tags: {
+      en: ["String", "Loop", "Character"],
+      fr: ["Chaîne", "Boucle", "Caractère"],
+      nl: ["String", "Lus", "Karakter"],
     },
-    {
-      to: "/inventory-master",
-     emoji: "📚",
-     color: "fun-blue",
-     title: { en: "Inventory Master", fr: "Maître de l'Inventaire", nl: "Inventarisgoeroe" },
-     desc: {
-       en: "Manage items using lists. Add and remove wisely!",
-       fr: "Gère les objets avec des listes. Ajoute et supprime avec sagesse !",
-       nl: "Beheer items met lijsten. Voeg toe en verwijder voorzichtig!",
-     },
-     tags: {
-       en: ["Arrays", "Lists"],
+  },
+  {
+    to: "/bubble-sort",
+    emoji: "🔢",
+    color: "fun-green",
+    title: { en: "Bubble Sort", fr: "Tri à Bulles", nl: "Bellensort" },
+    desc: {
+      en: "Watch numbers bubble to their correct positions. Learn sorting algorithms!",
+      fr: "Regarde les nombres monter à leur bonne place. Apprends les algoritmes de tri !",
+      nl: "Bekijk getallen naar hun juiste positie bubbelen. Leer sorteeralgoritmen!",
+    },
+    tags: {
+      en: ["Algorithm", "Loops", "Sorting"],
+      fr: ["Algoritme", "Boucles", "Tri"],
+      nl: ["Algoritme", "Lussen", "Sorteren"],
+    },
+  },
+  {
+    to: "/insertion-sort",
+    emoji: "🎴",
+    color: "fun-blue",
+    title: { en: "Insertion Sort", fr: "Tri par Insertion", nl: "Invoegsortering" },
+    desc: {
+      en: "Sort like playing cards! Insert each card into its correct position.",
+      fr: "Trie comme des cartes à jouer ! Insère chaque carte à sa bonne place.",
+      nl: "Sorteer als speelkaarten! Voeg elke kaart op de juiste plaats in.",
+    },
+    tags: {
+      en: ["Algorithm", "Loops", "Sorting"],
+      fr: ["Algoritme", "Boucles", "Tri"],
+      nl: ["Algoritme", "Lussen", "Sorteren"],
+    },
+  },
+  {
+    to: "/inventory-master",
+    emoji: "📚",
+    color: "fun-blue",
+    title: { en: "Inventory Master", fr: "Maître de l'Inventaire", nl: "Inventarisgoeroe" },
+    desc: {
+      en: "Manage items using lists. Add and remove wisely!",
+      fr: "Gère les objets avec des listes. Ajoute et supprime avec sagesse !",
+      nl: "Beheer items met lijsten. Voeg toe en verwijder voorzichtig!",
+    },
+    tags: {
+      en: ["Arrays", "Lists"],
       fr: ["Tableaux", "Listes"],
       nl: ["Arrays", "Lijsten"],
     },
@@ -228,7 +248,7 @@ const games = [
       nl: ["Lussen", "Patronen", "Geneste Lussen"],
     },
   },
-   {
+  {
     to: "/race-against-time",
     emoji: "⏱️",
     color: "fun-blue",
@@ -244,41 +264,57 @@ const games = [
       nl: ["Timer", "Snelheidsuitdaging"],
     },
   },
-   {
-     to: "/ice-skater",
-     emoji: "⛸️",
-     color: "fun-blue",
-     title: { en: "Ice Skater", fr: "Patineur sur Glace", nl: "IJsschaatser" },
-     desc: {
-       en: "Help the skater escape by navigating the ice rink with loops!",
-       fr: "Aide le patineur à s'échapper en naviguant la patinoire avec des boucles !",
-       nl: "Help de schaatser ontsnappen door de ijsbaan te navigeren met lussen!",
-     },
-     tags: {
-       en: ["Loops", "Logic", "Navigation"],
-       fr: ["Boucles", "Logique", "Navigation"],
-       nl: ["Lussen", "Logica", "Navigatie"],
-     },
-   },
-   {
-     to: "/ai-trainer",
-     emoji: "🤖",
-     color: "fun-indigo",
-     title: { en: "AI Trainer", fr: "Entraîneur IA", nl: "AI Trainer" },
-     desc: {
-       en: "Teach an AI to learn patterns by giving it examples!",
-       fr: "Enseigne à une IA à apprendre des motifs en lui donnant des exemples !",
-       nl: "Leer een AI patronen door voorbeelden te geven!",
-     },
-     tags: {
-       en: ["AI", "Machine Learning", "Pattern Recognition"],
-       fr: ["IA", "Apprentissage Automatique", "Reconnaissance de Motifs"],
-       nl: ["AI", "Machine Learning", "Patroonherkenning"],
-     },
-   },
+  {
+    to: "/ice-skater",
+    emoji: "⛸️",
+    color: "fun-blue",
+    title: { en: "Ice Skater", fr: "Patineur sur Glace", nl: "IJsschaatser" },
+    desc: {
+      en: "Help the skater escape by navigating the ice rink with loops!",
+      fr: "Aide le patineur à s'échapper en naviguant la patinoire avec des boucles !",
+      nl: "Help de schaatser ontsnappen door de ijsbaan te navigeren met lussen!",
+    },
+    tags: {
+      en: ["Loops", "Logic", "Navigation"],
+      fr: ["Boucles", "Logique", "Navigation"],
+      nl: ["Lussen", "Logica", "Navigatie"],
+    },
+  },
+  {
+    to: "/ai-trainer",
+    emoji: "🤖",
+    color: "fun-indigo",
+    title: { en: "AI Trainer", fr: "Entraîneur IA", nl: "AI Trainer" },
+    desc: {
+      en: "Teach an AI to learn patterns by giving it examples!",
+      fr: "Enseigne à une IA à apprendre des motifs en lui donnant des exemples !",
+      nl: "Leer een AI patronen door voorbeelden te geven!",
+    },
+    tags: {
+      en: ["AI", "Machine Learning", "Pattern Recognition"],
+      fr: ["IA", "Apprentissage Automatique", "Reconnaissance de Motifs"],
+      nl: ["AI", "Machine Learning", "Patroonherkenning"],
+    },
+  },
+  {
+    to: "/memory-game",
+    emoji: "🃏",
+    color: "fun-blue",
+    title: { en: "Memory Game", fr: "Jeu de Mémoire", nl: "Geheugenspel" },
+    desc: {
+      en: "Find matching pairs of images! Remember positions to win!",
+      fr: "Trouve les paires d'images ! Souviens-toi des positions !",
+      nl: "Vind overeenkomende afbeeldingen! Onthoud posities om te winnen!",
+    },
+    tags: {
+      en: ["Memory", "Observation", "Brain Training"],
+      fr: ["Mémoire", "Observation", "Entraînement Cérébral"],
+      nl: ["Geheugen", "Waarneming", "Hersentraining"],
+    },
+  },
 ];
 
-const concepts = [
+const bigIdeasConcepts = [
   {
     slug: "programming",
     emoji: "💻",
@@ -323,6 +359,9 @@ const concepts = [
     name: { en: "Conditions", fr: "Conditions", nl: "Condities" },
     desc: { en: "If this... then that.", fr: "Si ceci... alors cela.", nl: "Als dit... dan dat." },
   },
+];
+
+const advancedConcepts = [
   {
     slug: "errors",
     emoji: "🛡️",
@@ -367,7 +406,7 @@ const concepts = [
       nl: "Maak spellen onvoorspelbaar en leuk!",
     },
   },
-   {
+  {
     slug: "timer",
     emoji: "⏱️",
     color: "concept-timer",
@@ -378,44 +417,48 @@ const concepts = [
       nl: "Voeg urgentie en spanning toe aan spellen!",
     },
   },
-   {
-     slug: "encryption",
-     emoji: "🔐",
-     color: "concept-encryption",
-     name: {
-       en: "Encryption & Secret Codes",
-       fr: "Chiffrement & Codes Secrets",
-       nl: "Versleuteling & Geheime Codes",
-     },
-     desc: {
-       en: "Hide messages with secret formulas so only the right person can read them!",
-       fr: "Cache des messages avec des formules secrètes pour que seul le bon personne puisse les lire !",
-       nl: "Verberg berichten met geheime formules zodat alleen de juiste persoon ze kan lezen!",
-     },
-   },
-    {
-      slug: "sorting",
-      emoji: "🔢",
-      color: "concept-algorithms",
-      name: { en: "Sorting & Algorithms", fr: "Tri & Algorithmes", nl: "Sorteren & Algoritmen" },
-      desc: {
-        en: "Organize data efficiently using smart sorting techniques!",
-        fr: "Organise les données efficacement avec des techniques de tri malines !",
-        nl: "Organiseer gegevens efficiënt met slimme sorteerttechnieken!",
-      },
+  {
+    slug: "encryption",
+    emoji: "🔐",
+    color: "concept-encryption",
+    name: {
+      en: "Encryption & Secret Codes",
+      fr: "Chiffrement & Codes Secrets",
+      nl: "Versleuteling & Geheime Codes",
     },
-    {
-      slug: "ai",
-      emoji: "🤖",
-      color: "concept-ai",
-      name: { en: "AI & Machine Learning", fr: "IA & Apprentissage Automatique", nl: "AI & Machine Learning" },
-      desc: {
-        en: "Create smart programs that learn from examples instead of following strict rules!",
-        fr: "Crée des programmes intelligents qui apprennent d'exemples plutôt que de suivre des règles strictes !",
-        nl: "Maak slimme programma's die leren van voorbeelden in plaats van strikte regels te volgen!",
-      },
+    desc: {
+      en: "Hide messages with secret formulas so only the right person can read them!",
+      fr: "Cache des messages avec des formules secrètes pour que seul le bon personne puisse les lire !",
+      nl: "Verberg berichten met geheime formules zodat alleen de juiste persoon ze kan lezen!",
     },
-  ];
+  },
+  {
+    slug: "sorting",
+    emoji: "🔢",
+    color: "concept-algorithms",
+    name: { en: "Sorting & Algorithms", fr: "Tri & Algorithmes", nl: "Sorteren & Algoritmen" },
+    desc: {
+      en: "Organize data efficiently using smart sorting techniques!",
+      fr: "Organise les données efficacement avec des techniques de tri malines !",
+      nl: "Organiseer gegevens efficiënt met slimme sorteerttechnieken!",
+    },
+  },
+  {
+    slug: "ai",
+    emoji: "🤖",
+    color: "concept-ai",
+    name: {
+      en: "AI & Machine Learning",
+      fr: "IA & Apprentissage Automatique",
+      nl: "AI & Machine Learning",
+    },
+    desc: {
+      en: "Create smart programs that learn from examples instead of following strict rules!",
+      fr: "Crée des programmes intelligents qui apprennent d'exemples plutôt que de suivre des règles strictes !",
+      nl: "Maak slimme programma's die leren van voorbeelden in plaats van strikte regels te volgen!",
+    },
+  },
+];
 
 function Home() {
   const { lang, name } = useLang();
@@ -440,11 +483,11 @@ function Home() {
       </>
     ),
   });
-    const heroSub = pick(lang, {
-       en: "Sixteen mini-games. Ten big programming ideas. Click an idea to learn the theory, or pick a game!",
-       fr: "Seize mini-jeux. Dix grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
-       nl: "Zestien minigames. Tien grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
-     });
+  const heroSub = pick(lang, {
+    en: "Sixteen mini-games. Ten big programming ideas. Click an idea to learn the theory, or pick a game!",
+    fr: "Seize mini-jeux. Dix grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
+    nl: "Zestien minigames. Tien grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
+  });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
@@ -453,29 +496,57 @@ function Home() {
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">{heroSub}</p>
       </section>
 
-      <h2 className="text-2xl font-bold mb-4">{t.bigIdeas}</h2>
-      <section className="grid gap-4 md:grid-cols-4 mb-14">
-        {concepts.map((c) => (
-          <Link
-            key={c.slug}
-            to="/concepts/$concept"
-            params={{ concept: c.slug }}
-            className="group rounded-2xl bg-card border-2 border-border p-4 shadow-[4px_4px_0_0_var(--color-border)] hover:shadow-[6px_6px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all"
-          >
-            <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-2"
-              style={{ backgroundColor: `var(--${c.color})` }}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold mb-4">{t.bigIdeas}</h2>
+        <section className="grid gap-4 md:grid-cols-4 mb-14">
+          {bigIdeasConcepts.map((c) => (
+            <Link
+              key={c.slug}
+              to="/concepts/$concept"
+              params={{ concept: c.slug }}
+              className="group rounded-2xl bg-card border-2 border-border p-4 shadow-[4px_4px_0_0_var(--color-border)] hover:shadow-[6px_6px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all"
             >
-              {c.emoji}
-            </div>
-            <div className="font-display font-bold text-lg">{pick(lang, c.name)}</div>
-            <p className="text-sm text-muted-foreground">{pick(lang, c.desc)}</p>
-            <div className="text-xs text-primary font-bold mt-2 group-hover:underline">
-              {t.learnMore} →
-            </div>
-          </Link>
-        ))}
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-2"
+                style={{ backgroundColor: `var(--${c.color})` }}
+              >
+                {c.emoji}
+              </div>
+              <div className="font-display font-bold text-lg">{pick(lang, c.name)}</div>
+              <p className="text-sm text-muted-foreground">{pick(lang, c.desc)}</p>
+              <div className="text-xs text-primary font-bold mt-2 group-hover:underline">
+                {t.learnMore} →
+              </div>
+            </Link>
+          ))}
+        </section>
+
+        <h2 className="text-2xl font-bold mb-4">{t.advancedConcepts}</h2>
+        <section className="grid gap-4 md:grid-cols-4">
+          {advancedConcepts.map((c) => (
+            <Link
+              key={c.slug}
+              to="/concepts/$concept"
+              params={{ concept: c.slug }}
+              className="group rounded-2xl bg-card border-2 border-border p-4 shadow-[4px_4px_0_0_var(--color-border)] hover:shadow-[6px_6px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all"
+            >
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-2"
+                style={{ backgroundColor: `var(--${c.color})` }}
+              >
+                {c.emoji}
+              </div>
+              <div className="font-display font-bold text-lg">{pick(lang, c.name)}</div>
+              <p className="text-sm text-muted-foreground">{pick(lang, c.desc)}</p>
+              <div className="text-xs text-primary font-bold mt-2 group-hover:underline">
+                {t.learnMore} →
+              </div>
+            </Link>
+          ))}
+        </section>
       </section>
+
+      <div className="my-16 border-t-2 border-border"></div>
 
       <h2 className="text-3xl font-bold mb-6">{t.chooseGame}</h2>
       <section className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">

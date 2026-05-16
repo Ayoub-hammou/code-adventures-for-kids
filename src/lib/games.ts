@@ -8,6 +8,8 @@ export const GAMES_ORDER = [
   "/fizzbuzz",
   "/simon",
   "/calculator",
+  "/error-handler",
+  "/memory-game",
   "/caesar-cipher",
   "/bubble-sort",
   "/insertion-sort",
@@ -16,6 +18,7 @@ export const GAMES_ORDER = [
   "/pattern-painter",
   "/race-against-time",
   "/ice-skater",
+  "/ai-trainer",
 ];
 
 export function getNextGameUrl(currentPath: string): string | null {
