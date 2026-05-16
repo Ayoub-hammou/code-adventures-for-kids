@@ -25,7 +25,8 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(KEY);
+      // Use sessionStorage so data is cleared when the browser closes
+      const raw = sessionStorage.getItem(KEY);
       if (raw) {
         const p = JSON.parse(raw);
         if (p.lang) setLangState(p.lang);
@@ -41,7 +42,8 @@ export function LangProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!ready) return;
     try {
-      localStorage.setItem(KEY, JSON.stringify({ lang, name, showCodeByDefault }));
+      // Use sessionStorage so data is cleared when the browser closes
+      sessionStorage.setItem(KEY, JSON.stringify({ lang, name, showCodeByDefault }));
     } catch {
       // ignore
     }
@@ -57,7 +59,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
         reset: () => {
           setNameState("");
           try {
-            localStorage.removeItem(KEY);
+            sessionStorage.removeItem(KEY);
           } catch {
             // ignore
           }
