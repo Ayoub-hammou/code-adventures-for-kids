@@ -27,7 +27,9 @@ export function Onboarding() {
         onSubmit={submit}
         className="w-full max-w-md rounded-3xl bg-card border-2 border-border p-8 shadow-[8px_8px_0_0_var(--color-border)]"
       >
-        <div className="text-6xl text-center mb-2">👋</div>
+        <div className="flex justify-center mb-2">
+          <img src="/favicon.ico" alt="Code Adventures for Kids" className="w-24 h-24" />
+        </div>
         <h1 className="text-3xl font-bold text-center mb-1">{t.welcome}</h1>
         <p className="text-center text-muted-foreground mb-6 font-display">CodeKids Lab</p>
 

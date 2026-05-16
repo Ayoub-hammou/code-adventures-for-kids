@@ -8,6 +8,7 @@ export const GAMES_ORDER = [
   "/fizzbuzz",
   "/simon",
   "/calculator",
+  "/caesar-cipher",
   "/inventory-master",
   "/luck-master",
   "/pattern-painter",

@@ -22,6 +22,7 @@ import { Route as GuessRouteImport } from './routes/guess'
 import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
 import { Route as Connect4RouteImport } from './routes/connect4'
 import { Route as CalculatorRouteImport } from './routes/calculator'
+import { Route as CaesarCipherRouteImport } from './routes/caesar-cipher'
 import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConceptsConceptRouteImport } from './routes/concepts.$concept'
@@ -91,6 +92,11 @@ const CalculatorRoute = CalculatorRouteImport.update({
   path: '/calculator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaesarCipherRoute = CaesarCipherRouteImport.update({
+  id: '/caesar-cipher',
+  path: '/caesar-cipher',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdventureRoute = AdventureRouteImport.update({
   id: '/adventure',
   path: '/adventure',
@@ -110,6 +116,7 @@ const ConceptsConceptRoute = ConceptsConceptRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
   '/fizzbuzz': typeof FizzbuzzRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/adventure'
+    | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
     | '/fizzbuzz'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/adventure'
+    | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
     | '/fizzbuzz'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/adventure'
+    | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
     | '/fizzbuzz'
@@ -222,6 +234,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdventureRoute: typeof AdventureRoute
+  CaesarCipherRoute: typeof CaesarCipherRoute
   CalculatorRoute: typeof CalculatorRoute
   Connect4Route: typeof Connect4Route
   FizzbuzzRoute: typeof FizzbuzzRoute
@@ -331,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/caesar-cipher': {
+      id: '/caesar-cipher'
+      path: '/caesar-cipher'
+      fullPath: '/caesar-cipher'
+      preLoaderRoute: typeof CaesarCipherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/adventure': {
       id: '/adventure'
       path: '/adventure'
@@ -358,6 +378,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdventureRoute: AdventureRoute,
+  CaesarCipherRoute: CaesarCipherRoute,
   CalculatorRoute: CalculatorRoute,
   Connect4Route: Connect4Route,
   FizzbuzzRoute: FizzbuzzRoute,

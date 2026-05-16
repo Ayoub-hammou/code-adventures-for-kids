@@ -116,24 +116,40 @@ const games = [
     },
     tags: { en: ["Variable", "Loop"], fr: ["Variable", "Boucle"], nl: ["Variabele", "Lus"] },
   },
-  {
-    to: "/calculator",
-    emoji: "🧮",
-    color: "fun-green",
-    title: { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
-    desc: {
-      en: "Catches mistakes before they crash!",
-      fr: "Attrape les erreurs avant qu'elles plantent !",
-      nl: "Vangt fouten voor ze crashen!",
-    },
-    tags: {
-      en: ["Variable", "Error Handling"],
-      fr: ["Variable", "Gestion d'erreurs"],
-      nl: ["Variabele", "Foutafhandeling"],
-    },
-  },
-  {
-    to: "/inventory-master",
+   {
+     to: "/calculator",
+     emoji: "🧮",
+     color: "fun-green",
+     title: { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
+     desc: {
+       en: "Catches mistakes before they crash!",
+       fr: "Attrape les erreurs avant qu'elles plantent !",
+       nl: "Vangt fouten voor ze crashen!",
+     },
+     tags: {
+       en: ["Variable", "Error Handling"],
+       fr: ["Variable", "Gestion d'erreurs"],
+       nl: ["Variabele", "Foutafhandeling"],
+     },
+   },
+   {
+     to: "/caesar-cipher",
+     emoji: "🔐",
+     color: "fun-red",
+     title: { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
+     desc: {
+       en: "Encrypt messages by shifting letters.",
+       fr: "Chiffre les messages en décalant les lettres.",
+       nl: "Versleutel berichten door letters te verschuiven.",
+     },
+     tags: {
+       en: ["String", "Loop", "Character"],
+       fr: ["Chaîne", "Boucle", "Caractère"],
+       nl: ["String", "Lus", "Karakter"],
+     },
+   },
+   {
+     to: "/inventory-master",
     emoji: "📚",
     color: "fun-blue",
     title: { en: "Inventory Master", fr: "Maître de l'Inventaire", nl: "Inventarisgoeroe" },
@@ -325,6 +341,21 @@ const concepts = [
       nl: "Voeg urgentie en spanning toe aan spellen!",
     },
   },
+  {
+    slug: "encryption",
+    emoji: "🔐",
+    color: "concept-encryption",
+    name: {
+      en: "Encryption & Secret Codes",
+      fr: "Chiffrement & Codes Secrets",
+      nl: "Versleuteling & Geheime Codes",
+    },
+    desc: {
+      en: "Hide messages with secret formulas so only the right person can read them!",
+      fr: "Cache des messages avec des formules secrètes pour que seul le bon personne puisse les lire !",
+      nl: "Verberg berichten met geheime formules zodat alleen de juiste persoon ze kan lezen!",
+    },
+  },
 ];
 
 function Home() {
@@ -350,11 +381,11 @@ function Home() {
       </>
     ),
   });
-  const heroSub = pick(lang, {
-    en: "Thirteen mini-games. Ten big programming ideas. Click an idea to learn the theory, or pick a game!",
-    fr: "Treize mini-jeux. Dix grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
-    nl: "Dertien minigames. Tien grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
-  });
+    const heroSub = pick(lang, {
+      en: "Fourteen mini-games. Eleven big programming ideas. Click an idea to learn the theory, or pick a game!",
+      fr: "Quatorze mini-jeux. Onze grandes idées de programmation. Clique sur une idée pour la théorie, ou choisis un jeu !",
+      nl: "Veertien minigames. Elf grote programmeerideeën. Klik op een idee voor de theorie of kies een spel!",
+    });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">

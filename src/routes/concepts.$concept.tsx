@@ -582,6 +582,64 @@ const data: Record<string, Concept> = {
     ],
     games: ["/race-against-time"],
   },
+  encryption: {
+    emoji: "🔐",
+    color: "concept-encryption",
+    title: {
+      en: "Encryption & Secret Codes",
+      fr: "Chiffrement & Codes Secrets",
+      nl: "Versleuteling & Geheime Codes",
+    },
+    intro: {
+      en: "Encryption is a way to hide messages so only the right person can read them. It's like a secret code! We turn readable text (called 'plaintext') into scrambled text (called 'ciphertext') that looks like nonsense to anyone who doesn't know the secret. Kings used secret codes for battles, spies use them for secrets, and now YOU can create your own!",
+      fr: "Le chiffrement est un moyen de cacher des messages pour que seule la bonne personne puisse les lire. C'est comme un code secret ! On transforme le texte lisible (appelé 'texte en clair') en texte brouillé (appelé 'texte chiffré') qui ressemble à du charabia pour celui qui ne connaît pas le secret. Les rois utilisaient des codes secrets pour les batailles, les espions les utilisent pour les secrets, et maintenant c'est TOI qui peux créer le tien !",
+      nl: "Versleuteling is een manier om berichten te verbergen zodat alleen de juiste persoon ze kan lezen. Het is als een geheime code! We veranderen leesbare tekst (genaamd 'plaintext') in verwarde tekst (genaamd 'ciphertext') die voor iedereen die het geheim niet kent onzin lijkt. Koningen gebruikten geheime codes voor veldsllagen, spionnen gebruiken ze voor geheimen, en nu KUN JIJ je eigen maken!",
+    },
+    keyIdea: {
+      en: "Encryption scrambles data using a formula. The formula is the KEY. Only someone with the key can unscramble it!",
+      fr: "Le chiffrement brouille les données en utilisant une formule. La formule est la CLÉ. Seul quelqu'un qui connaît la clé peut les débrouiller !",
+      nl: "Versleuteling verwarrt gegevens met een formule. De formule is de SLEUTEL. Alleen iemand met de sleutel kan het ontwarren!",
+    },
+    examples: [
+      {
+        code: {
+          en: `# Caesar Cipher: Shift each letter by 3\nplaintext = "HELLO"\nshift = 3\n\nciphertext = ""\nfor char in plaintext:\n  new_char = shift_letter(char, shift)\n  ciphertext = ciphertext + new_char\n\nprint(f"Secret: {ciphertext}")  # Output: KHOOR`,
+          fr: `# Chiffre de César : Décaler chaque lettre de 3\ntexte_clair = "BONJOUR"\ndecalage = 3\n\ntexte_chiffre = ""\npour char dans texte_clair:\n  nouveau_char = decaler_lettre(char, decalage)\n  texte_chiffre = texte_chiffre + nouveau_char\n\nafficher(f"Secret : {texte_chiffre}")  # Sortie: ERQMRXU`,
+          nl: `# Caesar Cipher: Verschuif elke letter met 3\nplaintext = "HALLO"\nverschuiving = 3\n\nciphertext = ""\nvoor char in plaintext:\n  nieuw_char = verschuif_letter(char, verschuiving)\n  ciphertext = ciphertext + nieuw_char\n\nafdrukken(f"Geheim: {ciphertext}")  # Uitvoer: KDOOR`,
+        },
+        explain: {
+          en: "The Caesar Cipher is one of the oldest encryption methods! It shifts each letter by a fixed number (the KEY). A→D, B→E, etc. Simple but clever!",
+          fr: "Le Chiffre de César est l'une des plus anciennes méthodes de chiffrement ! Il décale chaque lettre d'un nombre fixe (la CLÉ). A→D, B→E, etc. Simple mais malin !",
+          nl: "De Caesar Cipher is een van de oudste versleutelingsmethoden! Het verschuift elke letter met een vast aantal (de SLEUTEL). A→D, B→E, enz. Eenvoudig maar slim!",
+        },
+      },
+      {
+        code: {
+          en: `# To decode a message, reverse the shift\nciphertext = "KHOOR"\nshift = 3  # Same KEY!\n\nplaintext = ""\nfor char in ciphertext:\n  original_char = shift_letter(char, -shift)  # Negative shift!\n  plaintext = plaintext + original_char\n\nprint(f"Decoded: {plaintext}")  # Output: HELLO`,
+          fr: `# Pour décoder un message, inverser le décalage\ntexte_chiffre = "ERQMRXU"\ndecalage = 3  # Même CLÉ !\n\ntexte_clair = ""\npour char dans texte_chiffre:\n  char_original = decaler_lettre(char, -decalage)  # Décalage négatif !\n  texte_clair = texte_clair + char_original\n\nafficher(f"Décodé : {texte_clair}")  # Sortie: BONJOUR`,
+          nl: `# Om een bericht te decoderen, draai de verschuiving om\nciphertext = "KDOOR"\nverschuiving = 3  # Dezelfde SLEUTEL!\n\nplaintext = ""\nvoor char in ciphertext:\n  origineel_char = verschuif_letter(char, -verschuiving)  # Negatieve verschuiving!\n  plaintext = plaintext + origineel_char\n\nafdrukken(f"Gedecodeerd: {plaintext}")  # Uitvoer: HALLO`,
+        },
+        explain: {
+          en: "To decode, you reverse the process! If you shifted by 3, shift back by -3. The same KEY that locked the message can unlock it!",
+          fr: "Pour décoder, tu inverses le processus ! Si tu as décalé de 3, décale en arrière de -3. La même CLÉ qui a verrouillé le message peut le déverrouiller !",
+          nl: "Om te decoderen, keer je het proces om! Als je met 3 bent verschoven, verschuif dan terug met -3. Dezelfde SLEUTEL die het bericht vergrendelde kan het ontgrendelen!",
+        },
+      },
+      {
+        code: {
+          en: `# Example: A secret spy message\nsecret_message = "MEET AT MIDNIGHT"\nspy_key = 7\n\n# Encode\nencoded = encode(secret_message, spy_key)\nprint(f"Coded message: {encoded}")\n\n# Send the message publicly (it looks like nonsense)\n# Enemy spy intercepts: TLLY HY TLKKRHNO\n\n# Only the spy with the KEY can decode\ndecoded = decode(encoded, spy_key)\nprint(f"Agent decoded: {decoded}")  # MEET AT MIDNIGHT`,
+          fr: `# Exemple : Un message d'espion secret\nmessage_secret = "RENDEZ-VOUS A MINUIT"\ncle_espion = 7\n\n# Encoder\ncode = encoder(message_secret, cle_espion)\nafficher(f"Message codé : {code}")\n\n# Envoyer le message publiquement (il ressemble à du charabia)\n# Espion ennemi intercepte : YLUKLY-CLVZ H TVUVAO\n\n# Seul l'espion avec la CLÉ peut décoder\ndecode = decoder(code, cle_espion)\nafficher(f"Agent décodé : {decode}")  # RENDEZ-VOUS A MINUIT`,
+          nl: `# Voorbeeld: Een geheim spionnenbericht\ngeheim_bericht = "ONTMOETING OM MIDDERNACHT"\nspy_sleutel = 7\n\n# Coderen\ngecodeerd = coderen(geheim_bericht, spy_sleutel)\nafdrukken(f"Gecodeerd bericht: {gecodeerd}")\n\n# Stuur het bericht openbaar (het ziet er als onzin uit)\n# Vijandige spion onderschept: VUDVNNAJUN VT TVKKNADHROB\n\n# Alleen de spion met de SLEUTEL kan decoderen\ngedecodeerd = decoderen(gecodeerd, spy_sleutel)\nafdrukken(f"Agent gedecodeerd: {gedecodeerd}")  # ONTMOETING OM MIDDERNACHT`,
+        },
+        explain: {
+          en: "Real spies use encryption to send secret messages! The message is useless to the enemy unless they crack the code. Encryption protects privacy and secrets!",
+          fr: "Les vrais espions utilisent le chiffrement pour envoyer des messages secrets ! Le message est inutile pour l'ennemi à moins qu'il ne craque le code. Le chiffrement protège la vie privée et les secrets !",
+          nl: "Echte spionnen gebruiken versleuteling om geheime berichten te sturen! Het bericht is nutteloos voor de vijand tenzij ze de code kraken. Versleuteling beschermt privacy en geheimen!",
+        },
+      },
+    ],
+    games: ["/caesar-cipher"],
+  },
 };
 
 const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
@@ -593,8 +651,9 @@ const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
   "/rps": { en: "Rock Paper Scissors", fr: "Pierre Feuille Ciseaux", nl: "Steen Papier Schaar" },
   "/fizzbuzz": { en: "Fizz Buzz", fr: "Fizz Buzz", nl: "Fizz Buzz" },
   "/simon": { en: "Simon Says", fr: "Jacques a dit", nl: "Simon Zegt" },
-  "/calculator": { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
-  "/inventory-master": {
+   "/calculator": { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
+   "/caesar-cipher": { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
+   "/inventory-master": {
     en: "Inventory Master",
     fr: "Maître de l'Inventaire",
     nl: "Inventarisgoeroe",

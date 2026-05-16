@@ -42,9 +42,10 @@
   --color-concept-programming: var(--concept-programming);
   --color-concept-functions: var(--concept-functions);
   --color-concept-arrays: var(--concept-arrays);
-  --color-concept-randomness: var(--concept-randomness);
-  --color-concept-patterns: var(--concept-patterns);
-  --color-concept-timer: var(--concept-timer);
+   --color-concept-randomness: var(--concept-randomness);
+   --color-concept-patterns: var(--concept-patterns);
+   --color-concept-timer: var(--concept-timer);
+   --color-concept-encryption: var(--concept-encryption);
 
   --color-fun-yellow: var(--fun-yellow);
   --color-fun-pink: var(--fun-pink);
@@ -96,9 +97,10 @@
   --concept-programming: oklch(0.62 0.22 285);
   --concept-functions: oklch(0.7 0.18 45);
   --concept-arrays: oklch(0.75 0.19 260);
-  --concept-randomness: oklch(0.8 0.17 20);
-  --concept-patterns: oklch(0.76 0.18 280);
-  --concept-timer: oklch(0.68 0.2 30);
+   --concept-randomness: oklch(0.8 0.17 20);
+   --concept-patterns: oklch(0.76 0.18 280);
+   --concept-timer: oklch(0.68 0.2 30);
+   --concept-encryption: oklch(0.65 0.22 10);
 }
 
 .dark {
