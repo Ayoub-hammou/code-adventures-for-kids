@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useLang, useUI, pick, Lang } from "@/lib/i18n";
+import { getNextConceptSlug, getTotalConcepts } from "@/lib/games";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/concepts/$concept")({ component: ConceptPage });
 
@@ -267,9 +269,9 @@ const data: Record<string, Concept> = {
       },
       {
         code: {
-          en: `try:\n  result = 10 / x\nexcept DivideByZero:\n  result = "infinity-ish 😅"`,
-          fr: `essayer:\n  resultat = 10 / x\nsauf DivisionParZero:\n  resultat = "infini-ish 😅"`,
-          nl: `probeer:\n  resulaat = 10 / x\nbehalve DelingDoorNul:\n  resulaat = "oneindig-ish 😅"`,
+          en: `try:\n  result = 10 / x\nexcept DivideByZero:\n  result = "Euh, can we call your mathematic teacher ? 😅"`,
+          fr: `essayer:\n  resultat = 10 / x\nsauf DivisionParZero:\n  resultat = "Euh, peut-on appeler ton prof de maths ? 😅"`,
+          nl: `probeer:\n  resulaat = 10 / x\nbehalve DelingDoorNul:\n  resulaat = "Euh, kunnen we je wiskundeleraar oproepen ? 😅"`,
         },
         explain: {
           en: "try the risky thing, catch the problem if it explodes.",
@@ -279,9 +281,9 @@ const data: Record<string, Concept> = {
       },
       {
         code: {
-          en: `# 💥 BAD (no checks):\nguess = parseInt("banana")\n# guess is NaN, everything breaks silently!`,
-          fr: `# 💥 MAUVAIS (pas de vérifications):\ndeviner = entierAnalyse("banane")\n# deviner est NaN, tout casse en silence !`,
-          nl: `# 💥 SLECHT (geen controles):\nraden = geheel_analyse("banaan")\n# raden is NaN, alles breekt stilletjes!`,
+          en: `# 💥 BAD (no checks):\nguess = parseInt("banana")\n# guess is invalid, everything breaks silently!`,
+          fr: `# 💥 MAUVAIS (pas de vérifications):\ndeviner = entierAnalyse("banane")\n# deviner est invalide, tout casse en silence !`,
+          nl: `# 💥 SLECHT (geen controles):\nraden = geheel_analyse("banaan")\n# raden is ongeldig, alles breekt stilletjes!`,
         },
         explain: {
           en: "Without error handling, your program lies or crashes. The 'Guess the Number' game shows this!",
@@ -710,59 +712,44 @@ const data: Record<string, Concept> = {
       ],
      games: ["/ai-trainer"],
    },
- };
-
-const gameNames: Record<string, { en: string; fr: string; nl: string }> = {
-  "/guess": { en: "Guess the Number", fr: "Devine le Nombre", nl: "Raad het Getal" },
-  "/palindrome": { en: "Palindrome", fr: "Palindrome", nl: "Palindroom" },
-  "/adventure": { en: "Adventure", fr: "Aventure", nl: "Avontuur" },
-  "/connect4": { en: "4 in a Row", fr: "Puissance 4", nl: "Vier op een Rij" },
-  "/mastermind": { en: "Mastermind", fr: "Mastermind", nl: "Mastermind" },
-  "/rps": { en: "Rock Paper Scissors", fr: "Pierre Feuille Ciseaux", nl: "Steen Papier Schaar" },
-  "/fizzbuzz": { en: "Fizz Buzz", fr: "Fizz Buzz", nl: "Fizz Buzz" },
-  "/simon": { en: "Simon Says", fr: "Jacques a dit", nl: "Simon Zegt" },
-   "/calculator": { en: "Safe Calculator", fr: "Calculatrice Sûre", nl: "Veilige Calculator" },
-   "/caesar-cipher": { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
-   "/bubble-sort": { en: "Bubble Sort", fr: "Tri à Bulles", nl: "Bellensort" },
-   "/insertion-sort": { en: "Insertion Sort", fr: "Tri par Insertion", nl: "Invoegsortering" },
-   "/inventory-master": {
-    en: "Inventory Master",
-    fr: "Maître de l'Inventaire",
-    nl: "Inventarisgoeroe",
-  },
-  "/luck-master": { en: "Luck Master", fr: "Maître de la Chance", nl: "Geluksmeester" },
-  "/pattern-painter": {
-    en: "Pattern Painter",
-    fr: "Peintre de Motifs",
-    nl: "Patroon Schilder",
-  },
-   "/race-against-time": {
-     en: "Race Against Time",
-     fr: "Course Contre la Montre",
-     nl: "Race Tegen de Klok",
-   },
-   "/ai-trainer": { en: "AI Trainer", fr: "Entraîneur IA", nl: "AI Trainer" },
- };
-
-const labels = {
-  en: { play: "Play games using this", explore: "Explore in these games" },
-  fr: { play: "Jouer aux jeux qui l'utilisent", explore: "Explore-le dans ces jeux" },
-  nl: { play: "Speel spellen die dit gebruiken", explore: "Ontdek dit in deze spellen" },
-};
+  };
 
 function ConceptPage() {
   const { concept } = Route.useParams();
-  const { lang } = useLang();
+  const { lang, visitedConcepts, addVisitedConcept, setGamesUnlocked } = useLang();
   const t = useUI();
   const c = data[concept];
   if (!c) throw notFound();
-  const L = labels[lang as Lang];
+  const nextConceptSlug = getNextConceptSlug(concept);
+  const totalConcepts = getTotalConcepts();
+
+  // Track concept visit and auto-unlock games when all concepts are covered
+  useEffect(() => {
+    addVisitedConcept(concept);
+
+    // Check if all concepts have been visited
+    const conceptsToCheck = new Set([...visitedConcepts, concept]);
+    if (conceptsToCheck.size === totalConcepts) {
+      setGamesUnlocked(true);
+    }
+  }, [concept, visitedConcepts, addVisitedConcept, setGamesUnlocked, totalConcepts]);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
-      <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-primary">
-        {t.back}
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-primary">
+          {t.back}
+        </Link>
+        {nextConceptSlug && (
+          <Link
+            to="/concepts/$concept"
+            params={{ concept: nextConceptSlug }}
+            className="text-sm font-semibold text-primary hover:text-primary/80"
+          >
+            {t.nextConcept} →
+          </Link>
+        )}
+      </div>
       <header className="mt-4 mb-6 flex items-center gap-4">
         <div
           className="w-20 h-20 rounded-2xl flex items-center justify-center text-5xl"
@@ -798,22 +785,6 @@ function ConceptPage() {
         ))}
       </div>
 
-      {c.games.length > 0 && (
-        <>
-          <h2 className="text-2xl font-bold mb-4">🎮 {L.explore}</h2>
-          <div className="flex flex-wrap gap-2">
-            {c.games.map((g) => (
-              <Link
-                key={g}
-                to={g}
-                className="rounded-full bg-primary text-primary-foreground px-4 py-2 font-bold hover:scale-105 transition"
-              >
-                {pick(lang, gameNames[g])} →
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
+     </div>
+   );
+ }

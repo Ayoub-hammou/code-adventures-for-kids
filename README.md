@@ -277,4 +277,4 @@ bun install   # or: npm install
 
 If you find any bugs or have suggestions for new games, please create an issue in the project repository.
 
-Happy coding! 🚀
+Happy coding and don't forget... CodeKidsRocks! 🚀

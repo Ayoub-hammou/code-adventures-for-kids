@@ -67,7 +67,7 @@ export function Onboarding() {
           disabled={!draftName.trim()}
           className="w-full rounded-xl bg-primary text-primary-foreground px-6 py-3 font-bold text-lg hover:scale-[1.02] transition disabled:opacity-40"
         >
-          {t.start} 🚀
+          {t.start}
         </button>
       </form>
     </div>

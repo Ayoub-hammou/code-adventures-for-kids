@@ -11,6 +11,12 @@ type Ctx = {
   ready: boolean;
   showCodeByDefault: boolean;
   setShowCodeByDefault: (show: boolean) => void;
+  gamesUnlocked: boolean;
+  setGamesUnlocked: (unlocked: boolean) => void;
+  visitedConcepts: string[];
+  addVisitedConcept: (slug: string) => void;
+  unlockedViaPassword: boolean;
+  setUnlockedViaPassword: (unlocked: boolean) => void;
 };
 
 const LangCtx = createContext<Ctx | null>(null);
@@ -22,6 +28,9 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [name, setNameState] = useState<string>("");
   const [ready, setReady] = useState(false);
   const [showCodeByDefault, setShowCodeByDefaultState] = useState(true);
+  const [gamesUnlocked, setGamesUnlockedState] = useState(false);
+  const [visitedConcepts, setVisitedConceptsState] = useState<string[]>([]);
+  const [unlockedViaPassword, setUnlockedViaPasswordState] = useState(false);
 
   useEffect(() => {
     try {
@@ -32,6 +41,9 @@ export function LangProvider({ children }: { children: ReactNode }) {
         if (p.lang) setLangState(p.lang);
         if (p.name) setNameState(p.name);
         if (p.showCodeByDefault !== undefined) setShowCodeByDefaultState(p.showCodeByDefault);
+        if (p.gamesUnlocked !== undefined) setGamesUnlockedState(p.gamesUnlocked);
+        if (p.visitedConcepts !== undefined) setVisitedConceptsState(p.visitedConcepts);
+        if (p.unlockedViaPassword !== undefined) setUnlockedViaPasswordState(p.unlockedViaPassword);
       }
     } catch {
       // ignore
@@ -43,11 +55,14 @@ export function LangProvider({ children }: { children: ReactNode }) {
     if (!ready) return;
     try {
       // Use sessionStorage so data is cleared when the browser closes
-      sessionStorage.setItem(KEY, JSON.stringify({ lang, name, showCodeByDefault }));
+      sessionStorage.setItem(
+        KEY,
+        JSON.stringify({ lang, name, showCodeByDefault, gamesUnlocked, visitedConcepts, unlockedViaPassword }),
+      );
     } catch {
       // ignore
     }
-  }, [lang, name, ready, showCodeByDefault]);
+  }, [lang, name, ready, showCodeByDefault, gamesUnlocked, visitedConcepts, unlockedViaPassword]);
 
   return (
     <LangCtx.Provider
@@ -58,6 +73,9 @@ export function LangProvider({ children }: { children: ReactNode }) {
         setName: setNameState,
         reset: () => {
           setNameState("");
+          setGamesUnlockedState(false);
+          setVisitedConceptsState([]);
+          setUnlockedViaPasswordState(false);
           try {
             sessionStorage.removeItem(KEY);
           } catch {
@@ -67,6 +85,17 @@ export function LangProvider({ children }: { children: ReactNode }) {
         ready,
         showCodeByDefault,
         setShowCodeByDefault: setShowCodeByDefaultState,
+        gamesUnlocked,
+        setGamesUnlocked: setGamesUnlockedState,
+        visitedConcepts,
+        addVisitedConcept: (slug: string) => {
+          setVisitedConceptsState((prev) => {
+            if (prev.includes(slug)) return prev;
+            return [...prev, slug];
+          });
+        },
+        unlockedViaPassword,
+        setUnlockedViaPassword: setUnlockedViaPasswordState,
       }}
     >
       {children}
@@ -94,8 +123,9 @@ export const UI = {
     hi: "Hi",
     changeLang: "Language",
     changeName: "Change",
-    back: "← Back to all games",
+    back: "← Back home",
     next: "Next game",
+    nextConcept: "Next concept",
     howItWorks: "📜 How it works",
     show: "Show",
     hide: "Hide",
@@ -105,11 +135,22 @@ export const UI = {
     tryIt: "Try it",
     examples: "Examples",
     keyIdea: "Key idea",
-    builtFor: "Built for curious kids • Open the code, break it, fix it, learn 💡",
+    builtFor: "Where curiosity meets code !",
     copyright: "© 2025-2026 CodeKids Lab. All rights reserved.",
     codeVisible: "Code visible",
     codeHidden: "Code hidden",
     advancedConcepts: "🚀 Let's go and learn further",
+    unlockTitle: "🔓 Unlock All Games",
+    unlockDescription: "Enter the secret code to unlock all games at once!",
+    unlockPlaceholder: "Enter code...",
+    unlockButton: "Unlock",
+    unlockError: "Wrong code. Try again!",
+    unlockSuccess: "🎉 All games unlocked!",
+    conceptsCompleted: "Congratulations ! All concepts covered. Games unlocked !",
+    gotIt: "Got it",
+    gamesLocked: "🔒 Games Locked",
+    gamesLockedDesc: "Learn concepts first, then unlock games to practice!",
+    conceptsCovered: "concepts covered",
   },
   fr: {
     welcome: "Bienvenue !",
@@ -119,8 +160,9 @@ export const UI = {
     hi: "Salut",
     changeLang: "Langue",
     changeName: "Changer",
-    back: "← Retour aux jeux",
+    back: "← Retour à l'accueil",
     next: "Jeu suivant",
+    nextConcept: "Concept suivant",
     howItWorks: "📜 Comment ça marche",
     show: "Afficher",
     hide: "Masquer",
@@ -130,11 +172,22 @@ export const UI = {
     tryIt: "Essaie",
     examples: "Exemples",
     keyIdea: "Idée clé",
-    builtFor: "Pour les enfants curieux • Ouvre le code, casse-le, répare-le, apprends 💡",
+    builtFor: "Où la curiosité rencontre le code !",
     copyright: "© 2025-2026 CodeKids Lab. Tous droits réservés.",
     codeVisible: "Code visible",
     codeHidden: "Code masqué",
     advancedConcepts: "🚀 Allons-y et apprenons davantage",
+    unlockTitle: "🔓 Déverrouiller Tous les Jeux",
+    unlockDescription: "Entrez le code secret pour déverrouiller tous les jeux à la fois !",
+    unlockPlaceholder: "Entrez le code...",
+    unlockButton: "Déverrouiller",
+    unlockError: "Mauvais code. Réessayez !",
+    unlockSuccess: "🎉 Tous les jeux déverrouillés !",
+    conceptsCompleted: "Félicitations ! Tous les concepts couverts. Jeux déverrouillés !",
+    gotIt: "Compris",
+    gamesLocked: "🔒 Jeux Verrouillés",
+    gamesLockedDesc: "Apprenez les concepts en premier, puis déverrouillez les jeux pour pratiquer !",
+    conceptsCovered: "concepts couverts",
   },
   nl: {
     welcome: "Welkom!",
@@ -144,8 +197,9 @@ export const UI = {
     hi: "Hoi",
     changeLang: "Taal",
     changeName: "Wijzig",
-    back: "← Terug naar alle spellen",
+    back: "← Terug naar startpagina",
     next: "Volgende spel",
+    nextConcept: "Volgende concept",
     howItWorks: "📜 Hoe het werkt",
     show: "Weergeven",
     hide: "Verbergen",
@@ -155,11 +209,22 @@ export const UI = {
     tryIt: "Probeer",
     examples: "Voorbeelden",
     keyIdea: "Hoofdidee",
-    builtFor: "Voor nieuwsgierige kinderen • Open de code, breek hem, repareer hem, leer 💡",
-    copyright: "© 2025-2026 CodeKids Lab. Alle rechten voorbehouden.",
+    builtFor: "Waar nieuwsgierigheid code ontmoet !",
+    copyright: "© 2025-2026 Ayoub Hammou. Alle rechten voorbehouden.",
     codeVisible: "Code zichtbaar",
     codeHidden: "Code verborgen",
     advancedConcepts: "🚀 Laten we verder leren",
+    unlockTitle: "🔓 Alle Spellen Ontgrendelen",
+    unlockDescription: "Voer de geheime code in om alle spellen tegelijk te ontgrendelen!",
+    unlockPlaceholder: "Voer code in...",
+    unlockButton: "Ontgrendelen",
+    unlockError: "Verkeerde code. Probeer opnieuw!",
+    unlockSuccess: "🎉 Alle spellen ontgrendeld!",
+    conceptsCompleted: "Gefeliciteerd ! Alle concepten afgerond. Spellen ontgrendeld !",
+    gotIt: "Begrepen",
+    gamesLocked: "🔒 Spellen Vergrendeld",
+    gamesLockedDesc: "Leer concepten eerst, ontgrendel dan spellen om te oefenen!",
+    conceptsCovered: "concepten afgerond",
   },
 } as const;
 
