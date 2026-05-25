@@ -17,6 +17,12 @@ type Ctx = {
   addVisitedConcept: (slug: string) => void;
   unlockedViaPassword: boolean;
   setUnlockedViaPassword: (unlocked: boolean) => void;
+  conceptsUnlockPopupShown: boolean;
+  setConceptsUnlockPopupShown: (shown: boolean) => void;
+  easterEggUnlocked: boolean;
+  setEasterEggUnlocked: (unlocked: boolean) => void;
+  easterEggJustUnlocked: boolean;
+  setEasterEggJustUnlocked: (unlocked: boolean) => void;
 };
 
 const LangCtx = createContext<Ctx | null>(null);
@@ -31,6 +37,9 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [gamesUnlocked, setGamesUnlockedState] = useState(false);
   const [visitedConcepts, setVisitedConceptsState] = useState<string[]>([]);
   const [unlockedViaPassword, setUnlockedViaPasswordState] = useState(false);
+  const [conceptsUnlockPopupShown, setConceptsUnlockPopupShownState] = useState(false);
+  const [easterEggUnlocked, setEasterEggUnlockedState] = useState(false);
+  const [easterEggJustUnlocked, setEasterEggJustUnlockedState] = useState(false);
 
   useEffect(() => {
     try {
@@ -44,6 +53,11 @@ export function LangProvider({ children }: { children: ReactNode }) {
         if (p.gamesUnlocked !== undefined) setGamesUnlockedState(p.gamesUnlocked);
         if (p.visitedConcepts !== undefined) setVisitedConceptsState(p.visitedConcepts);
         if (p.unlockedViaPassword !== undefined) setUnlockedViaPasswordState(p.unlockedViaPassword);
+        if (p.conceptsUnlockPopupShown !== undefined)
+          setConceptsUnlockPopupShownState(p.conceptsUnlockPopupShown);
+        if (p.easterEggUnlocked !== undefined) setEasterEggUnlockedState(p.easterEggUnlocked);
+        if (p.easterEggJustUnlocked !== undefined)
+          setEasterEggJustUnlockedState(p.easterEggJustUnlocked);
       }
     } catch {
       // ignore
@@ -57,12 +71,33 @@ export function LangProvider({ children }: { children: ReactNode }) {
       // Use sessionStorage so data is cleared when the browser closes
       sessionStorage.setItem(
         KEY,
-        JSON.stringify({ lang, name, showCodeByDefault, gamesUnlocked, visitedConcepts, unlockedViaPassword }),
+        JSON.stringify({
+          lang,
+          name,
+          showCodeByDefault,
+          gamesUnlocked,
+          visitedConcepts,
+          unlockedViaPassword,
+          conceptsUnlockPopupShown,
+          easterEggUnlocked,
+          easterEggJustUnlocked,
+        }),
       );
     } catch {
       // ignore
     }
-  }, [lang, name, ready, showCodeByDefault, gamesUnlocked, visitedConcepts, unlockedViaPassword]);
+  }, [
+    lang,
+    name,
+    ready,
+    showCodeByDefault,
+    gamesUnlocked,
+    visitedConcepts,
+    unlockedViaPassword,
+    conceptsUnlockPopupShown,
+    easterEggUnlocked,
+    easterEggJustUnlocked,
+  ]);
 
   return (
     <LangCtx.Provider
@@ -76,6 +111,9 @@ export function LangProvider({ children }: { children: ReactNode }) {
           setGamesUnlockedState(false);
           setVisitedConceptsState([]);
           setUnlockedViaPasswordState(false);
+          setConceptsUnlockPopupShownState(false);
+          setEasterEggUnlockedState(false);
+          setEasterEggJustUnlockedState(false);
           try {
             sessionStorage.removeItem(KEY);
           } catch {
@@ -96,6 +134,12 @@ export function LangProvider({ children }: { children: ReactNode }) {
         },
         unlockedViaPassword,
         setUnlockedViaPassword: setUnlockedViaPasswordState,
+        conceptsUnlockPopupShown,
+        setConceptsUnlockPopupShown: setConceptsUnlockPopupShownState,
+        easterEggUnlocked,
+        setEasterEggUnlocked: setEasterEggUnlockedState,
+        easterEggJustUnlocked,
+        setEasterEggJustUnlocked: setEasterEggJustUnlockedState,
       }}
     >
       {children}
@@ -147,12 +191,17 @@ export const UI = {
     unlockError: "Wrong code. Try again!",
     unlockSuccess: "🎉 All games unlocked!",
     conceptsCompleted: "Congratulations ! All concepts covered. Games unlocked !",
-    gotIt: "Got it",
-    gamesLocked: "🔒 Games Locked",
-    gamesLockedDesc: "Learn concepts first, then unlock games to practice!",
-    conceptsCovered: "concepts covered",
-  },
-  fr: {
+     gotIt: "Got it",
+     gamesLocked: "🔒 Games Locked",
+     gamesLockedDesc: "Learn concepts first, then unlock games to practice!",
+     conceptsCovered: "concepts covered",
+     powerUpRapid: "Rapid Fire",
+     powerUpShield: "Shield",
+     powerUpSpread: "Spread Shot",
+     bestScore: "Best Score",
+     unlockSecretGame: "🔓 Secret Game Unlocked!",
+   },
+   fr: {
     welcome: "Bienvenue !",
     askName: "Quel est ton prénom ?",
     askLang: "Choisis ta langue",
@@ -186,10 +235,16 @@ export const UI = {
     conceptsCompleted: "Félicitations ! Tous les concepts couverts. Jeux déverrouillés !",
     gotIt: "Compris",
     gamesLocked: "🔒 Jeux Verrouillés",
-    gamesLockedDesc: "Apprenez les concepts en premier, puis déverrouillez les jeux pour pratiquer !",
-    conceptsCovered: "concepts couverts",
-  },
-  nl: {
+      gamesLockedDesc:
+        "Apprenez les concepts en premier, puis déverrouillez les jeux pour pratiquer !",
+      conceptsCovered: "concepts couverts",
+      powerUpRapid: "Tir rapide",
+      powerUpShield: "Bouclier",
+      powerUpSpread: "Tir dispersé",
+      bestScore: "Meilleur score",
+      unlockSecretGame: "🔓 Jeu secret déverrouillé !",
+    },
+    nl: {
     welcome: "Welkom!",
     askName: "Wat is je naam?",
     askLang: "Kies je taal",
@@ -222,10 +277,15 @@ export const UI = {
     unlockSuccess: "🎉 Alle spellen ontgrendeld!",
     conceptsCompleted: "Gefeliciteerd ! Alle concepten afgerond. Spellen ontgrendeld !",
     gotIt: "Begrepen",
-    gamesLocked: "🔒 Spellen Vergrendeld",
-    gamesLockedDesc: "Leer concepten eerst, ontgrendel dan spellen om te oefenen!",
-    conceptsCovered: "concepten afgerond",
-  },
+     gamesLocked: "🔒 Spellen Vergrendeld",
+     gamesLockedDesc: "Leer concepten eerst, ontgrendel dan spellen om te oefenen!",
+     conceptsCovered: "concepten afgerond",
+     powerUpRapid: "Snelschot",
+     powerUpShield: "Schild",
+     powerUpSpread: "Spreidschot",
+     bestScore: "Beste score",
+     unlockSecretGame: "🔓 Geheim spel ontgrendeld!",
+   },
 } as const;
 
 export function useUI() {

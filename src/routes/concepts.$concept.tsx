@@ -198,7 +198,7 @@ const data: Record<string, Concept> = {
     keyIdea: {
       en: "if / else if / else — like a fork in the road.",
       fr: "si / sinon si / sinon — comme un carrefour.",
-      nl: "als / anders als / anders — zoals een splitsing.",
+      nl: "als / anders_als / anders — zoals een splitsing.",
     },
     examples: [
       {

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUI } from "@/lib/i18n";
-import { validateUnlockCode } from "@/lib/unlock";
+import { evaluateUnlockCode, type UnlockResult } from "@/lib/unlock";
 import { CelebrationAnimation } from "@/components/CelebrationAnimation";
 import {
   Dialog,
@@ -13,24 +13,29 @@ import {
 interface UnlockModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onUnlock: (viaPassword: boolean) => void;
+  onUnlock: (result: Exclude<UnlockResult, "none">) => void;
 }
 
 export function UnlockModal({ open, onOpenChange, onUnlock }: UnlockModalProps) {
   const [code, setCode] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const t = useUI();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateUnlockCode(code)) {
-      setSuccess(true);
-      setError(false);
-      setTimeout(() => {
+   const handleSubmit = (e: React.FormEvent) => {
+     e.preventDefault();
+     const result = evaluateUnlockCode(code);
+     if (result !== "none") {
+       setSuccess(true);
+       setError(false);
+       const message = result === "spaceInvaders" ? t.unlockSecretGame : t.unlockSuccess;
+       setSuccessMessage(message);
+       setTimeout(() => {
         setCode("");
         setSuccess(false);
-        onUnlock(true);
+        setSuccessMessage("");
+        onUnlock(result);
         onOpenChange(false);
       }, 1200);
     } else {
@@ -66,18 +71,17 @@ export function UnlockModal({ open, onOpenChange, onUnlock }: UnlockModalProps) 
                 }`}
               />
             </div>
-
             {error && (
               <div className="text-sm text-red-500 font-semibold animate-pulse">
                 ❌ {t.unlockError}
               </div>
             )}
-
             {success && (
               <div className="text-sm text-green-500 font-semibold animate-bounce">
-                {t.unlockSuccess}
+                {successMessage}
               </div>
-            )}            <button
+            )}{" "}
+            <button
               type="submit"
               disabled={!code.trim() || success}
               className="w-full rounded-xl bg-primary text-primary-foreground px-6 py-3 font-bold text-lg hover:scale-[1.02] transition disabled:opacity-40"
@@ -90,8 +94,3 @@ export function UnlockModal({ open, onOpenChange, onUnlock }: UnlockModalProps) 
     </>
   );
 }
-
-
-
-
-

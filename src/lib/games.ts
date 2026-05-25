@@ -21,13 +21,10 @@ export const GAMES_ORDER = [
   "/ai-trainer",
 ];
 
+export const SECRET_GAMES_ORDER = [...GAMES_ORDER, "/space-invaders"];
+
 // Big ideas concepts (in order)
-export const BIG_IDEAS_CONCEPTS = [
-  "programming",
-  "variables",
-  "loops",
-  "conditions",
-];
+export const BIG_IDEAS_CONCEPTS = ["programming", "variables", "loops", "conditions"];
 
 // Advanced concepts (in order)
 export const ADVANCED_CONCEPTS = [
@@ -44,12 +41,13 @@ export const ADVANCED_CONCEPTS = [
 // All concepts in order (big ideas first, then advanced)
 export const ALL_CONCEPTS = [...BIG_IDEAS_CONCEPTS, ...ADVANCED_CONCEPTS];
 
-export function getNextGameUrl(currentPath: string): string | null {
-  const currentIndex = GAMES_ORDER.indexOf(currentPath);
-  if (currentIndex === -1 || currentIndex === GAMES_ORDER.length - 1) {
+export function getNextGameUrl(currentPath: string, includeSecretGame = false): string | null {
+  const gamesOrder = includeSecretGame ? SECRET_GAMES_ORDER : GAMES_ORDER;
+  const currentIndex = gamesOrder.indexOf(currentPath);
+  if (currentIndex === -1 || currentIndex === gamesOrder.length - 1) {
     return null; // No next game or current path not in list
   }
-  return GAMES_ORDER[currentIndex + 1];
+  return gamesOrder[currentIndex + 1];
 }
 
 export function getGameIndex(path: string): number {
@@ -75,4 +73,3 @@ export function getConceptIndex(slug: string): number {
 export function getTotalConcepts(): number {
   return ALL_CONCEPTS.length;
 }
-

@@ -21,11 +21,11 @@ export function GameLayout({
   intro?: string;
   codeKey?: string | number;
 }) {
-  const { showCodeByDefault } = useLang();
+  const { showCodeByDefault, easterEggUnlocked } = useLang();
   const [showCode, setShowCode] = useState(showCodeByDefault);
   const t = useUI();
   const location = useLocation();
-  const nextGameUrl = getNextGameUrl(location.pathname);
+  const nextGameUrl = getNextGameUrl(location.pathname, easterEggUnlocked);
 
   // Reset showCode when codeKey changes (e.g., when level changes)
   // Also update based on the global setting
@@ -64,8 +64,8 @@ export function GameLayout({
         </div>
         {code && (
           <aside className="rounded-2xl bg-foreground text-background p-5 text-xs font-mono overflow-x-auto h-fit sticky top-20">
-             <div className="flex items-center justify-between mb-3">
-               <div className="text-[10px] uppercase tracking-widest opacity-60">{t.howItWorks}</div>
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-[10px] uppercase tracking-widest opacity-60">{t.howItWorks}</div>
               <Button
                 variant="ghost"
                 size="sm"

@@ -135,29 +135,29 @@ const games = [
       fr: ["Variable", "Gestion d'erreurs"],
       nl: ["Variabele", "Foutafhandeling"],
     },
-   },
-   {
-     to: "/error-handler",
-     emoji: "🛡️",
-     color: "fun-red",
-     title: {
-       en: "Error Handler Workshop",
-       fr: "Atelier Gestion des Erreurs",
-       nl: "Foutafhandelings Workshop",
-     },
-     desc: {
-       en: "Build a robot or validate forms. Learn error handling with two interactive workshops!",
-       fr: "Construis un robot ou valide des formulaires. Apprends la gestion des erreurs avec deux ateliers interactifs !",
-       nl: "Bouw een robot of valideer formulieren. Leer foutafhandeling met twee interactieve workshops!",
-     },
-     tags: {
-       en: ["Error Handling", "Validation", "Try/Catch"],
-       fr: ["Gestion d'erreurs", "Validation", "Try/Catch"],
-       nl: ["Foutafhandeling", "Validatie", "Try/Catch"],
-     },
-   },
-   {
-     to: "/caesar-cipher",
+  },
+  {
+    to: "/error-handler",
+    emoji: "🛡️",
+    color: "fun-red",
+    title: {
+      en: "Error Handler Workshop",
+      fr: "Atelier Gestion des Erreurs",
+      nl: "Foutafhandelings Workshop",
+    },
+    desc: {
+      en: "Build a robot or validate forms. Learn error handling with two interactive workshops!",
+      fr: "Construis un robot ou valide des formulaires. Apprends la gestion des erreurs avec deux ateliers interactifs !",
+      nl: "Bouw een robot of valideer formulieren. Leer foutafhandeling met twee interactieve workshops!",
+    },
+    tags: {
+      en: ["Error Handling", "Validation", "Try/Catch"],
+      fr: ["Gestion d'erreurs", "Validation", "Try/Catch"],
+      nl: ["Foutafhandeling", "Validatie", "Try/Catch"],
+    },
+  },
+  {
+    to: "/caesar-cipher",
     emoji: "🔐",
     color: "fun-red",
     title: { en: "Caesar Cipher", fr: "Chiffre de César", nl: "Caesar Cipher" },
@@ -318,6 +318,23 @@ const games = [
   },
 ];
 
+const easterEggGame = {
+  to: "/space-invaders",
+  emoji: "👾",
+  color: "fun-indigo",
+  title: { en: "Space Invaders DX", fr: "Space Invaders DX", nl: "Space Invaders DX" },
+  desc: {
+    en: "A secret arcade mode with skins, bosses, power-ups and endless challenge.",
+    fr: "Un mode arcade secret avec skins, boss, bonus et difficulté croissante.",
+    nl: "Een geheime arcademodus met skins, bazen, power-ups en oplopende moeilijkheid.",
+  },
+  tags: {
+    en: ["Easter Egg", "Arcade", "Boss Fight"],
+    fr: ["Easter Egg", "Arcade", "Combat de Boss"],
+    nl: ["Easter Egg", "Arcade", "Baasgevecht"],
+  },
+};
+
 const bigIdeasConcepts = [
   {
     slug: "programming",
@@ -465,21 +482,59 @@ const advancedConcepts = [
 ];
 
 function Home() {
-  const { lang, name, gamesUnlocked, setGamesUnlocked, visitedConcepts, unlockedViaPassword, setUnlockedViaPassword } = useLang();
+  const {
+    lang,
+    name,
+    gamesUnlocked,
+    setGamesUnlocked,
+    visitedConcepts,
+    unlockedViaPassword,
+    setUnlockedViaPassword,
+    conceptsUnlockPopupShown,
+    setConceptsUnlockPopupShown,
+    easterEggUnlocked,
+    setEasterEggUnlocked,
+    easterEggJustUnlocked,
+    setEasterEggJustUnlocked,
+  } = useLang();
   const t = useUI();
   const [unlockModalOpen, setUnlockModalOpen] = useState(false);
   const [congratsModalOpen, setCongratulationsModalOpen] = useState(false);
-  const [showedCongratsThisSession, setShowedCongratsThisSession] = useState(false);
+  const [showEasterBurst, setShowEasterBurst] = useState(false);
   const totalConcepts = getTotalConcepts();
 
   // Show congratulations only when all concepts are completed and games just unlocked via concepts
   // Don't show if games were unlocked via code (manual unlock)
   useEffect(() => {
-    if (visitedConcepts.length === totalConcepts && gamesUnlocked && !congratsModalOpen && !showedCongratsThisSession && !unlockedViaPassword) {
+    if (
+      visitedConcepts.length === totalConcepts &&
+      gamesUnlocked &&
+      !congratsModalOpen &&
+      !conceptsUnlockPopupShown &&
+      !unlockedViaPassword
+    ) {
       setCongratulationsModalOpen(true);
-      setShowedCongratsThisSession(true);
+      setConceptsUnlockPopupShown(true);
     }
-  }, [gamesUnlocked, visitedConcepts.length, totalConcepts, congratsModalOpen, showedCongratsThisSession, unlockedViaPassword]);
+  }, [
+    gamesUnlocked,
+    visitedConcepts.length,
+    totalConcepts,
+    congratsModalOpen,
+    conceptsUnlockPopupShown,
+    unlockedViaPassword,
+    setConceptsUnlockPopupShown,
+  ]);
+
+  useEffect(() => {
+    if (!easterEggJustUnlocked) return;
+    setShowEasterBurst(true);
+    const timer = setTimeout(() => {
+      setShowEasterBurst(false);
+      setEasterEggJustUnlocked(false);
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [easterEggJustUnlocked, setEasterEggJustUnlocked]);
 
   const heroTitle = pick(lang, {
     en: (
@@ -507,139 +562,157 @@ function Home() {
     nl: "Leer je door programmeerideeën en spellen. Verken concepten en word een mini-programmeur!",
   });
 
+  const visibleGames = easterEggUnlocked ? [...games, easterEggGame] : games;
+
   // Unlocked state - show normal home page
   return (
     <>
       <UnlockModal
         open={unlockModalOpen}
         onOpenChange={setUnlockModalOpen}
-        onUnlock={(viaPassword) => {
+        onUnlock={(result) => {
           setGamesUnlocked(true);
-          if (viaPassword) {
-            setUnlockedViaPassword(true);
+          setUnlockedViaPassword(true);
+          if (result === "spaceInvaders") {
+            setEasterEggUnlocked(true);
+            setEasterEggJustUnlocked(true);
           }
         }}
       />
-      <CongratulatationsModal
-        open={congratsModalOpen}
-        onOpenChange={setCongratulationsModalOpen}
-      />
+      <CongratulatationsModal open={congratsModalOpen} onOpenChange={setCongratulationsModalOpen} />
       <div className="mx-auto max-w-6xl px-4 py-12">
-      <section className="text-center mb-14">
-        <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">{heroTitle}</h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">{heroSub}</p>
-      </section>
-
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-4">{t.bigIdeas}</h2>
-         <section className="grid gap-4 md:grid-cols-4 mb-14">
-           {bigIdeasConcepts.map((c) => (
-             <Link
-               key={c.slug}
-               to="/concepts/$concept"
-               params={{ concept: c.slug }}
-               className="group rounded-2xl bg-card border-2 border-border p-4 shadow-[4px_4px_0_0_var(--color-border)] hover:shadow-[6px_6px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all relative"
-             >
-               {visitedConcepts.includes(c.slug) && (
-                 <div className="absolute top-2 right-2 text-2xl">⭐</div>
-               )}
-               <div
-                 className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-2"
-                 style={{ backgroundColor: `var(--${c.color})` }}
-               >
-                 {c.emoji}
-               </div>
-               <div className="font-display font-bold text-lg">{pick(lang, c.name)}</div>
-               <p className="text-sm text-muted-foreground">{pick(lang, c.desc)}</p>
-               <div className="text-xs text-primary font-bold mt-2 group-hover:underline">
-                 {t.learnMore} →
-               </div>
-             </Link>
-           ))}
-         </section>
-
-         <h2 className="text-2xl font-bold mb-4">{t.advancedConcepts}</h2>
-         <section className="grid gap-4 md:grid-cols-4">
-           {advancedConcepts.map((c) => (
-             <Link
-               key={c.slug}
-               to="/concepts/$concept"
-               params={{ concept: c.slug }}
-               className="group rounded-2xl bg-card border-2 border-border p-4 shadow-[4px_4px_0_0_var(--color-border)] hover:shadow-[6px_6px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all relative"
-             >
-               {visitedConcepts.includes(c.slug) && (
-                 <div className="absolute top-2 right-2 text-2xl">⭐</div>
-               )}
-               <div
-                 className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-2"
-                 style={{ backgroundColor: `var(--${c.color})` }}
-               >
-                 {c.emoji}
-               </div>
-               <div className="font-display font-bold text-lg">{pick(lang, c.name)}</div>
-               <p className="text-sm text-muted-foreground">{pick(lang, c.desc)}</p>
-               <div className="text-xs text-primary font-bold mt-2 group-hover:underline">
-                 {t.learnMore} →
-               </div>
-             </Link>
-           ))}
-         </section>
-      </section>
-
-      <div className="my-16 border-t-2 border-border"></div>
-
-      <h2 className="text-3xl font-bold mb-6">{t.chooseGame}</h2>
-
-       {!gamesUnlocked ? (
-         <div className="text-center py-12 px-8 rounded-2xl bg-card border-2 border-border">
-           <div className="text-6xl mb-4">🔒</div>
-           <h3 className="text-2xl font-bold mb-2">{t.gamesLocked}</h3>
-           <p className="text-muted-foreground mb-6">{t.gamesLockedDesc}</p>
-           <div className="mb-6 text-lg font-semibold">
-             <span className="text-primary">{visitedConcepts.length}</span> / <span className="text-muted-foreground">12</span> {t.conceptsCovered}
-           </div>
-           <button
-             onClick={() => setUnlockModalOpen(true)}
-             className="inline-flex items-center justify-center rounded-xl bg-primary text-primary-foreground px-6 py-3 font-bold text-lg hover:scale-[1.05] transition"
-           >
-             {t.unlockTitle} 🔓
-           </button>
-         </div>
-       ) : (
-        <section className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {games.map((g) => (
-            <Link
-              key={g.to}
-              to={g.to}
-              className="group rounded-2xl bg-card border-2 border-border p-6 shadow-[6px_6px_0_0_var(--color-border)] hover:shadow-[10px_10px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all"
-            >
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center text-4xl mb-4"
-                style={{ backgroundColor: `var(--${g.color})` }}
-              >
-                {g.emoji}
-              </div>
-              <h3 className="text-2xl font-bold mb-1">{pick(lang, g.title)}</h3>
-              <p className="text-sm text-muted-foreground mb-3">{pick(lang, g.desc)}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {pick(lang, g.tags).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </Link>
-          ))}
+        <section className="text-center mb-14">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">{heroTitle}</h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">{heroSub}</p>
         </section>
-      )}
 
-      <footer className="mt-16 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-        <p>{t.builtFor}</p>
-        <p className="mt-2 text-xs">{t.copyright}</p>
-      </footer>
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-4">{t.bigIdeas}</h2>
+          <section className="grid gap-4 md:grid-cols-4 mb-14">
+            {bigIdeasConcepts.map((c) => (
+              <Link
+                key={c.slug}
+                to="/concepts/$concept"
+                params={{ concept: c.slug }}
+                className="group rounded-2xl bg-card border-2 border-border p-4 shadow-[4px_4px_0_0_var(--color-border)] hover:shadow-[6px_6px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all relative"
+              >
+                {visitedConcepts.includes(c.slug) && (
+                  <div className="absolute top-2 right-2 text-2xl">⭐</div>
+                )}
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-2"
+                  style={{ backgroundColor: `var(--${c.color})` }}
+                >
+                  {c.emoji}
+                </div>
+                <div className="font-display font-bold text-lg">{pick(lang, c.name)}</div>
+                <p className="text-sm text-muted-foreground">{pick(lang, c.desc)}</p>
+                <div className="text-xs text-primary font-bold mt-2 group-hover:underline">
+                  {t.learnMore} →
+                </div>
+              </Link>
+            ))}
+          </section>
+
+          <h2 className="text-2xl font-bold mb-4">{t.advancedConcepts}</h2>
+          <section className="grid gap-4 md:grid-cols-4">
+            {advancedConcepts.map((c) => (
+              <Link
+                key={c.slug}
+                to="/concepts/$concept"
+                params={{ concept: c.slug }}
+                className="group rounded-2xl bg-card border-2 border-border p-4 shadow-[4px_4px_0_0_var(--color-border)] hover:shadow-[6px_6px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all relative"
+              >
+                {visitedConcepts.includes(c.slug) && (
+                  <div className="absolute top-2 right-2 text-2xl">⭐</div>
+                )}
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-2"
+                  style={{ backgroundColor: `var(--${c.color})` }}
+                >
+                  {c.emoji}
+                </div>
+                <div className="font-display font-bold text-lg">{pick(lang, c.name)}</div>
+                <p className="text-sm text-muted-foreground">{pick(lang, c.desc)}</p>
+                <div className="text-xs text-primary font-bold mt-2 group-hover:underline">
+                  {t.learnMore} →
+                </div>
+              </Link>
+            ))}
+          </section>
+        </section>
+
+        <div className="my-16 border-t-2 border-border"></div>
+
+        <h2 className="text-3xl font-bold mb-6">{t.chooseGame}</h2>
+
+        {!gamesUnlocked ? (
+          <div className="text-center py-12 px-8 rounded-2xl bg-card border-2 border-border">
+            <div className="text-6xl mb-4">🔒</div>
+            <h3 className="text-2xl font-bold mb-2">{t.gamesLocked}</h3>
+            <p className="text-muted-foreground mb-6">{t.gamesLockedDesc}</p>
+            <div className="mb-6 text-lg font-semibold">
+              <span className="text-primary">{visitedConcepts.length}</span> /{" "}
+              <span className="text-muted-foreground">12</span> {t.conceptsCovered}
+            </div>
+            <button
+              onClick={() => setUnlockModalOpen(true)}
+              className="inline-flex items-center justify-center rounded-xl bg-primary text-primary-foreground px-6 py-3 font-bold text-lg hover:scale-[1.05] transition"
+            >
+              {t.unlockTitle} 🔓
+            </button>
+          </div>
+        ) : (
+          <section className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {visibleGames.map((g) => (
+              <Link
+                key={g.to}
+                to={g.to}
+                className={`group rounded-2xl bg-card border-2 border-border p-6 shadow-[6px_6px_0_0_var(--color-border)] hover:shadow-[10px_10px_0_0_var(--color-primary)] hover:-translate-y-1 transition-all relative ${
+                  g.to === "/space-invaders" && showEasterBurst
+                    ? "animate-bounce border-primary"
+                    : ""
+                }`}
+              >
+                {g.to === "/space-invaders" && (
+                  <>
+                    <div className="absolute top-3 right-3 text-[10px] px-2 py-1 rounded-full bg-primary text-primary-foreground font-black tracking-wide">
+                      SECRET
+                    </div>
+                    {showEasterBurst && (
+                      <div className="pointer-events-none absolute inset-0 flex items-start justify-center pt-2 text-2xl animate-pulse">
+                        ✨🚀✨
+                      </div>
+                    )}
+                  </>
+                )}
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-4xl mb-4"
+                  style={{ backgroundColor: `var(--${g.color})` }}
+                >
+                  {g.emoji}
+                </div>
+                <h3 className="text-2xl font-bold mb-1">{pick(lang, g.title)}</h3>
+                <p className="text-sm text-muted-foreground mb-3">{pick(lang, g.desc)}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {pick(lang, g.tags).map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </section>
+        )}
+
+        <footer className="mt-16 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <p>{t.builtFor}</p>
+          <p className="mt-2 text-xs">{t.copyright}</p>
+        </footer>
       </div>
     </>
   );

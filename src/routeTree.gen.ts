@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpaceInvadersRouteImport } from './routes/space-invaders'
 import { Route as SimonRouteImport } from './routes/simon'
 import { Route as RpsRouteImport } from './routes/rps'
 import { Route as RaceAgainstTimeRouteImport } from './routes/race-against-time'
@@ -32,6 +33,11 @@ import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConceptsConceptRouteImport } from './routes/concepts.$concept'
 
+const SpaceInvadersRoute = SpaceInvadersRouteImport.update({
+  id: '/space-invaders',
+  path: '/space-invaders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SimonRoute = SimonRouteImport.update({
   id: '/simon',
   path: '/simon',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
+  '/space-invaders': typeof SpaceInvadersRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesByTo {
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
+  '/space-invaders': typeof SpaceInvadersRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesById {
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
+  '/space-invaders': typeof SpaceInvadersRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRouteTypes {
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/race-against-time'
     | '/rps'
     | '/simon'
+    | '/space-invaders'
     | '/concepts/$concept'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/race-against-time'
     | '/rps'
     | '/simon'
+    | '/space-invaders'
     | '/concepts/$concept'
   id:
     | '__root__'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/race-against-time'
     | '/rps'
     | '/simon'
+    | '/space-invaders'
     | '/concepts/$concept'
   fileRoutesById: FileRoutesById
 }
@@ -313,11 +325,19 @@ export interface RootRouteChildren {
   RaceAgainstTimeRoute: typeof RaceAgainstTimeRoute
   RpsRoute: typeof RpsRoute
   SimonRoute: typeof SimonRoute
+  SpaceInvadersRoute: typeof SpaceInvadersRoute
   ConceptsConceptRoute: typeof ConceptsConceptRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/space-invaders': {
+      id: '/space-invaders'
+      path: '/space-invaders'
+      fullPath: '/space-invaders'
+      preLoaderRoute: typeof SpaceInvadersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/simon': {
       id: '/simon'
       path: '/simon'
@@ -497,6 +517,7 @@ const rootRouteChildren: RootRouteChildren = {
   RaceAgainstTimeRoute: RaceAgainstTimeRoute,
   RpsRoute: RpsRoute,
   SimonRoute: SimonRoute,
+  SpaceInvadersRoute: SpaceInvadersRoute,
   ConceptsConceptRoute: ConceptsConceptRoute,
 }
 export const routeTree = rootRouteImport

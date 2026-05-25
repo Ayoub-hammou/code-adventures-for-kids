@@ -7,7 +7,17 @@ import { UnlockModal } from "@/components/UnlockModal";
 const FLAGS: Record<Lang, string> = { en: "🇬🇧", fr: "🇫🇷", nl: "🇳🇱" };
 
 export function Header() {
-  const { name, lang, setLang, reset, showCodeByDefault, setShowCodeByDefault, gamesUnlocked, setGamesUnlocked } = useLang();
+  const {
+    name,
+    lang,
+    setLang,
+    reset,
+    showCodeByDefault,
+    setShowCodeByDefault,
+    setGamesUnlocked,
+    setEasterEggUnlocked,
+    setEasterEggJustUnlocked,
+  } = useLang();
   const t = useUI();
   const [unlockModalOpen, setUnlockModalOpen] = useState(false);
 
@@ -16,7 +26,13 @@ export function Header() {
       <UnlockModal
         open={unlockModalOpen}
         onOpenChange={setUnlockModalOpen}
-        onUnlock={() => setGamesUnlocked(true)}
+        onUnlock={(result) => {
+          setGamesUnlocked(true);
+          if (result === "spaceInvaders") {
+            setEasterEggUnlocked(true);
+            setEasterEggJustUnlocked(true);
+          }
+        }}
       />
       <header className="border-b-2 border-border bg-card/60 backdrop-blur sticky top-0 z-20">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
@@ -30,15 +46,13 @@ export function Header() {
                 {t.hi}, <span className="text-primary">{name}</span> 👋
               </span>
             )}
-            {!gamesUnlocked && (
-              <button
-                onClick={() => setUnlockModalOpen(true)}
-                className="px-3 py-1 rounded-full border-2 border-border hover:border-primary text-xs font-semibold transition hover:bg-secondary"
-                title="Unlock games with secret code"
-              >
-                🔒
-              </button>
-            )}
+            <button
+              onClick={() => setUnlockModalOpen(true)}
+              className="px-3 py-1 rounded-full border-2 border-border hover:border-primary text-xs font-semibold transition hover:bg-secondary"
+              title="Unlock games with secret code"
+            >
+              🔒
+            </button>
             <Toggle
               pressed={showCodeByDefault}
               onPressedChange={setShowCodeByDefault}
@@ -46,7 +60,9 @@ export function Header() {
               title={showCodeByDefault ? t.codeVisible : t.codeHidden}
               className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
             >
-              <span className="text-xs font-semibold">{showCodeByDefault ? t.codeVisible : t.codeHidden}</span>
+              <span className="text-xs font-semibold">
+                {showCodeByDefault ? t.codeVisible : t.codeHidden}
+              </span>
             </Toggle>
             <select
               aria-label={t.changeLang}
