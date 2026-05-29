@@ -36,7 +36,7 @@ const data: Record<string, Concept> = {
     keyIdea: {
       en: "Computers are super dumb but super fast. They do EXACTLY what you tell them—no shortcuts, no guesses.",
       fr: "Les ordinateurs sont super bêtes mais super rapides. Ils font EXACTEMENT ce que tu dis — pas de raccourcis, pas de devinettes.",
-      nl: "Computers zijn super dom maar supersnellennen. Ze doen PRECIES wat je zegt — geen shortcuts, geen gokken.",
+      nl: "Computers zijn super dom maar supersnel. Ze doen PRECIES wat je zegt — geen shortcuts, geen gokken.",
     },
     examples: [
       {
