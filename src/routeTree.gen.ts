@@ -9,18 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpaceInvadersRouteImport } from './routes/space-invaders'
 import { Route as SimonRouteImport } from './routes/simon'
 import { Route as RpsRouteImport } from './routes/rps'
+import { Route as RaceAgainstTimeRouteImport } from './routes/race-against-time'
+import { Route as PatternPainterRouteImport } from './routes/pattern-painter'
 import { Route as PalindromeRouteImport } from './routes/palindrome'
+import { Route as MemoryGameRouteImport } from './routes/memory-game'
 import { Route as MastermindRouteImport } from './routes/mastermind'
+import { Route as LuckMasterRouteImport } from './routes/luck-master'
+import { Route as InventoryMasterRouteImport } from './routes/inventory-master'
+import { Route as InsertionSortRouteImport } from './routes/insertion-sort'
+import { Route as IceSkaterRouteImport } from './routes/ice-skater'
 import { Route as GuessRouteImport } from './routes/guess'
 import { Route as FizzbuzzRouteImport } from './routes/fizzbuzz'
+import { Route as ErrorHandlerRouteImport } from './routes/error-handler'
 import { Route as Connect4RouteImport } from './routes/connect4'
 import { Route as CalculatorRouteImport } from './routes/calculator'
+import { Route as CaesarCipherRouteImport } from './routes/caesar-cipher'
+import { Route as BubbleSortRouteImport } from './routes/bubble-sort'
+import { Route as AiTrainerRouteImport } from './routes/ai-trainer'
 import { Route as AdventureRouteImport } from './routes/adventure'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConceptsConceptRouteImport } from './routes/concepts.$concept'
 
+const SpaceInvadersRoute = SpaceInvadersRouteImport.update({
+  id: '/space-invaders',
+  path: '/space-invaders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SimonRoute = SimonRouteImport.update({
   id: '/simon',
   path: '/simon',
@@ -31,14 +48,49 @@ const RpsRoute = RpsRouteImport.update({
   path: '/rps',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RaceAgainstTimeRoute = RaceAgainstTimeRouteImport.update({
+  id: '/race-against-time',
+  path: '/race-against-time',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatternPainterRoute = PatternPainterRouteImport.update({
+  id: '/pattern-painter',
+  path: '/pattern-painter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PalindromeRoute = PalindromeRouteImport.update({
   id: '/palindrome',
   path: '/palindrome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MemoryGameRoute = MemoryGameRouteImport.update({
+  id: '/memory-game',
+  path: '/memory-game',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MastermindRoute = MastermindRouteImport.update({
   id: '/mastermind',
   path: '/mastermind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LuckMasterRoute = LuckMasterRouteImport.update({
+  id: '/luck-master',
+  path: '/luck-master',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryMasterRoute = InventoryMasterRouteImport.update({
+  id: '/inventory-master',
+  path: '/inventory-master',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsertionSortRoute = InsertionSortRouteImport.update({
+  id: '/insertion-sort',
+  path: '/insertion-sort',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IceSkaterRoute = IceSkaterRouteImport.update({
+  id: '/ice-skater',
+  path: '/ice-skater',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuessRoute = GuessRouteImport.update({
@@ -51,6 +103,11 @@ const FizzbuzzRoute = FizzbuzzRouteImport.update({
   path: '/fizzbuzz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ErrorHandlerRoute = ErrorHandlerRouteImport.update({
+  id: '/error-handler',
+  path: '/error-handler',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Connect4Route = Connect4RouteImport.update({
   id: '/connect4',
   path: '/connect4',
@@ -59,6 +116,21 @@ const Connect4Route = Connect4RouteImport.update({
 const CalculatorRoute = CalculatorRouteImport.update({
   id: '/calculator',
   path: '/calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaesarCipherRoute = CaesarCipherRouteImport.update({
+  id: '/caesar-cipher',
+  path: '/caesar-cipher',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BubbleSortRoute = BubbleSortRouteImport.update({
+  id: '/bubble-sort',
+  path: '/bubble-sort',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiTrainerRoute = AiTrainerRouteImport.update({
+  id: '/ai-trainer',
+  path: '/ai-trainer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdventureRoute = AdventureRouteImport.update({
@@ -80,41 +152,77 @@ const ConceptsConceptRoute = ConceptsConceptRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/ai-trainer': typeof AiTrainerRoute
+  '/bubble-sort': typeof BubbleSortRoute
+  '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/error-handler': typeof ErrorHandlerRoute
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/ice-skater': typeof IceSkaterRoute
+  '/insertion-sort': typeof InsertionSortRoute
+  '/inventory-master': typeof InventoryMasterRoute
+  '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
+  '/memory-game': typeof MemoryGameRoute
   '/palindrome': typeof PalindromeRoute
+  '/pattern-painter': typeof PatternPainterRoute
+  '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
+  '/space-invaders': typeof SpaceInvadersRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/ai-trainer': typeof AiTrainerRoute
+  '/bubble-sort': typeof BubbleSortRoute
+  '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/error-handler': typeof ErrorHandlerRoute
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/ice-skater': typeof IceSkaterRoute
+  '/insertion-sort': typeof InsertionSortRoute
+  '/inventory-master': typeof InventoryMasterRoute
+  '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
+  '/memory-game': typeof MemoryGameRoute
   '/palindrome': typeof PalindromeRoute
+  '/pattern-painter': typeof PatternPainterRoute
+  '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
+  '/space-invaders': typeof SpaceInvadersRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/adventure': typeof AdventureRoute
+  '/ai-trainer': typeof AiTrainerRoute
+  '/bubble-sort': typeof BubbleSortRoute
+  '/caesar-cipher': typeof CaesarCipherRoute
   '/calculator': typeof CalculatorRoute
   '/connect4': typeof Connect4Route
+  '/error-handler': typeof ErrorHandlerRoute
   '/fizzbuzz': typeof FizzbuzzRoute
   '/guess': typeof GuessRoute
+  '/ice-skater': typeof IceSkaterRoute
+  '/insertion-sort': typeof InsertionSortRoute
+  '/inventory-master': typeof InventoryMasterRoute
+  '/luck-master': typeof LuckMasterRoute
   '/mastermind': typeof MastermindRoute
+  '/memory-game': typeof MemoryGameRoute
   '/palindrome': typeof PalindromeRoute
+  '/pattern-painter': typeof PatternPainterRoute
+  '/race-against-time': typeof RaceAgainstTimeRoute
   '/rps': typeof RpsRoute
   '/simon': typeof SimonRoute
+  '/space-invaders': typeof SpaceInvadersRoute
   '/concepts/$concept': typeof ConceptsConceptRoute
 }
 export interface FileRouteTypes {
@@ -122,59 +230,114 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/adventure'
+    | '/ai-trainer'
+    | '/bubble-sort'
+    | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
+    | '/error-handler'
     | '/fizzbuzz'
     | '/guess'
+    | '/ice-skater'
+    | '/insertion-sort'
+    | '/inventory-master'
+    | '/luck-master'
     | '/mastermind'
+    | '/memory-game'
     | '/palindrome'
+    | '/pattern-painter'
+    | '/race-against-time'
     | '/rps'
     | '/simon'
+    | '/space-invaders'
     | '/concepts/$concept'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/adventure'
+    | '/ai-trainer'
+    | '/bubble-sort'
+    | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
+    | '/error-handler'
     | '/fizzbuzz'
     | '/guess'
+    | '/ice-skater'
+    | '/insertion-sort'
+    | '/inventory-master'
+    | '/luck-master'
     | '/mastermind'
+    | '/memory-game'
     | '/palindrome'
+    | '/pattern-painter'
+    | '/race-against-time'
     | '/rps'
     | '/simon'
+    | '/space-invaders'
     | '/concepts/$concept'
   id:
     | '__root__'
     | '/'
     | '/adventure'
+    | '/ai-trainer'
+    | '/bubble-sort'
+    | '/caesar-cipher'
     | '/calculator'
     | '/connect4'
+    | '/error-handler'
     | '/fizzbuzz'
     | '/guess'
+    | '/ice-skater'
+    | '/insertion-sort'
+    | '/inventory-master'
+    | '/luck-master'
     | '/mastermind'
+    | '/memory-game'
     | '/palindrome'
+    | '/pattern-painter'
+    | '/race-against-time'
     | '/rps'
     | '/simon'
+    | '/space-invaders'
     | '/concepts/$concept'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdventureRoute: typeof AdventureRoute
+  AiTrainerRoute: typeof AiTrainerRoute
+  BubbleSortRoute: typeof BubbleSortRoute
+  CaesarCipherRoute: typeof CaesarCipherRoute
   CalculatorRoute: typeof CalculatorRoute
   Connect4Route: typeof Connect4Route
+  ErrorHandlerRoute: typeof ErrorHandlerRoute
   FizzbuzzRoute: typeof FizzbuzzRoute
   GuessRoute: typeof GuessRoute
+  IceSkaterRoute: typeof IceSkaterRoute
+  InsertionSortRoute: typeof InsertionSortRoute
+  InventoryMasterRoute: typeof InventoryMasterRoute
+  LuckMasterRoute: typeof LuckMasterRoute
   MastermindRoute: typeof MastermindRoute
+  MemoryGameRoute: typeof MemoryGameRoute
   PalindromeRoute: typeof PalindromeRoute
+  PatternPainterRoute: typeof PatternPainterRoute
+  RaceAgainstTimeRoute: typeof RaceAgainstTimeRoute
   RpsRoute: typeof RpsRoute
   SimonRoute: typeof SimonRoute
+  SpaceInvadersRoute: typeof SpaceInvadersRoute
   ConceptsConceptRoute: typeof ConceptsConceptRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/space-invaders': {
+      id: '/space-invaders'
+      path: '/space-invaders'
+      fullPath: '/space-invaders'
+      preLoaderRoute: typeof SpaceInvadersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/simon': {
       id: '/simon'
       path: '/simon'
@@ -189,6 +352,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RpsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/race-against-time': {
+      id: '/race-against-time'
+      path: '/race-against-time'
+      fullPath: '/race-against-time'
+      preLoaderRoute: typeof RaceAgainstTimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pattern-painter': {
+      id: '/pattern-painter'
+      path: '/pattern-painter'
+      fullPath: '/pattern-painter'
+      preLoaderRoute: typeof PatternPainterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/palindrome': {
       id: '/palindrome'
       path: '/palindrome'
@@ -196,11 +373,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PalindromeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/memory-game': {
+      id: '/memory-game'
+      path: '/memory-game'
+      fullPath: '/memory-game'
+      preLoaderRoute: typeof MemoryGameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mastermind': {
       id: '/mastermind'
       path: '/mastermind'
       fullPath: '/mastermind'
       preLoaderRoute: typeof MastermindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/luck-master': {
+      id: '/luck-master'
+      path: '/luck-master'
+      fullPath: '/luck-master'
+      preLoaderRoute: typeof LuckMasterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory-master': {
+      id: '/inventory-master'
+      path: '/inventory-master'
+      fullPath: '/inventory-master'
+      preLoaderRoute: typeof InventoryMasterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insertion-sort': {
+      id: '/insertion-sort'
+      path: '/insertion-sort'
+      fullPath: '/insertion-sort'
+      preLoaderRoute: typeof InsertionSortRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ice-skater': {
+      id: '/ice-skater'
+      path: '/ice-skater'
+      fullPath: '/ice-skater'
+      preLoaderRoute: typeof IceSkaterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guess': {
@@ -217,6 +429,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FizzbuzzRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/error-handler': {
+      id: '/error-handler'
+      path: '/error-handler'
+      fullPath: '/error-handler'
+      preLoaderRoute: typeof ErrorHandlerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/connect4': {
       id: '/connect4'
       path: '/connect4'
@@ -229,6 +448,27 @@ declare module '@tanstack/react-router' {
       path: '/calculator'
       fullPath: '/calculator'
       preLoaderRoute: typeof CalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/caesar-cipher': {
+      id: '/caesar-cipher'
+      path: '/caesar-cipher'
+      fullPath: '/caesar-cipher'
+      preLoaderRoute: typeof CaesarCipherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bubble-sort': {
+      id: '/bubble-sort'
+      path: '/bubble-sort'
+      fullPath: '/bubble-sort'
+      preLoaderRoute: typeof BubbleSortRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-trainer': {
+      id: '/ai-trainer'
+      path: '/ai-trainer'
+      fullPath: '/ai-trainer'
+      preLoaderRoute: typeof AiTrainerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/adventure': {
@@ -258,14 +498,26 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdventureRoute: AdventureRoute,
+  AiTrainerRoute: AiTrainerRoute,
+  BubbleSortRoute: BubbleSortRoute,
+  CaesarCipherRoute: CaesarCipherRoute,
   CalculatorRoute: CalculatorRoute,
   Connect4Route: Connect4Route,
+  ErrorHandlerRoute: ErrorHandlerRoute,
   FizzbuzzRoute: FizzbuzzRoute,
   GuessRoute: GuessRoute,
+  IceSkaterRoute: IceSkaterRoute,
+  InsertionSortRoute: InsertionSortRoute,
+  InventoryMasterRoute: InventoryMasterRoute,
+  LuckMasterRoute: LuckMasterRoute,
   MastermindRoute: MastermindRoute,
+  MemoryGameRoute: MemoryGameRoute,
   PalindromeRoute: PalindromeRoute,
+  PatternPainterRoute: PatternPainterRoute,
+  RaceAgainstTimeRoute: RaceAgainstTimeRoute,
   RpsRoute: RpsRoute,
   SimonRoute: SimonRoute,
+  SpaceInvadersRoute: SpaceInvadersRoute,
   ConceptsConceptRoute: ConceptsConceptRoute,
 }
 export const routeTree = rootRouteImport

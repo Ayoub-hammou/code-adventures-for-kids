@@ -39,16 +39,32 @@ function FizzBuzzPage() {
   const items = fizzbuzz(n);
 
   const colorFor = (k: string) =>
-    k === "fb" ? "var(--primary)"
-    : k === "f" ? "var(--fun-pink)"
-    : k === "b" ? "var(--fun-blue)"
-    : "var(--secondary)";
+    k === "fb"
+      ? "var(--primary)"
+      : k === "f"
+        ? "var(--fun-pink)"
+        : k === "b"
+          ? "var(--fun-blue)"
+          : "var(--secondary)";
 
   return (
-    <GameLayout title={t("title")} emoji="🔢" concept={t("concept")} intro={t("intro")} code={t("code")}>
+    <GameLayout
+      title={t("title")}
+      emoji="🔢"
+      concept={t("concept")}
+      intro={t("intro")}
+      code={t("code")}
+    >
       <div className="flex items-center gap-3 mb-5">
         <label className="text-sm font-bold">{t("upTo")}</label>
-        <input type="range" min={10} max={100} value={n} onChange={(e) => setN(parseInt(e.target.value))} className="flex-1" />
+        <input
+          type="range"
+          min={10}
+          max={100}
+          value={n}
+          onChange={(e) => setN(parseInt(e.target.value))}
+          className="flex-1"
+        />
         <span className="font-mono font-bold w-10 text-right">{n}</span>
       </div>
       <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 gap-2">
@@ -56,7 +72,10 @@ function FizzBuzzPage() {
           <div
             key={i}
             className="aspect-square rounded-lg flex items-center justify-center text-xs sm:text-sm font-bold text-center px-1 border-2 border-border"
-            style={{ backgroundColor: colorFor(it.kind), color: it.kind === "n" ? undefined : "var(--background)" }}
+            style={{
+              backgroundColor: colorFor(it.kind),
+              color: it.kind === "n" ? undefined : "var(--background)",
+            }}
           >
             {it.v}
           </div>

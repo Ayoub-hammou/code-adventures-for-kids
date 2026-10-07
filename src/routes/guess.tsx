@@ -7,26 +7,46 @@ export const Route = createFileRoute("/guess")({ component: GuessPage });
 
 const T = {
   title: { en: "Guess the Number", fr: "Devine le Nombre", nl: "Raad het Getal" },
-  concept: { en: "Variables & Conditions (and a missing safety net!)", fr: "Variables & Conditions (sans filet de sécurité !)", nl: "Variabelen & Condities (zonder vangnet!)" },
+  concept: {
+    en: "Variables & Conditions (and a missing safety net!)",
+    fr: "Variables & Conditions (sans filet de sécurité !)",
+    nl: "Variabelen & Condities (zonder vangnet!)",
+  },
   intro: {
     en: "I'm thinking of a number between 1 and 100. Try to guess it! Then try typing a word like 'banana' to see what happens...",
     fr: "Je pense à un nombre entre 1 et 100. Devine-le ! Puis essaie d'écrire un mot comme « banane » pour voir ce qui se passe...",
     nl: "Ik denk aan een getal tussen 1 en 100. Raad het! Probeer dan een woord zoals 'banaan' te typen...",
   },
-  placeholder: { en: "Type a guess (1–100)", fr: "Tape un nombre (1–100)", nl: "Typ een gok (1–100)" },
+  placeholder: {
+    en: "Type a guess (1–100)",
+    fr: "Tape un nombre (1–100)",
+    nl: "Typ een gok (1–100)",
+  },
   guessBtn: { en: "Guess!", fr: "Devine !", nl: "Raden!" },
   tries: { en: "Tries", fr: "Essais", nl: "Pogingen" },
   newGame: { en: "↺ New game", fr: "↺ Nouvelle partie", nl: "↺ Nieuw spel" },
-  none: { en: "No guesses yet. Type a number!", fr: "Aucun essai. Tape un nombre !", nl: "Nog geen pogingen. Typ een getal!" },
+  none: {
+    en: "No guesses yet. Type a number!",
+    fr: "Aucun essai. Tape un nombre !",
+    nl: "Nog geen pogingen. Typ een getal!",
+  },
   higher: { en: "📈 Higher!", fr: "📈 Plus haut !", nl: "📈 Hoger!" },
   lower: { en: "📉 Lower!", fr: "📉 Plus bas !", nl: "📉 Lager!" },
-  win: { en: (n: number) => `🎉 You got it in ${n} tries!`, fr: (n: number) => `🎉 Trouvé en ${n} essais !`, nl: (n: number) => `🎉 Gevonden in ${n} pogingen!` },
+  win: {
+    en: (n: number) => `🎉 You got it in ${n} tries!`,
+    fr: (n: number) => `🎉 Trouvé en ${n} essais !`,
+    nl: (n: number) => `🎉 Gevonden in ${n} pogingen!`,
+  },
   boom: {
     en: "💥 BOOM ! 💥\n\nThe program just crashed because it expected a NUMBER but got text.\n\nLesson: this is why we need ERROR HANDLING!",
     fr: "💥 BOUM ! 💥\n\nLe programme vient de planter parce qu'il attendait un NOMBRE mais a reçu du texte.\n\nLeçon : voilà pourquoi il faut GÉRER LES ERREURS !",
     nl: "💥 BOEM ! 💥\n\nHet programma is gecrasht omdat het een GETAL verwachtte maar tekst kreeg.\n\nLes: daarom hebben we FOUTAFHANDELING nodig!",
   },
-  challenge: { en: "🧪 Teacher's challenge", fr: "🧪 Défi du prof", nl: "🧪 Uitdaging van de leerkracht" },
+  challenge: {
+    en: "🧪 Teacher's challenge",
+    fr: "🧪 Défi du prof",
+    nl: "🧪 Uitdaging van de leerkracht",
+  },
   challengeText: {
     en: "Try typing letters instead of a number. What happens? Now ask the class: how would YOU protect the program?",
     fr: "Essaie de taper des lettres au lieu d'un nombre. Que se passe-t-il ? Demande à la classe : comment TU protégerais le programme ?",
@@ -106,7 +126,6 @@ function GuessPage() {
     // ⚠️ ON PURPOSE: NO ERROR HANDLING ⚠️
     const guess = parseInt(raw);
     if (isNaN(guess)) {
-      // eslint-disable-next-line no-alert
       alert(t("boom"));
       return;
     }
@@ -123,7 +142,13 @@ function GuessPage() {
   }
 
   return (
-    <GameLayout title={t("title")} emoji="🎯" concept={t("concept")} intro={t("intro")} code={t("code")}>
+    <GameLayout
+      title={t("title")}
+      emoji="🎯"
+      concept={t("concept")}
+      intro={t("intro")}
+      code={t("code")}
+    >
       <form onSubmit={onSubmit} className="flex gap-2 mb-6">
         <input
           ref={inputRef}
@@ -133,24 +158,37 @@ function GuessPage() {
           className="flex-1 rounded-xl border-2 border-border bg-input px-4 py-3 text-lg font-mono focus:outline-none focus:border-primary"
           autoFocus
         />
-        <button type="submit" disabled={done} className="rounded-xl bg-primary text-primary-foreground px-6 py-3 font-bold hover:scale-105 transition disabled:opacity-50">
+        <button
+          type="submit"
+          disabled={done}
+          className="rounded-xl bg-primary text-primary-foreground px-6 py-3 font-bold hover:scale-105 transition disabled:opacity-50"
+        >
           {t("guessBtn")}
         </button>
       </form>
 
       <div className="flex items-center justify-between mb-3">
-        <div className="text-sm text-muted-foreground">{t("tries")}: <span className="font-bold text-foreground">{tries}</span></div>
-        <button onClick={reset} className="text-sm font-semibold text-primary hover:underline">{t("newGame")}</button>
+        <div className="text-sm text-muted-foreground">
+          {t("tries")}: <span className="font-bold text-foreground">{tries}</span>
+        </div>
+        <button onClick={reset} className="text-sm font-semibold text-primary hover:underline">
+          {t("newGame")}
+        </button>
       </div>
 
       <ul className="space-y-2 max-h-64 overflow-y-auto">
         {history.map((h, i) => (
-          <li key={i} className="flex items-center justify-between rounded-lg bg-secondary px-4 py-2">
+          <li
+            key={i}
+            className="flex items-center justify-between rounded-lg bg-secondary px-4 py-2"
+          >
             <span className="font-mono font-bold">{h.guess}</span>
             <span>{h.hint}</span>
           </li>
         ))}
-        {history.length === 0 && <li className="text-center text-muted-foreground py-8">{t("none")}</li>}
+        {history.length === 0 && (
+          <li className="text-center text-muted-foreground py-8">{t("none")}</li>
+        )}
       </ul>
 
       <div className="mt-6 p-4 rounded-xl border-2 border-dashed border-[var(--concept-error)] bg-[color-mix(in_oklab,var(--concept-error)_8%,transparent)]">
